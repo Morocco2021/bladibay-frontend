@@ -1,1297 +1,686 @@
 <!DOCTYPE html>
-<html lang="fr" dir="ltr" id="html-root">
+<html lang="fr" dir="ltr">
 <head>
+    <!-- META TAGS ESSENTIELS -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BladiBay ✨ - بلادي باي | Marketplace Premium Maroc</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --primary-gradient: linear-gradient(135deg, #8B5CF6 0%, #A855F7 50%, #C084FC 100%);
-            --purple-bg: linear-gradient(135deg, #7C3AED 0%, #8B5CF6 50%, #A855F7 100%);
-            --glass: rgba(255, 255, 255, 0.15);
-            --glass-border: rgba(255, 255, 255, 0.2);
-            --shadow-soft: 0 8px 32px rgba(139, 92, 246, 0.3);
-            --shadow-hover: 0 15px 35px rgba(139, 92, 246, 0.4);
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body { 
-            font-family: 'Inter', sans-serif;
-            background: var(--purple-bg);
-            background-attachment: fixed;
-            min-height: 100vh;
-            color: white;
-        }
-        
-        .glass-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 20px;
-            box-shadow: var(--shadow-soft);
-            transition: all 0.3s ease;
-        }
-        
-        .glass-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-hover);
-        }
-        
-        .premium-button {
-            border: none;
-            border-radius: 12px;
-            color: white;
-            font-weight: 600;
-            padding: 10px 16px;
-            font-size: 14px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-        }
-        
-        .btn-call {
-            background: linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%);
-        }
-        
-        .btn-whatsapp {
-            background: linear-gradient(135deg, #10B981 0%, #059669 100%);
-        }
-        
-        .btn-favorite {
-            background: linear-gradient(135deg, #EF4444 0%, #DC2626 100%);
-        }
-        
-        .btn-favorite.favorited {
-            background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
-        }
-        
-        .btn-share {
-            background: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%);
-        }
-        
-        .premium-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-        }
-        
-        .search-container {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 8px;
-            margin-bottom: 30px;
-        }
-        
-        .search-input {
-            background: transparent;
-            border: none;
-            outline: none;
-            padding: 16px 20px;
-            font-size: 16px;
-            width: 100%;
-            color: #374151;
-            border-radius: 15px;
-        }
-        
-        .search-button {
-            background: var(--primary-gradient);
-            border: none;
-            border-radius: 15px;
-            color: white;
-            font-weight: 600;
-            padding: 14px 24px;
-            width: 100%;
-            margin-top: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .category-card {
-            background: var(--glass);
-            backdrop-filter: blur(15px);
-            border: 1px solid var(--glass-border);
-            border-radius: 18px;
-            padding: 20px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .category-card:hover {
-            transform: translateY(-8px);
-            background: rgba(255, 255, 255, 0.2);
-        }
-        
-        .ad-card {
-            background: var(--glass);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            padding: 20px;
-            margin-bottom: 20px;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-        
-        .ad-card:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-hover);
-        }
-        
-        .price-text {
-            color: #F472B6;
-            font-weight: 800;
-            font-size: 24px;
-            margin: 8px 0;
-        }
-        
-        .premium-badge {
-            background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
-            color: white;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 700;
-            text-transform: uppercase;
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-        }
-        
-        .verified-badge {
-            background: linear-gradient(135deg, #10B981 0%, #059669 100%);
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 10px;
-        }
-        
-        .ad-meta {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 14px;
-            margin: 12px 0;
-        }
-        
-        .mobile-nav {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--glass);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            border-radius: 25px;
-            padding: 12px 20px;
-            z-index: 1000;
-            width: 90%;
-            max-width: 400px;
-        }
-        
-        .nav-item {
-            background: transparent;
-            border: none;
-            color: rgba(255, 255, 255, 0.7);
-            padding: 10px;
-            border-radius: 15px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4px;
-        }
-        
-        .nav-item.active {
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-        }
-        
-        .nav-item:hover {
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-        }
-        
-        .lang-toggle {
-            background: var(--glass);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--glass-border);
-            border-radius: 12px;
-            padding: 8px 12px;
-            color: white;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .lang-toggle:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-        
-        .section-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 20px;
-        }
-        
-        .section-title {
-            color: white;
-            font-size: 20px;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .filter-button {
-            background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-            cursor: pointer;
-        }
-        
-        .image-container {
-            width: 80px;
-            height: 80px;
-            border-radius: 15px;
-            overflow: hidden;
-            flex-shrink: 0;
-            margin-right: 16px;
-        }
-        
-        .image-container.rtl {
-            margin-left: 16px;
-            margin-right: 0;
-        }
-        
-        .image-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
-        
-        .image-container:hover img {
-            transform: scale(1.1);
-        }
-        
-        .ad-content {
-            flex: 1;
-        }
-        
-        .ad-title {
-            color: white;
-            font-size: 18px;
-            font-weight: 700;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .ad-description {
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 14px;
-            line-height: 1.4;
-            margin-bottom: 16px;
-        }
-        
-        .ad-buttons {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-        
-        .rtl { direction: rtl; }
-        .ltr { direction: ltr; }
-        
-        .fade-in {
-            animation: fadeIn 0.5s ease-in;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .notification {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: var(--glass);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            border-radius: 12px;
-            padding: 16px 20px;
-            color: white;
-            z-index: 9999;
-            animation: slideIn 0.3s ease;
-        }
-        
-        @keyframes slideIn {
-            from { transform: translateX(100%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-        
-        @media (max-width: 768px) {
-            .ad-buttons {
-                justify-content: center;
-            }
-            .premium-button {
-                font-size: 12px;
-                padding: 8px 12px;
-            }
-        }
-    </style>
-</head>
-<body class="pb-28">
+    <meta name="description" content="BladiBay - Marketplace marocain moderne avec IA. Achetez et vendez facilement au Maroc.">
+    <meta name="keywords" content="marketplace maroc, annonces maroc, vente achat maroc, bladibay">
+    <meta name="author" content="BladiBay Team">
     
-    <!-- Header -->
-    <header class="p-6">
-        <div class="flex items-center justify-between max-w-md mx-auto">
-            <div class="flex items-center gap-3">
-                <div class="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-10">
-                    <i class="fas fa-gem text-white text-lg"></i>
+    <!-- OPEN GRAPH (Partage réseaux sociaux) -->
+    <meta property="og:title" content="BladiBay - Marketplace du Maroc">
+    <meta property="og:description" content="La plateforme moderne pour acheter et vendre au Maroc">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://bladibay.netlify.app">
+    
+    <!-- FAVICON -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <!-- TITRE DE LA PAGE -->
+    <title>BladiBay - Marketplace Intelligent du Maroc 🇲🇦</title>
+    
+    <!-- FONTS GOOGLE -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- TAILWIND CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- FONT AWESOME ICONS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- NOTRE CSS PERSONNALISÉ -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- CONFIGURATION TAILWIND -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                        'poppins': ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        'brand': {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="font-inter bg-gradient-to-br from-purple-50 via-blue-50 to-pink-50 min-h-screen">
+    
+    <!-- 🔵 HEADER NAVIGATION -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-white/20 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                
+                <!-- LOGO -->
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-gradient-to-r from-purple-600 to-blue-600 rounded-xl flex items-center justify-center">
+                        <i class="fas fa-gem text-white text-lg"></i>
+                    </div>
+                    <h1 class="text-xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+                        BladiBay
+                    </h1>
                 </div>
-                <div>
-                    <h1 class="text-xl font-bold text-white">BladiBay</h1>
-                    <p class="text-sm text-white/80" id="header-subtitle">بلادي باي</p>
+                
+                <!-- NAVIGATION DESKTOP -->
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="text-gray-700 hover:text-purple-600 font-medium transition-colors">
+                        <span class="fr">Accueil</span>
+                        <span class="ar hidden">الرئيسية</span>
+                    </a>
+                    <a href="#categories" class="text-gray-700 hover:text-purple-600 font-medium transition-colors">
+                        <span class="fr">Catégories</span>
+                        <span class="ar hidden">الفئات</span>
+                    </a>
+                    <a href="#featured" class="text-gray-700 hover:text-purple-600 font-medium transition-colors">
+                        <span class="fr">À la une</span>
+                        <span class="ar hidden">مميزة</span>
+                    </a>
+                </nav>
+                
+                <!-- ACTIONS HEADER -->
+                <div class="flex items-center space-x-4">
+                    <!-- Sélecteur de langue -->
+                    <button id="languageToggle" class="flex items-center space-x-2 px-3 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors">
+                        <i class="fas fa-globe text-gray-600"></i>
+                        <span class="hidden sm:inline text-sm font-medium text-gray-700" id="currentLang">FR</span>
+                    </button>
+                    
+                    <!-- Favoris -->
+                    <button class="relative p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors">
+                        <i class="fas fa-heart text-gray-600"></i>
+                        <span id="favoritesCount" class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span>
+                    </button>
+                    
+                    <!-- Publier une annonce -->
+                    <button class="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-4 py-2 rounded-lg font-medium hover:shadow-lg transition-all transform hover:scale-105">
+                        <i class="fas fa-plus mr-2"></i>
+                        <span class="fr">Publier</span>
+                        <span class="ar hidden">نشر إعلان</span>
+                    </button>
+                    
+                    <!-- Menu mobile -->
+                    <button id="mobileMenuToggle" class="md:hidden p-2 rounded-lg bg-gray-100">
+                        <i class="fas fa-bars text-gray-600"></i>
+                    </button>
                 </div>
             </div>
-            
-            <button id="lang-toggle" class="lang-toggle" onclick="toggleLanguage()">
-                <i class="fas fa-globe mr-1"></i>
-                <span id="current-lang">AR</span>
-            </button>
+        </div>
+        
+        <!-- MENU MOBILE -->
+        <div id="mobileMenu" class="md:hidden hidden bg-white/95 backdrop-blur-md border-t border-gray-200">
+            <div class="px-4 py-4 space-y-3">
+                <a href="#home" class="block py-2 text-gray-700 hover:text-purple-600">
+                    <span class="fr">Accueil</span>
+                    <span class="ar hidden">الرئيسية</span>
+                </a>
+                <a href="#categories" class="block py-2 text-gray-700 hover:text-purple-600">
+                    <span class="fr">Catégories</span>
+                    <span class="ar hidden">الفئات</span>
+                </a>
+                <a href="#featured" class="block py-2 text-gray-700 hover:text-purple-600">
+                    <span class="fr">À la une</span>
+                    <span class="ar hidden">مميزة</span>
+                </a>
+            </div>
         </div>
     </header>
 
-    <!-- Main Content -->
-    <main class="max-w-md mx-auto px-6" id="main-content">
-        
-        <!-- Welcome Section -->
-        <section class="text-center mb-8">
-            <h2 class="text-3xl font-bold text-white mb-3" id="welcome-title">
-                أهلا بك في بلادي باي
-            </h2>
-            <p class="text-white/90 text-lg" id="welcome-subtitle">
-                السوق الإلكتروني الحديث للمغرب 🇲🇦
+    <!-- 🎯 HERO SECTION -->
+    <section id="home" class="pt-24 pb-12 px-4">
+        <div class="max-w-7xl mx-auto text-center">
+            <!-- Titre principal -->
+            <h1 class="text-4xl md:text-6xl font-bold mb-6">
+                <span class="fr bg-gradient-to-r from-purple-600 via-blue-600 to-pink-600 bg-clip-text text-transparent">
+                    Achetez, Vendez,<br>Échangez au Maroc
+                </span>
+                <span class="ar hidden bg-gradient-to-r from-purple-600 via-blue-600 to-pink-600 bg-clip-text text-transparent">
+                    اشتري، بيع،<br>تبادل في المغرب
+                </span>
+            </h1>
+            
+            <!-- Sous-titre -->
+            <p class="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+                <span class="fr">La marketplace intelligente qui connecte tous les Marocains. Trouvez tout ce que vous cherchez près de chez vous.</span>
+                <span class="ar hidden">السوق الذكي الذي يربط جميع المغاربة. اعثر على كل ما تبحث عنه بالقرب منك.</span>
             </p>
-        </section>
+            
+            <!-- Barre de recherche principale -->
+            <div class="max-w-4xl mx-auto mb-12">
+                <div class="relative bg-white/80 backdrop-blur-md rounded-2xl p-6 shadow-xl border border-white/20">
+                    <div class="flex flex-col md:flex-row gap-4">
+                        <!-- Input recherche -->
+                        <div class="flex-1 relative">
+                            <i class="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                            <input 
+                                type="text" 
+                                id="mainSearchInput"
+                                placeholder="Que recherchez-vous ? (ex: iPhone 13, Appartement Casablanca...)"
+                                class="w-full pl-12 pr-4 py-4 rounded-xl border border-gray-200 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 outline-none transition-all bg-white/50"
+                            >
+                        </div>
+                        
+                        <!-- Sélecteur de ville -->
+                        <div class="relative">
+                            <i class="fas fa-map-marker-alt absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                            <select id="citySelector" class="pl-12 pr-8 py-4 rounded-xl border border-gray-200 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 outline-none bg-white/50 min-w-[200px]">
+                                <option value="">Toutes les villes</option>
+                                <option value="casablanca">Casablanca</option>
+                                <option value="rabat">Rabat</option>
+                                <option value="marrakech">Marrakech</option>
+                                <option value="fes">Fès</option>
+                                <option value="tangier">Tanger</option>
+                                <option value="agadir">Agadir</option>
+                                <option value="meknes">Meknès</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Bouton recherche -->
+                        <button id="mainSearchBtn" class="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-8 py-4 rounded-xl font-semibold hover:shadow-lg transition-all transform hover:scale-105 flex items-center justify-center space-x-2">
+                            <i class="fas fa-search"></i>
+                            <span class="fr">Rechercher</span>
+                            <span class="ar hidden">بحث</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Statistiques -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
+                <div class="text-center">
+                    <div class="text-3xl font-bold text-purple-600">10K+</div>
+                    <div class="text-gray-600 text-sm">
+                        <span class="fr">Annonces actives</span>
+                        <span class="ar hidden">إعلانات نشطة</span>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl font-bold text-blue-600">5K+</div>
+                    <div class="text-gray-600 text-sm">
+                        <span class="fr">Utilisateurs</span>
+                        <span class="ar hidden">مستخدمين</span>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl font-bold text-pink-600">20+</div>
+                    <div class="text-gray-600 text-sm">
+                        <span class="fr">Villes</span>
+                        <span class="ar hidden">مدن</span>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl font-bold text-green-600">24/7</div>
+                    <div class="text-gray-600 text-sm">
+                        <span class="fr">Support IA</span>
+                        <span class="ar hidden">دعم ذكي</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        <!-- Search Bar -->
-        <section class="mb-8">
-            <div class="search-container">
-                <input 
-                    type="text"
-                    id="search-input"
-                    placeholder="🔍 ماذا تبحث عنه؟"
-                    class="search-input"
-                />
-                <button id="search-button" class="search-button">
-                    <i class="fas fa-search mr-2"></i>
-                    <span>ابحث الآن</span>
+    <!-- 🏷️ CATÉGORIES POPULAIRES -->
+    <section id="categories" class="py-16 px-4 bg-white/30 backdrop-blur-sm">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">
+                    <span class="fr">Catégories Populaires</span>
+                    <span class="ar hidden">الفئات الشائعة</span>
+                </h2>
+                <p class="text-gray-600">
+                    <span class="fr">Explorez nos catégories les plus demandées</span>
+                    <span class="ar hidden">استكشف فئاتنا الأكثر طلباً</span>
+                </p>
+            </div>
+            
+            <div id="categoriesGrid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+                <!-- Les catégories seront générées par JavaScript -->
+                  </div>
+    </section>
+
+    <!-- 🔥 ANNONCES À LA UNE -->
+    <section id="featured" class="py-16 px-4">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-12">
+                <div>
+                    <h2 class="text-3xl font-bold text-gray-800 mb-4">
+                        <span class="fr">Annonces à la Une</span>
+                        <span class="ar hidden">الإعلانات المميزة</span>
+                    </h2>
+                    <p class="text-gray-600">
+                        <span class="fr">Découvrez les meilleures offres du moment</span>
+                        <span class="ar hidden">اكتشف أفضل العروض الحالية</span>
+                    </p>
+                </div>
+                
+                <!-- Filtres rapides -->
+                <div class="flex flex-wrap gap-3 mt-4 md:mt-0">
+                    <button class="filter-btn active" data-filter="all">
+                        <span class="fr">Tout</span>
+                        <span class="ar hidden">الكل</span>
+                    </button>
+                    <button class="filter-btn" data-filter="voitures">
+                        <span class="fr">Voitures</span>
+                        <span class="ar hidden">سيارات</span>
+                    </button>
+                    <button class="filter-btn" data-filter="immobilier">
+                        <span class="fr">Immobilier</span>
+                        <span class="ar hidden">عقارات</span>
+                    </button>
+                    <button class="filter-btn" data-filter="electronique">
+                        <span class="fr">Électronique</span>
+                        <span class="ar hidden">إلكترونيات</span>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Grille des annonces -->
+            <div id="productsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <!-- Les annonces seront générées par JavaScript -->
+            </div>
+            
+            <!-- Bouton voir plus -->
+            <div class="text-center mt-12">
+                <button id="loadMoreBtn" class="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-8 py-3 rounded-xl font-semibold hover:shadow-lg transition-all transform hover:scale-105">
+                    <i class="fas fa-plus mr-2"></i>
+                    <span class="fr">Voir plus d'annonces</span>
+                    <span class="ar hidden">عرض المزيد من الإعلانات</span>
                 </button>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Categories -->
-        <section class="mb-8">
-            <h3 class="section-title mb-6" id="categories-title">
-                <i class="fas fa-th-large"></i>
-                الفئات الشائعة
-            </h3>
-            <div class="grid grid-cols-2 gap-4">
-                
-                <div class="category-card" data-category="cars">
-                    <i class="fas fa-car text-3xl text-blue-400 mb-3"></i>
-                    <h4 class="font-bold text-white category-name">سيارات</h4>
-                    <p class="text-sm text-white/70 mt-1 category-count">1,234 إعلان</p>
-                </div>
-
-                <div class="category-card" data-category="realestate">
-                    <i class="fas fa-home text-3xl text-green-400 mb-3"></i>
-                                        <h4 class="font-bold text-white category-name">عقارات</h4>
-                    <p class="text-sm text-white/70 mt-1 category-count">856 إعلان</p>
-                </div>
-
-                <div class="category-card" data-category="electronics">
-                    <i class="fas fa-mobile-alt text-3xl text-purple-400 mb-3"></i>
-                    <h4 class="font-bold text-white category-name">إلكترونيات</h4>
-                    <p class="text-sm text-white/70 mt-1 category-count">2,341 إعلان</p>
-                </div>
-
-                <div class="category-card" data-category="fashion">
-                    <i class="fas fa-tshirt text-3xl text-pink-400 mb-3"></i>
-                    <h4 class="font-bold text-white category-name">أزياء</h4>
-                    <p class="text-sm text-white/70 mt-1 category-count">967 إعلان</p>
-                </div>
-
-                <div class="category-card" data-category="furniture">
-                    <i class="fas fa-couch text-3xl text-orange-400 mb-3"></i>
-                    <h4 class="font-bold text-white category-name">أثاث</h4>
-                    <p class="text-sm text-white/70 mt-1 category-count">445 إعلان</p>
-                </div>
-
-                <div class="category-card" data-category="all">
-                    <i class="fas fa-star text-3xl text-yellow-400 mb-3"></i>
-                    <h4 class="font-bold text-white category-name">الكل</h4>
-                    <p class="text-sm text-white/70 mt-1 category-count">5,843 إعلان</p>
+    <!-- 🤖 SECTION IA ASSISTANT -->
+    <section class="py-16 px-4 bg-gradient-to-r from-purple-600/10 to-blue-600/10">
+        <div class="max-w-4xl mx-auto text-center">
+            <div class="bg-white/80 backdrop-blur-md rounded-3xl p-8 shadow-xl border border-white/20">
+                <div class="w-16 h-16 bg-gradient-to-r from-purple-600 to-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                    <i class="fas fa-robot text-white text-2xl"></i>
                 </div>
                 
-            </div>
-        </section>
-
-        <!-- Annonces Section -->
-        <section class="mb-8">
-            <div class="section-header">
-                <h3 class="section-title" id="recent-title">
-                    <i class="fas fa-fire text-orange-400"></i>
-                    آخر الإعلانات
-                </h3>
-                <button class="filter-button">
-                    <i class="fas fa-filter mr-1"></i>
-                    <span id="filter-text">فلتر</span>
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">
+                    <span class="fr">Assistant IA BladiBay</span>
+                    <span class="ar hidden">مساعد بلادي باي الذكي</span>
+                </h2>
+                
+                <p class="text-gray-600 mb-8">
+                    <span class="fr">Notre intelligence artificielle vous aide à trouver exactement ce que vous cherchez et optimise vos annonces automatiquement.</span>
+                    <span class="ar hidden">يساعدك ذكاؤنا الاصطناعي في العثور على ما تبحث عنه بالضبط ويحسن إعلاناتك تلقائياً.</span>
+                </p>
+                
+                <div class="grid md:grid-cols-3 gap-6 mb-8">
+                    <div class="text-center">
+                        <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mx-auto mb-3">
+                            <i class="fas fa-search text-purple-600"></i>
+                        </div>
+                        <h3 class="font-semibold mb-2">
+                            <span class="fr">Recherche Intelligente</span>
+                            <span class="ar hidden">بحث ذكي</span>
+                        </h3>
+                        <p class="text-sm text-gray-600">
+                            <span class="fr">Comprenez vos besoins même avec des descriptions floues</span>
+                            <span class="ar hidden">يفهم احتياجاتك حتى مع الأوصاف الغامضة</span>
+                        </p>
+                    </div>
+                    
+                    <div class="text-center">
+                        <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mx-auto mb-3">
+                            <i class="fas fa-magic text-blue-600"></i>
+                        </div>
+                        <h3 class="font-semibold mb-2">
+                            <span class="fr">Amélioration Auto</span>
+                            <span class="ar hidden">تحسين تلقائي</span>
+                        </h3>
+                        <p class="text-sm text-gray-600">
+                            <span class="fr">Optimise vos titres et descriptions pour plus de visibilité</span>
+                            <span class="ar hidden">يحسن عناوينك ووصفك لمزيد من الرؤية</span>
+                        </p>
+                    </div>
+                    
+                    <div class="text-center">
+                        <div class="w-12 h-12 bg-pink-100 rounded-xl flex items-center justify-center mx-auto mb-3">
+                            <i class="fas fa-chart-line text-pink-600"></i>
+                        </div>
+                        <h3 class="font-semibold mb-2">
+                            <span class="fr">Prix Intelligent</span>
+                            <span class="ar hidden">سعر ذكي</span>
+                        </h3>
+                        <p class="text-sm text-gray-600">
+                            <span class="fr">Suggère le prix optimal basé sur le marché</span>
+                            <span class="ar hidden">يقترح السعر الأمثل بناءً على السوق</span>
+                        </p>
+                    </div>
+                </div>
+                
+                <button class="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-8 py-3 rounded-xl font-semibold hover:shadow-lg transition-all transform hover:scale-105">
+                    <i class="fas fa-comments mr-2"></i>
+                    <span class="fr">Parler avec l'IA</span>
+                    <span class="ar hidden">تحدث مع الذكاء الاصطناعي</span>
                 </button>
             </div>
-            <div id="recent-ads">
-                <!-- Les annonces seront générées dynamiquement -->
-            </div>
-        </section>
+        </div>
+    </section>
 
-    </main>
-
-    <!-- Navigation Mobile -->
-    <nav class="mobile-nav">
-        <div class="flex justify-around items-center">
-            <button class="nav-item active" data-page="home">
+    <!-- 📱 NAVIGATION MOBILE BOTTOM -->
+    <nav class="fixed bottom-0 left-0 right-0 bg-white/90 backdrop-blur-md border-t border-gray-200 md:hidden z-40">
+        <div class="flex items-center justify-around py-3">
+            <a href="#home" class="nav-item active flex flex-col items-center space-y-1 px-4 py-2">
                 <i class="fas fa-home text-lg"></i>
-                <span class="text-xs font-medium nav-text">الرئيسية</span>
-            </button>
-            <button class="nav-item" data-page="search">
+                <span class="text-xs font-medium">
+                    <span class="fr">Accueil</span>
+                    <span class="ar hidden">الرئيسية</span>
+                </span>
+            </a>
+            
+            <a href="#categories" class="nav-item flex flex-col items-center space-y-1 px-4 py-2">
+                <i class="fas fa-th-large text-lg"></i>
+                <span class="text-xs font-medium">
+                    <span class="fr">Catégories</span>
+                    <span class="ar hidden">الفئات</span>
+                </span>
+            </a>
+            
+            <button id="mobileSearchBtn" class="nav-item flex flex-col items-center space-y-1 px-4 py-2">
                 <i class="fas fa-search text-lg"></i>
-                <span class="text-xs font-medium nav-text">بحث</span>
+                <span class="text-xs font-medium">
+                    <span class="fr">Recherche</span>
+                    <span class="ar hidden">بحث</span>
+                </span>
             </button>
-            <button class="nav-item" data-page="add">
-                <i class="fas fa-plus text-lg"></i>
-                <span class="text-xs font-medium nav-text">إضافة</span>
-            </button>
-            <button class="nav-item" data-page="profile">
+            
+            <a href="#favorites" class="nav-item flex flex-col items-center space-y-1 px-4 py-2 relative">
+                <i class="fas fa-heart text-lg"></i>
+                <span class="text-xs font-medium">
+                    <span class="fr">Favoris</span>
+                    <span class="ar hidden">المفضلة</span>
+                </span>
+                <span id="mobileFavCount" class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center hidden">0</span>
+            </a>
+            
+            <a href="#profile" class="nav-item flex flex-col items-center space-y-1 px-4 py-2">
                 <i class="fas fa-user text-lg"></i>
-                <span class="text-xs font-medium nav-text">حسابي</span>
-            </button>
+                <span class="text-xs font-medium">
+                    <span class="fr">Profil</span>
+                    <span class="ar hidden">الملف</span>
+                </span>
+            </a>
         </div>
     </nav>
 
-    <!-- JavaScript Premium -->
-    <script>
-        // =================== DONNÉES AVEC DESIGN EXACT ===================
-        const sampleAds = [
-            {
-                id: 1,
-                title: { ar: "تويوتا كورولا 2020 فل أوبشن", fr: "Toyota Corolla 2020 Full Option" },
-                price: 180000,
-                location: { ar: "الدار البيضاء", fr: "Casablanca" },
-                category: "cars",
-                image: "https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?w=500&h=400&fit=crop&auto=format",
-                time: { ar: "منذ ساعتين", fr: "il y a 2h" },
-                description: { ar: "سيارة في حالة ممتازة، صيانة دورية، كيلومترات قليلة", fr: "Voiture en excellent état, entretien régulier, faible kilométrage" },
-                featured: true,
-                verified: true,
-                views: 245,
-                favorited: false
-            },
-            {
-                id: 2,
-                title: { ar: "شقة للبيع 3 غرف - إطلالة بحرية", fr: "Appartement 3 chambres - Vue mer" },
-                price: 850000,
-                location: { ar: "الرباط", fr: "Rabat" },
-                category: "realestate",
-                image: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=500&h=400&fit=crop&auto=format",
-                time: { ar: "منذ 5 ساعات", fr: "il y a 5h" },
-                description: { ar: "شقة واسعة ومشمسة، إطلالة رائعة على البحر، قريبة من الخدمات", fr: "Appartement spacieux et lumineux, belle vue mer, proche commodités" },
-                featured: false,
-                verified: true,
-                views: 189,
-                favorited: false
-            },
-            {
-                id: 3,
-                title: { ar: "آيفون 14 برو ماكس جديد", fr: "iPhone 14 Pro Max Neuf" },
-                price: 12000,
-                location: { ar: "فاس", fr: "Fès" },
-                category: "electronics",
-                image: "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=500&h=400&fit=crop&auto=format",
-                time: { ar: "منذ يوم", fr: "il y a 1 jour" },
-                description: { ar: "جديد في العلبة، ضمان كامل سنة، جميع الإكسسوارات", fr: "Neuf dans sa boîte, garantie 1 an, tous accessoires" },
-                featured: true,
-                verified: true,
-                views: 567,
-                favorited: true
-            },
-            {
-                id: 4,
-                title: { ar: "فستان زفاف أبيض راقي", fr: "Robe de mariée blanche élégante" },
-                price: 3500,
-                location: { ar: "مراكش", fr: "Marrakech" },
-                category: "fashion",
-                image: "https://images.unsplash.com/photo-1594736797933-d0501ba2fe65?w=500&h=400&fit=crop&auto=format",
-                time: { ar: "منذ 3 أيام", fr: "il y a 3 jours" },
-                description: { ar: "فستان أنيق ومميز، مقاس M، استعمال مرة واحدة", fr: "Robe élégante et unique, taille M, portée une seule fois" },
-                featured: false,
-                verified: false,
-                views: 123,
-                favorited: false
-            },
-            {
-                id: 5,
-                title: { ar: "مرسيدس بنز E200 موديل 2019", fr: "Mercedes Benz E200 2019" },
-                price: 320000,
-                location: { ar: "الدار البيضاء", fr: "Casablanca" },
-                category: "cars",
-                image: "https://images.unsplash.com/photo-1563720223185-11003d516935?w=500&h=400&fit=crop&auto=format",
-                time: { ar: "منذ 6 ساعات", fr: "il y a 6h" },
-                description: { ar: "سيارة فاخرة، حالة ممتازة، مالك واحد، تأمين شامل", fr: "Voiture de luxe, état impeccable, un seul propriétaire" },
-                featured: true,
-                verified: true,
-                views: 334,
-                favorited: false
-            },
-            {
-                id: 6,
-                title: { ar: "لابتوب ديل XPS للألعاب", fr: "Laptop Dell XPS Gaming" },
-                price: 8500,
-                location: { ar: "أكادير", fr: "Agadir" },
-                category: "electronics",
-                image: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=500&h=400&fit=crop&auto=format",
-                time: { ar: "منذ 12 ساعة", fr: "il y a 12h" },
-                description: { ar: "للألعاب والعمل، مواصفات عالية، كارت جرافيك قوي", fr: "Pour gaming et travail, hautes performances, carte graphique puissante" },
-                featured: false,
-                verified: true,
-                views: 278,
-                favorited: true
-            }
-        ];
+    <!-- 🔔 NOTIFICATIONS TOAST -->
+    <div id="toastContainer" class="fixed top-20 right-4 z-50 space-y-3">
+        <!-- Les notifications apparaîtront ici -->
+    </div>
 
-        // =================== VARIABLES GLOBALES ===================
-        let filteredAds = [...sampleAds];
-        let currentSearchTerm = '';
-        let currentLang = 'ar';
-
-        // =================== TRADUCTIONS ===================
-        const translations = {
-            ar: {
-                headerSubtitle: "بلادي باي",
-                welcomeTitle: "أهلا بك في بلادي باي",
-                welcomeSubtitle: "السوق الإلكتروني الحديث للمغرب 🇲🇦",
-                searchPlaceholder: "🔍 ماذا تبحث عنه؟",
-                searchButton: "ابحث الآن",
-                categoriesTitle: "الفئات الشائعة",
-                categories: ["سيارات", "عقارات", "إلكترونيات", "أزياء", "أثاث", "الكل"],
-                categoryCounts: ["1,234 إعلان", "856 إعلان", "2,341 إعلان", "967 إعلان", "445 إعلان", "5,843 إعلان"],
-                recentTitle: "آخر الإعلانات",
-                navTexts: ["الرئيسية", "بحث", "إضافة", "حسابي"],
-                direction: "rtl",
-                noResults: "لا توجد نتائج",
-                tryOtherKeywords: "جرب البحث بكلمات أخرى",
-                resultsFor: "نتيجة للبحث",
-                call: "اتصل",
-                whatsapp: "واتساب",
-                favorite: "مفضلة",
-                share: "مشاركة",
-                featured: "مميز",
-                verified: "موثق",
-                views: "مشاهدة",
-                filterText: "فلتر",
-                addedToFavorites: "تمت الإضافة للمفضلة ✨",
-                removedFromFavorites: "تم الحذف من المفضلة",
-                currency: "درهم"
-            },
-            fr: {
-                headerSubtitle: "BladiBay",
-                welcomeTitle: "Bienvenue sur BladiBay",
-                welcomeSubtitle: "Le marketplace moderne du Maroc 🇲🇦",
-                searchPlaceholder: "🔍 Rechercher...",
-                searchButton: "Rechercher",
-                categoriesTitle: "Catégories populaires",
-                categories: ["Voitures", "Immobilier", "Électronique", "Mode", "Mobilier", "Tout"],
-                categoryCounts: ["1,234 annonces", "856 annonces", "2,341 annonces", "967 annonces", "445 annonces", "5,843 annonces"],
-                recentTitle: "Annonces récentes",
-                navTexts: ["Accueil", "Recherche", "Publier", "Profil"],
-                direction: "ltr",
-                noResults: "Aucun résultat",
-                tryOtherKeywords: "Essayez avec d'autres mots-clés",
-                resultsFor: "résultats pour",
-                call: "Appeler",
-                whatsapp: "WhatsApp",
-                favorite: "Favori",
-                share: "Partager",
-                featured: "Premium",
-                verified: "Vérifié",
-                views: "vues",
-                filterText: "Filtre",
-                addedToFavorites: "Ajouté aux favoris ✨",
-                removedFromFavorites: "Retiré des favoris",
-                currency: "DH"
-            }
-        };
-
-        // =================== FONCTIONS PRINCIPALES ===================
-        function performSearch() {
-            const searchInput = document.getElementById('search-input');
-            const searchTerm = searchInput.value.toLowerCase().trim();
-            currentSearchTerm = searchTerm;
-            
-            if (searchTerm === '') {
-                filteredAds = [...sampleAds];
-            } else {
-                filteredAds = sampleAds.filter(ad => {
-                    const titleAr = ad.title.ar.toLowerCase();
-                    const titleFr = ad.title.fr.toLowerCase();
-                    const locationAr = ad.location.ar.toLowerCase();
-                    const locationFr = ad.location.fr.toLowerCase();
-                    const descAr = ad.description.ar.toLowerCase();
-                    const descFr = ad.description.fr.toLowerCase();
+    <!-- 🏠 FOOTER -->
+    <footer class="bg-gray-900 text-white py-16 px-4 mb-20 md:mb-0">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- Logo et description -->
+                <div class="col-span-1 md:col-span-2">
+                    <div class="flex items-center space-x-3 mb-6">
+                        <div class="w-12 h-12 bg-gradient-to-r from-purple-600 to-blue-600 rounded-xl flex items-center justify-center">
+                            <i class="fas fa-gem text-white text-xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold">BladiBay</h3>
+                    </div>
                     
-                    return titleAr.includes(searchTerm) || 
-                           titleFr.includes(searchTerm) ||
-                           locationAr.includes(searchTerm) ||
-                           locationFr.includes(searchTerm) ||
-                           descAr.includes(searchTerm) ||
-                           descFr.includes(searchTerm) ||
-                           ad.price.toString().includes(searchTerm);
-                });
-            }
-            
-            displaySearchResults();
-        }
-
-        function displaySearchResults() {
-            const recentAdsContainer = document.getElementById('recent-ads');
-            const recentTitle = document.getElementById('recent-title');
-            const t = translations[currentLang];
-            
-            if (currentSearchTerm === '') {
-                recentTitle.innerHTML = `<i class="fas fa-fire text-orange-400"></i>${t.recentTitle}`;
-            } else {
-                const resultsCount = filteredAds.length;
-                recentTitle.innerHTML = `<i class="fas fa-search text-blue-400"></i>${resultsCount} ${t.resultsFor} "${currentSearchTerm}"`;
-            }
-            
-            recentAdsContainer.innerHTML = '';
-            
-            if (filteredAds.length === 0) {
-                recentAdsContainer.innerHTML = `
-                    <div class="glass-card p-8 text-center">
-                                            <h4 class="font-bold text-white category-name">عقارات</h4>
-                    <p class="text-sm text-white/70 mt-1 category-count">856 إعلان</p>
-                </div>
-
-                <div class="category-card" data-category="electronics">
-                    <i class="fas fa-mobile-alt text-3xl text-purple-400 mb-3"></i>
-                    <h4 class="font-bold text-white category-name">إلكترونيات</h4>
-                    <p class="text-sm text-white/70 mt-1 category-count">2,341 إعلان</p>
-                </div>
-
-                <div class="category-card" data-category="fashion">
-                    <i class="fas fa-tshirt text-3xl text-pink-400 mb-3"></i>
-                    <h4 class="font-bold text-white category-name">أزياء</h4>
-                    <p class="text-sm text-white/70 mt-1 category-count">967 إعلان</p>
-                </div>
-
-                <div class="category-card" data-category="furniture">
-                    <i class="fas fa-couch text-3xl text-orange-400 mb-3"></i>
-                    <h4 class="font-bold text-white category-name">أثاث</h4>
-                    <p class="text-sm text-white/70 mt-1 category-count">445 إعلان</p>
-                </div>
-
-                <div class="category-card" data-category="all">
-                    <i class="fas fa-star text-3xl text-yellow-400 mb-3"></i>
-                    <h4 class="font-bold text-white category-name">الكل</h4>
-                    <p class="text-sm text-white/70 mt-1 category-count">5,843 إعلان</p>
+                    <p class="text-gray-400 mb-6 max-w-md">
+                        <span class="fr">La marketplace intelligente qui révolutionne le commerce au Maroc. Avec l'IA, trouvez et vendez plus facilement que jamais.</span>
+                        <span class="ar hidden">السوق الذكي الذي يثور التجارة في المغرب. مع الذكاء الاصطناعي، اعثر وبيع بسهولة أكثر من أي وقت مضى.</span>
+                    </p>
+                    
+                    <!-- Réseaux sociaux -->
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-purple-600 transition-colors">
+                            <i class="fab fa-facebook text-lg"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-blue-500 transition-colors">
+                            <i class="fab fa-twitter text-lg"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-pink-600 transition-colors">
+                            <i class="fab fa-instagram text-lg"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-green-600 transition-colors">
+                            <i class="fab fa-whatsapp text-lg"></i>
+                        </a>
+                    </div>
                 </div>
                 
+                <!-- Liens rapides -->
+                <div>
+                    <h4 class="font-semibold mb-4">
+                        <span class="fr">Liens Rapides</span>
+                        <span class="ar hidden">روابط سريعة</span>
+                    </h4>
+                    <ul class="space-y-3 text-gray-400">
+                                                <li class="flex items-center space-x-2 space-x-reverse">
+                            <i class="fas fa-phone w-4"></i>
+                            <span>+212 5XX-XXXXXX</span>
+                        </li>
+                        <li class="flex items-center space-x-2 space-x-reverse">
+                            <i class="fas fa-map-marker-alt w-4"></i>
+                            <span>Casablanca, Maroc</span>
+                        </li>
+                        <li class="flex items-center space-x-2 space-x-reverse">
+                            <i class="fas fa-clock w-4"></i>
+                            <span>24/7 Support IA</span>
+                        </li>
+                    </ul>
+                </div>
             </div>
-        </section>
-
-        <!-- Annonces Section -->
-        <section class="mb-8">
-            <div class="section-header">
-                <h3 class="section-title" id="recent-title">
-                    <i class="fas fa-fire text-orange-400"></i>
-                    آخر الإعلانات
-                </h3>
-                <button class="filter-button">
-                    <i class="fas fa-filter mr-1"></i>
-                    <span id="filter-text">فلتر</span>
-                </button>
-            </div>
-            <div id="recent-ads">
-                <!-- Les annonces seront générées dynamiquement -->
-            </div>
-        </section>
-
-    </main>
-
-    <!-- Navigation Mobile -->
-    <nav class="mobile-nav">
-        <div class="flex justify-around items-center">
-            <button class="nav-item active" data-page="home">
-                <i class="fas fa-home text-lg"></i>
-                <span class="text-xs font-medium nav-text">الرئيسية</span>
-            </button>
-            <button class="nav-item" data-page="search">
-                <i class="fas fa-search text-lg"></i>
-                <span class="text-xs font-medium nav-text">بحث</span>
-            </button>
-            <button class="nav-item" data-page="add">
-                <i class="fas fa-plus text-lg"></i>
-                <span class="text-xs font-medium nav-text">إضافة</span>
-            </button>
-            <button class="nav-item" data-page="profile">
-                <i class="fas fa-user text-lg"></i>
-                <span class="text-xs font-medium nav-text">حسابي</span>
-            </button>
-        </div>
-    </nav>
-
-    <!-- JavaScript Premium -->
-    <script>
-        // =================== DONNÉES AVEC DESIGN EXACT ===================
-        const sampleAds = [
-            {
-                id: 1,
-                title: { ar: "تويوتا كورولا 2020 فل أوبشن", fr: "Toyota Corolla 2020 Full Option" },
-                price: 180000,
-                location: { ar: "الدار البيضاء", fr: "Casablanca" },
-                category: "cars",
-                image: "https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?w=500&h=400&fit=crop&auto=format",
-                time: { ar: "منذ ساعتين", fr: "il y a 2h" },
-                description: { ar: "سيارة في حالة ممتازة، صيانة دورية، كيلومترات قليلة", fr: "Voiture en excellent état, entretien régulier, faible kilométrage" },
-                featured: true,
-                verified: true,
-                views: 245,
-                favorited: false
-            },
-            {
-                id: 2,
-                title: { ar: "شقة للبيع 3 غرف - إطلالة بحرية", fr: "Appartement 3 chambres - Vue mer" },
-                price: 850000,
-                location: { ar: "الرباط", fr: "Rabat" },
-                category: "realestate",
-                image: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=500&h=400&fit=crop&auto=format",
-                time: { ar: "منذ 5 ساعات", fr: "il y a 5h" },
-                description: { ar: "شقة واسعة ومشمسة، إطلالة رائعة على البحر، قريبة من الخدمات", fr: "Appartement spacieux et lumineux, belle vue mer, proche commodités" },
-                featured: false,
-                verified: true,
-                views: 189,
-                favorited: false
-            },
-            {
-                id: 3,
-                title: { ar: "آيفون 14 برو ماكس جديد", fr: "iPhone 14 Pro Max Neuf" },
-                price: 12000,
-                location: { ar: "فاس", fr: "Fès" },
-                category: "electronics",
-                image: "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=500&h=400&fit=crop&auto=format",
-                time: { ar: "منذ يوم", fr: "il y a 1 jour" },
-                description: { ar: "جديد في العلبة، ضمان كامل سنة، جميع الإكسسوارات", fr: "Neuf dans sa boîte, garantie 1 an, tous accessoires" },
-                featured: true,
-                verified: true,
-                views: 567,
-                favorited: true
-            },
-            {
-                id: 4,
-                title: { ar: "فستان زفاف أبيض راقي", fr: "Robe de mariée blanche élégante" },
-                price: 3500,
-                location: { ar: "مراكش", fr: "Marrakech" },
-                category: "fashion",
-                image: "https://images.unsplash.com/photo-1594736797933-d0501ba2fe65?w=500&h=400&fit=crop&auto=format",
-                time: { ar: "منذ 3 أيام", fr: "il y a 3 jours" },
-                description: { ar: "فستان أنيق ومميز، مقاس M، استعمال مرة واحدة", fr: "Robe élégante et unique, taille M, portée une seule fois" },
-                featured: false,
-                verified: false,
-                views: 123,
-                favorited: false
-            },
-            {
-                id: 5,
-                title: { ar: "مرسيدس بنز E200 موديل 2019", fr: "Mercedes Benz E200 2019" },
-                price: 320000,
-                location: { ar: "الدار البيضاء", fr: "Casablanca" },
-                category: "cars",
-                image: "https://images.unsplash.com/photo-1563720223185-11003d516935?w=500&h=400&fit=crop&auto=format",
-                time: { ar: "منذ 6 ساعات", fr: "il y a 6h" },
-                description: { ar: "سيارة فاخرة، حالة ممتازة، مالك واحد، تأمين شامل", fr: "Voiture de luxe, état impeccable, un seul propriétaire" },
-                featured: true,
-                verified: true,
-                views: 334,
-                favorited: false
-            },
-            {
-                id: 6,
-                title: { ar: "لابتوب ديل XPS للألعاب", fr: "Laptop Dell XPS Gaming" },
-                price: 8500,
-                location: { ar: "أكادير", fr: "Agadir" },
-                category: "electronics",
-                image: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=500&h=400&fit=crop&auto=format",
-                time: { ar: "منذ 12 ساعة", fr: "il y a 12h" },
-                description: { ar: "للألعاب والعمل، مواصفات عالية، كارت جرافيك قوي", fr: "Pour gaming et travail, hautes performances, carte graphique puissante" },
-                featured: false,
-                verified: true,
-                views: 278,
-                favorited: true
-            }
-        ];
-
-        // =================== VARIABLES GLOBALES ===================
-        let filteredAds = [...sampleAds];
-        let currentSearchTerm = '';
-        let currentLang = 'ar';
-
-        // =================== TRADUCTIONS ===================
-        const translations = {
-            ar: {
-                headerSubtitle: "بلادي باي",
-                welcomeTitle: "أهلا بك في بلادي باي",
-                welcomeSubtitle: "السوق الإلكتروني الحديث للمغرب 🇲🇦",
-                searchPlaceholder: "🔍 ماذا تبحث عنه؟",
-                searchButton: "ابحث الآن",
-                categoriesTitle: "الفئات الشائعة",
-                categories: ["سيارات", "عقارات", "إلكترونيات", "أزياء", "أثاث", "الكل"],
-                categoryCounts: ["1,234 إعلان", "856 إعلان", "2,341 إعلان", "967 إعلان", "445 إعلان", "5,843 إعلان"],
-                recentTitle: "آخر الإعلانات",
-                navTexts: ["الرئيسية", "بحث", "إضافة", "حسابي"],
-                direction: "rtl",
-                noResults: "لا توجد نتائج",
-                tryOtherKeywords: "جرب البحث بكلمات أخرى",
-                resultsFor: "نتيجة للبحث",
-                call: "اتصل",
-                whatsapp: "واتساب",
-                favorite: "مفضلة",
-                share: "مشاركة",
-                featured: "مميز",
-                verified: "موثق",
-                views: "مشاهدة",
-                filterText: "فلتر",
-                addedToFavorites: "تمت الإضافة للمفضلة ✨",
-                removedFromFavorites: "تم الحذف من المفضلة",
-                currency: "درهم"
-            },
-            fr: {
-                headerSubtitle: "BladiBay",
-                welcomeTitle: "Bienvenue sur BladiBay",
-                welcomeSubtitle: "Le marketplace moderne du Maroc 🇲🇦",
-                searchPlaceholder: "🔍 Rechercher...",
-                searchButton: "Rechercher",
-                categoriesTitle: "Catégories populaires",
-                categories: ["Voitures", "Immobilier", "Électronique", "Mode", "Mobilier", "Tout"],
-                categoryCounts: ["1,234 annonces", "856 annonces", "2,341 annonces", "967 annonces", "445 annonces", "5,843 annonces"],
-                recentTitle: "Annonces récentes",
-                navTexts: ["Accueil", "Recherche", "Publier", "Profil"],
-                direction: "ltr",
-                noResults: "Aucun résultat",
-                tryOtherKeywords: "Essayez avec d'autres mots-clés",
-                resultsFor: "résultats pour",
-                call: "Appeler",
-                whatsapp: "WhatsApp",
-                favorite: "Favori",
-                share: "Partager",
-                featured: "Premium",
-                verified: "Vérifié",
-                views: "vues",
-                filterText: "Filtre",
-                addedToFavorites: "Ajouté aux favoris ✨",
-                removedFromFavorites: "Retiré des favoris",
-                currency: "DH"
-            }
-        };
-
-        // =================== FONCTIONS PRINCIPALES ===================
-        function performSearch() {
-            const searchInput = document.getElementById('search-input');
-            const searchTerm = searchInput.value.toLowerCase().trim();
-            currentSearchTerm = searchTerm;
             
-            if (searchTerm === '') {
-                filteredAds = [...sampleAds];
-            } else {
-                filteredAds = sampleAds.filter(ad => {
-                    const titleAr = ad.title.ar.toLowerCase();
-                    const titleFr = ad.title.fr.toLowerCase();
-                    const locationAr = ad.location.ar.toLowerCase();
-                    const locationFr = ad.location.fr.toLowerCase();
-                    const descAr = ad.description.ar.toLowerCase();
-                    const descFr = ad.description.fr.toLowerCase();
+            <!-- Ligne de séparation -->
+            <div class="border-t border-gray-800 mt-12 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-400 text-sm">
+                        <span class="fr">© 2024 BladiBay. Tous droits réservés. Fait avec ❤️ au Maroc</span>
+                        <span class="ar hidden">© 2024 بلادي باي. جميع الحقوق محفوظة. صنع بـ ❤️ في المغرب</span>
+                    </p>
                     
-                    return titleAr.includes(searchTerm) || 
-                           titleFr.includes(searchTerm) ||
-                           locationAr.includes(searchTerm) ||
-                           locationFr.includes(searchTerm) ||
-                           descAr.includes(searchTerm) ||
-                           descFr.includes(searchTerm) ||
-                           ad.price.toString().includes(searchTerm);
-                });
-            }
-            
-            displaySearchResults();
-        }
-
-        function displaySearchResults() {
-            const recentAdsContainer = document.getElementById('recent-ads');
-            const recentTitle = document.getElementById('recent-title');
-            const t = translations[currentLang];
-            
-            if (currentSearchTerm === '') {
-                recentTitle.innerHTML = `<i class="fas fa-fire text-orange-400"></i>${t.recentTitle}`;
-            } else {
-                const resultsCount = filteredAds.length;
-                recentTitle.innerHTML = `<i class="fas fa-search text-blue-400"></i>${resultsCount} ${t.resultsFor} "${currentSearchTerm}"`;
-            }
-            
-            recentAdsContainer.innerHTML = '';
-            
-            if (filteredAds.length === 0) {
-                recentAdsContainer.innerHTML = `
-                    <div class="glass-card p-8 text-center">
-                                               <i class="fas fa-search text-6xl text-white/30 mb-4"></i>
-                        <h3 class="text-xl font-bold text-white mb-2">${t.noResults}</h3>
-                        <p class="text-white/70">${t.tryOtherKeywords}</p>
-                    </div>
-                `;
-                return;
-            }
-            
-            filteredAds.forEach((ad, index) => {
-                const adElement = createAdElement(ad);
-                adElement.style.animationDelay = `${index * 0.1}s`;
-                adElement.classList.add('fade-in');
-                recentAdsContainer.appendChild(adElement);
-            });
-        }
-
-        function createAdElement(ad) {
-            const t = translations[currentLang];
-            const adDiv = document.createElement('div');
-            adDiv.className = 'ad-card';
-            
-            const isRTL = currentLang === 'ar';
-            const imageClass = isRTL ? 'image-container rtl' : 'image-container';
-            
-            const featuredBadge = ad.featured ? 
-                `<span class="premium-badge absolute top-4 ${isRTL ? 'left-4' : 'right-4'}">
-                    <i class="fas fa-star"></i>${t.featured}
-                </span>` : '';
-            
-            const verifiedIcon = ad.verified ? 
-                `<span class="verified-badge">
-                    <i class="fas fa-check"></i>
-                </span>` : '';
-            
-            const favoriteIcon = ad.favorited ? 'fas fa-heart' : 'far fa-heart';
-            const favoriteClass = ad.favorited ? 'btn-favorite favorited' : 'btn-favorite';
-            
-            adDiv.innerHTML = `
-                <div class="relative">
-                    ${featuredBadge}
-                    <div class="flex ${isRTL ? 'flex-row-reverse' : ''}">
-                        <div class="${imageClass}">
-                            <img 
-                                src="${ad.image}" 
-                                alt="${ad.title[currentLang]}"
-                                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
-                            />
-                            <div class="w-full h-full bg-gradient-to-br from-purple-400 to-pink-400 hidden items-center justify-center text-white text-2xl">
-                                <i class="fas fa-image"></i>
-                            </div>
-                        </div>
-                        <div class="ad-content" ${isRTL ? 'dir="rtl"' : ''}>
-                            <div class="ad-title">
-                                ${ad.title[currentLang]}
-                                ${verifiedIcon}
-                            </div>
-                            <div class="price-text">
-                                ${ad.price.toLocaleString()} ${t.currency}
-                            </div>
-                            <div class="ad-meta">
-                                <i class="fas fa-map-marker-alt"></i>
-                                <span>${ad.location[currentLang]}</span>
-                                <span>•</span>
-                                <i class="fas fa-clock"></i>
-                                <span>${ad.time[currentLang]}</span>
-                                <span>•</span>
-                                <i class="fas fa-eye"></i>
-                                <span>${ad.views} ${t.views}</span>
-                            </div>
-                            <div class="ad-description">
-                                ${ad.description[currentLang]}
-                            </div>
-                            <div class="ad-buttons">
-                                <button class="premium-button btn-call">
-                                    <i class="fas fa-phone"></i>
-                                    ${t.call}
-                                </button>
-                                <button class="premium-button btn-whatsapp">
-                                    <i class="fab fa-whatsapp"></i>
-                                    ${t.whatsapp}
-                                </button>
-                                <button class="premium-button ${favoriteClass}" onclick="toggleFavorite(${ad.id}, this)">
-                                    <i class="${favoriteIcon}"></i>
-                                    ${t.favorite}
-                                </button>
-                                <button class="premium-button btn-share">
-                                    <i class="fas fa-share-alt"></i>
-                                    ${t.share}
-                                </button>
-                            </div>
-                        </div>
+                    <div class="flex space-x-6 mt-4 md:mt-0 text-sm">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <span class="fr">Conditions d'utilisation</span>
+                            <span class="ar hidden">شروط الاستخدام</span>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <span class="fr">Politique de confidentialité</span>
+                            <span class="ar hidden">سياسة الخصوصية</span>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <span class="fr">Cookies</span>
+                            <span class="ar hidden">ملفات تعريف الارتباط</span>
+                        </a>
                     </div>
                 </div>
-            `;
-            
-            return adDiv;
-        }
+            </div>
+        </div>
+    </footer>
 
-        function toggleLanguage() {
-            currentLang = currentLang === 'ar' ? 'fr' : 'ar';
-            updateLanguage();
-            setTimeout(() => {
-                displaySearchResults();
-            }, 100);
-        }
-
-        function updateLanguage() {
-            const t = translations[currentLang];
-            const htmlRoot = document.getElementById('html-root');
-            const mainContent = document.getElementById('main-content');
-            
-            htmlRoot.setAttribute('dir', t.direction);
-            htmlRoot.setAttribute('lang', currentLang === 'ar' ? 'ar' : 'fr');
-            
-            // Update texts
-            document.getElementById('header-subtitle').textContent = t.headerSubtitle;
-            document.getElementById('welcome-title').textContent = t.welcomeTitle;
-            document.getElementById('welcome-subtitle').textContent = t.welcomeSubtitle;
-            document.getElementById('search-input').placeholder = t.searchPlaceholder;
-            document.getElementById('search-button').querySelector('span').textContent = t.searchButton;
-            document.getElementById('categories-title').innerHTML = `<i class="fas fa-th-large"></i>${t.categoriesTitle}`;
-            document.getElementById('current-lang').textContent = currentLang.toUpperCase();
-            document.getElementById('filter-text').textContent = t.filterText;
-            
-            // Update categories
-            const categoryNames = document.querySelectorAll('.category-name');
-            const categoryCounts = document.querySelectorAll('.category-count');
-            categoryNames.forEach((el, i) => {
-                if (t.categories[i]) el.textContent = t.categories[i];
-            });
-            categoryCounts.forEach((el, i) => {
-                if (t.categoryCounts[i]) el.textContent = t.categoryCounts[i];
-            });
-            
-            // Update navigation
-            const navTexts = document.querySelectorAll('.nav-text');
-            navTexts.forEach((el, i) => {
-                if (t.navTexts[i]) el.textContent = t.navTexts[i];
-            });
-            
-            // Update search input direction
-            const searchInput = document.getElementById('search-input');
-            searchInput.style.direction = t.direction;
-            
-            // Save language preference
-            localStorage.setItem('bladibay-lang', currentLang);
-        }
-
-        function filterByCategory(category) {
-            const searchInput = document.getElementById('search-input');
-            
-            if (category === 'all') {
-                searchInput.value = '';
-                filteredAds = [...sampleAds];
-                currentSearchTerm = '';
-            } else {
-                filteredAds = sampleAds.filter(ad => ad.category === category);
-                const categoryNames = {
-                    cars: { ar: 'سيارات', fr: 'voitures' },
-                    realestate: { ar: 'عقارات', fr: 'immobilier' },
-                    electronics: { ar: 'إلكترونيات', fr: 'électronique' },
-                    fashion: { ar: 'أزياء', fr: 'mode' },
-                    furniture: { ar: 'أثاث', fr: 'mobilier' }
-                };
-                const searchTerm = categoryNames[category] ? categoryNames[category][currentLang] : '';
-                searchInput.value = searchTerm;
-                currentSearchTerm = searchTerm;
-            }
-            
-            displaySearchResults();
-            document.getElementById('recent-title').scrollIntoView({ 
-                behavior: 'smooth'
-            });
-        }
-
-        function toggleFavorite(adId, buttonElement) {
-            const ad = sampleAds.find(a => a.id === adId);
-            if (!ad) return;
-            
-            const t = translations[currentLang];
-            ad.favorited = !ad.favorited;
-            
-            const icon = buttonElement.querySelector('i');
-            if (ad.favorited) {
-                icon.className = 'fas fa-heart';
-                buttonElement.className = 'premium-button btn-favorite favorited';
-                showNotification(t.addedToFavorites, 'success');
-            } else {
-                icon.className = 'far fa-heart';
-                buttonElement.className = 'premium-button btn-favorite';
-                showNotification(t.removedFromFavorites, 'info');
-            }
-            
-            // Save to localStorage
-            const favorites = JSON.parse(localStorage.getItem('bladibay-favorites') || '[]');
-            if (ad.favorited) {
-                if (!favorites.includes(adId)) favorites.push(adId);
-            } else {
-                const index = favorites.indexOf(adId);
-                if (index > -1) favorites.splice(index, 1);
-            }
-            localStorage.setItem('bladibay-favorites', JSON.stringify(favorites));
-        }
-
-        function showNotification(message, type = 'info') {
-            const notification = document.createElement('div');
-            notification.className = 'notification';
-            
-            const icon = type === 'success' ? 'check-circle' : 
-                        type === 'error' ? 'exclamation-circle' : 'info-circle';
-            
-            notification.innerHTML = `
-                <div class="flex items-center gap-3">
-                    <i class="fas fa-${icon}"></i>
-                    <span>${message}</span>
+    <!-- 💬 CHAT IA FLOTTANT -->
+    <div id="aiChatWidget" class="fixed bottom-24 md:bottom-6 right-6 z-50">
+        <!-- Bouton d'ouverture du chat -->
+        <button id="aiChatToggle" class="w-14 h-14 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full shadow-lg hover:shadow-xl transition-all transform hover:scale-110 flex items-center justify-center">
+            <i class="fas fa-robot text-white text-xl"></i>
+        </button>
+        
+        <!-- Fenêtre de chat (cachée par défaut) -->
+        <div id="aiChatWindow" class="absolute bottom-16 right-0 w-80 h-96 bg-white/95 backdrop-blur-md rounded-2xl shadow-2xl border border-white/20 transform scale-0 origin-bottom-right transition-transform duration-300">
+            <!-- Header du chat -->
+            <div class="bg-gradient-to-r from-purple-600 to-blue-600 text-white p-4 rounded-t-2xl">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold">Assistant BladiBay</h4>
+                            <p class="text-xs opacity-90">
+                                <span class="fr">En ligne maintenant</span>
+                                <span class="ar hidden">متصل الآن</span>
+                            </p>
+                        </div>
+                    </div>
+                    <button id="aiChatClose" class="w-8 h-8 rounded-full bg-white/20 hover:bg-white/30 transition-colors flex items-center justify-center">
+                        <i class="fas fa-times text-sm"></i>
+                    </button>
                 </div>
-            `;
+            </div>
             
-            document.body.appendChild(notification);
+            <!-- Messages du chat -->
+            <div id="aiChatMessages" class="flex-1 p-4 h-64 overflow-y-auto space-y-3">
+                <div class="flex items-start space-x-3">
+                    <div class="w-8 h-8 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full flex items-center justify-center flex-shrink-0">
+                        <i class="fas fa-robot text-white text-xs"></i>
+                    </div>
+                    <div class="bg-gray-100 rounded-2xl rounded-tl-none p-3 max-w-xs">
+                        <p class="text-sm">
+                            <span class="fr">Salut ! 👋 Je suis votre assistant IA. Comment puis-je vous aider aujourd'hui ?</span>
+                            <span class="ar hidden">مرحبا ! 👋 أنا مساعدك الذكي. كيف يمكنني مساعدتك اليوم؟</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
             
+            <!-- Input du chat -->
+            <div class="p-4 border-t border-gray-200">
+                <div class="flex space-x-2">
+                    <input 
+                        type="text" 
+                        id="aiChatInput" 
+                        placeholder="Tapez votre message..."
+                        class="flex-1 px-3 py-2 border border-gray-200 rounded-xl focus:border-purple-500 focus:ring-1 focus:ring-purple-200 outline-none text-sm"
+                    >
+                    <button id="aiChatSend" class="w-10 h-10 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-xl hover:shadow-lg transition-all transform hover:scale-105">
+                        <i class="fas fa-paper-plane text-sm"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 🎉 MODAL DE DÉTAIL PRODUIT -->
+    <div id="productModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+            <!-- Contenu du modal sera généré par JavaScript -->
+        </div>
+    </div>
+
+    <!-- ⚡ SCRIPTS JAVASCRIPT -->
+    
+    <!-- Données des produits -->
+    <script src="data/products.js"></script>
+    
+    <!-- Script principal -->
+    <script src="script.js"></script>
+    
+    <!-- Script d'initialisation -->
+    <script>
+        // Initialisation de l'application au chargement de la page
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🚀 BladiBay initialized successfully!');
+            
+            // Charger les préférences utilisateur
+            loadUserPreferences();
+            
+            // Initialiser les composants
+            initializeApp();
+            
+            // Charger les données
+            loadInitialData();
+            
+            // Configurer les event listeners
+            setupEventListeners();
+            
+            // Animation d'entrée
+            animatePageLoad();
+        });
+        
+        // Fonctions d'initialisation
+        function loadUserPreferences() {
+            // Charger la langue préférée
+            const savedLanguage = localStorage.getItem('bladibay_language') || 'fr';
+            setLanguage(savedLanguage);
+            
+            // Charger les favoris
+            const savedFavorites = JSON.parse(localStorage.getItem('bladibay_favorites') || '[]');
+            updateFavoritesCount(savedFavorites.length);
+        }
+        
+        function initializeApp() {
+            // Initialiser les composants UI
+            console.log('Initializing UI components...');
+        }
+        
+        function loadInitialData() {
+            // Charger les catégories et produits
+            console.log('Loading initial data...');
+        }
+        
+        function setupEventListeners() {
+            // Configurer tous les event listeners
+            console.log('Setting up event listeners...');
+        }
+        
+        function animatePageLoad() {
+            // Animations d'entrée de page
+            console.log('Animating page load...');
+        }
+        
+        // Fonction utilitaire pour les notifications
+        function showNotification(message, type = 'success') {
+            const toast = document.createElement('div');
+            toast.className = `notification-toast ${type}`;
+            toast.textContent = message;
+            
+            const container = document.getElementById('toastContainer');
+            container.appendChild(toast);
+            
+            // Animation d'entrée
+            setTimeout(() => toast.classList.add('show'), 100);
+            
+            // Suppression automatique après 3 secondes
             setTimeout(() => {
-                notification.style.transform = 'translateX(100%)';
-                notification.style.opacity = '0';
-                setTimeout(() => {
-                    if (document.body.contains(notification)) {
-                        document.body.removeChild(notification);
-                    }
-                }, 300);
+                toast.classList.remove('show');
+                setTimeout(() => container.removeChild(toast), 300);
             }, 3000);
         }
-
-        // Navigation mobile
-        function switchNavigation(page) {
-            const navItems = document.querySelectorAll('.nav-item');
-            navItems.forEach(item => {
-                item.classList.remove('active');
-                if (item.dataset.page === page) {
-                    item.classList.add('active');
-                }
+        
+        // Service Worker pour PWA (Progressive Web App)
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(function(registration) {
+                        console.log('ServiceWorker registration successful');
+                    })
+                    .catch(function(err) {
+                        console.log('ServiceWorker registration failed');
+                    });
             });
         }
-
-        // =================== INITIALISATION ===================
-        document.addEventListener('DOMContentLoaded', function() {
-            // Load saved language
-            const savedLang = localStorage.getItem('bladibay-lang');
-            if (savedLang) {
-                currentLang = savedLang;
-                updateLanguage();
-            }
-            
-            // Load saved favorites
-            const savedFavorites = JSON.parse(localStorage.getItem('bladibay-favorites') || '[]');
-            sampleAds.forEach(ad => {
-                if (savedFavorites.includes(ad.id)) {
-                    ad.favorited = true;
-                }
-            });
-            
-            // Setup search
-            const searchInput = document.getElementById('search-input');
-            const searchButton = document.getElementById('search-button');
-            
-            if (searchInput && searchButton) {
-                let searchTimeout;
-                searchInput.addEventListener('input', function() {
-                    clearTimeout(searchTimeout);
-                    searchTimeout = setTimeout(performSearch, 300);
-                });
-                
-                searchInput.addEventListener('keypress', function(e) {
-                    if (e.key === 'Enter') {
-                        clearTimeout(searchTimeout);
-                        performSearch();
-                    }
-                });
-                
-                searchButton.addEventListener('click', performSearch);
-            }
-            
-            // Setup category cards
-            const cards = document.querySelectorAll('.category-card');
-            cards.forEach((card, index) => {
-                card.style.animationDelay = `${index * 0.1}s`;
-                card.classList.add('fade-in');
-                
-                card.addEventListener('click', function() {
-                    const category = this.getAttribute('data-category');
-                    filterByCategory(category);
-                });
-            });
-            
-            // Setup navigation mobile
-            const navItems = document.querySelectorAll('.nav-item');
-            navItems.forEach(item => {
-                item.addEventListener('click', function() {
-                    const page = this.dataset.page;
-                    switchNavigation(page);
-                });
-            });
-            
-            // Load initial ads
-            displaySearchResults();
-            
-            // Welcome message
-            setTimeout(() => {
-                if (!localStorage.getItem('bladibay-welcomed')) {
-                    showNotification(
-                        currentLang === 'ar' ? 
-                        'مرحباً بك في بلادي باي! 🎉' : 
-                        'Bienvenue sur BladiBay! 🎉',
-                        'success'
-                    );
-                    localStorage.setItem('bladibay-welcomed', 'true');
-                }
-            }, 1000);
-        });
     </script>
-
+    
+    <!-- Google Analytics (à remplacer par votre ID) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'GA_MEASUREMENT_ID');
+    </script>
+    
 </body>
 </html>
