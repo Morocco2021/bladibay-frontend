@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" dir="ltr" id="html-root">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,32 +10,53 @@
         .mobile-nav { position: fixed; bottom: 0; left: 0; right: 0; z-index: 100; }
         .category-card { transition: all 0.3s ease; }
         .category-card:hover { transform: translateY(-2px); }
+        .lang-switch { transition: all 0.3s ease; }
+        .rtl { direction: rtl; }
+        .ltr { direction: ltr; }
+        .fade-in { animation: fadeIn 0.3s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
 <body class="bg-gray-50 pb-20">
     
-    <!-- Header BladiBay -->
+    <!-- Header BladiBay avec sélecteur de langue -->
     <header class="bg-blue-600 text-white p-4 shadow-lg">
         <div class="flex items-center justify-between max-w-md mx-auto">
             <h1 class="text-2xl font-bold flex items-center">
                 🏛️ BladiBay
             </h1>
-            <div class="text-right">
-                <p class="text-sm opacity-90">بلادي باي</p>
-                <p class="text-xs opacity-75">السوق المغربي</p>
+            
+            <!-- Sélecteur de langue -->
+            <div class="flex items-center space-x-2">
+                <div class="text-right mr-4">
+                    <p class="text-sm opacity-90" id="header-subtitle">بلادي باي</p>
+                    <p class="text-xs opacity-75" id="header-tagline">السوق المغربي</p>
+                </div>
+                
+                <!-- Bouton langue -->
+                <div class="lang-switch bg-white bg-opacity-20 rounded-lg p-2">
+                    <button 
+                        id="lang-toggle" 
+                        class="flex items-center space-x-1 text-white hover:bg-white hover:bg-opacity-20 rounded px-2 py-1 transition-all"
+                        onclick="toggleLanguage()"
+                    >
+                        <span id="current-lang" class="font-semibold">AR</span>
+                        <span class="text-xs">🌐</span>
+                    </button>
+                </div>
             </div>
         </div>
     </header>
 
     <!-- Hero Section -->
-    <main class="max-w-md mx-auto p-4">
+    <main class="max-w-md mx-auto p-4 fade-in" id="main-content">
         
         <!-- Welcome Message -->
         <section class="text-center py-6">
-            <h2 class="text-3xl font-bold text-gray-800 mb-2">
+            <h2 class="text-3xl font-bold text-gray-800 mb-2" id="welcome-title">
                 أهلا بك في بلادي باي
             </h2>
-            <p class="text-gray-600 mb-6">
+            <p class="text-gray-600 mb-6" id="welcome-subtitle">
                 السوق الإلكتروني الحديث للمغرب 🇲🇦
             </p>
         </section>
@@ -46,11 +67,11 @@
                 <div class="relative">
                     <input 
                         type="text"
+                        id="search-input"
                         placeholder="🔍 ماذا تبحث عنه؟"
                         class="w-full p-4 border-2 border-gray-200 rounded-lg text-lg focus:border-blue-500 focus:outline-none"
-                        dir="rtl"
                     />
-                    <button class="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white p-4 rounded-lg mt-3 font-bold text-lg hover:from-blue-700 hover:to-blue-800 transition-all">
+                    <button id="search-button" class="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white p-4 rounded-lg mt-3 font-bold text-lg hover:from-blue-700 hover:to-blue-800 transition-all">
                         ابحث الآن
                     </button>
                 </div>
@@ -59,38 +80,38 @@
 
         <!-- Categories -->
         <section class="mb-8">
-            <h3 class="text-xl font-bold text-gray-800 mb-4 text-center">الفئات الشائعة</h3>
-            <div class="grid grid-cols-2 gap-4">
+            <h3 class="text-xl font-bold text-gray-800 mb-4 text-center" id="categories-title">الفئات الشائعة</h3>
+            <div class="grid grid-cols-2 gap-4" id="categories-grid">
                 
                 <div class="category-card bg-white p-6 rounded-xl shadow-lg hover:shadow-xl cursor-pointer">
                     <div class="text-center">
                         <div class="text-4xl mb-3">🚗</div>
-                        <h4 class="font-bold text-gray-800">سيارات</h4>
-                        <p class="text-sm text-gray-500 mt-1">1,234 إعلان</p>
+                        <h4 class="font-bold text-gray-800 category-name">سيارات</h4>
+                        <p class="text-sm text-gray-500 mt-1 category-count">1,234 إعلان</p>
                     </div>
                 </div>
 
                 <div class="category-card bg-white p-6 rounded-xl shadow-lg hover:shadow-xl cursor-pointer">
                     <div class="text-center">
                         <div class="text-4xl mb-3">🏠</div>
-                        <h4 class="font-bold text-gray-800">عقارات</h4>
-                        <p class="text-sm text-gray-500 mt-1">856 إعلان</p>
+                        <h4 class="font-bold text-gray-800 category-name">عقارات</h4>
+                        <p class="text-sm text-gray-500 mt-1 category-count">856 إعلان</p>
                     </div>
                 </div>
 
                 <div class="category-card bg-white p-6 rounded-xl shadow-lg hover:shadow-xl cursor-pointer">
                     <div class="text-center">
                         <div class="text-4xl mb-3">📱</div>
-                        <h4 class="font-bold text-gray-800">إلكترونيات</h4>
-                        <p class="text-sm text-gray-500 mt-1">2,341 إعلان</p>
+                        <h4 class="font-bold text-gray-800 category-name">إلكترونيات</h4>
+                        <p class="text-sm text-gray-500 mt-1 category-count">2,341 إعلان</p>
                     </div>
                 </div>
 
                 <div class="category-card bg-white p-6 rounded-xl shadow-lg hover:shadow-xl cursor-pointer">
                     <div class="text-center">
                         <div class="text-4xl mb-3">👕</div>
-                        <h4 class="font-bold text-gray-800">أزياء</h4>
-                        <p class="text-sm text-gray-500 mt-1">967 إعلان</p>
+                        <h4 class="font-bold text-gray-800 category-name">أزياء</h4>
+                        <p class="text-sm text-gray-500 mt-1 category-count">967 إعلان</p>
                     </div>
                 </div>
                 
@@ -99,18 +120,18 @@
 
         <!-- Recent Ads Preview -->
         <section class="mb-8">
-            <h3 class="text-xl font-bold text-gray-800 mb-4 text-center">آخر الإعلانات</h3>
-            <div class="space-y-4">
+            <h3 class="text-xl font-bold text-gray-800 mb-4 text-center" id="recent-title">آخر الإعلانات</h3>
+            <div class="space-y-4" id="recent-ads">
                 
                 <div class="bg-white rounded-xl shadow-lg p-4 hover:shadow-xl transition-all cursor-pointer">
                     <div class="flex">
                         <div class="w-20 h-20 bg-gradient-to-br from-blue-400 to-blue-600 rounded-lg flex items-center justify-center text-2xl text-white">
                             🚗
                         </div>
-                        <div class="mr-4 flex-1" dir="rtl">
-                            <h4 class="font-bold text-gray-800">تويوتا كورولا 2020</h4>
-                            <p class="text-orange-500 font-bold text-lg">180,000 درهم</p>
-                            <p class="text-sm text-gray-500">📍 الدار البيضاء • منذ ساعتين</p>
+                        <div class="mr-4 flex-1">
+                            <h4 class="font-bold text-gray-800 ad-title">تويوتا كورولا 2020</h4>
+                            <p class="text-orange-500 font-bold text-lg ad-price">180,000 درهم</p>
+                            <p class="text-sm text-gray-500 ad-location">📍 الدار البيضاء • منذ ساعتين</p>
                         </div>
                     </div>
                 </div>
@@ -120,10 +141,10 @@
                         <div class="w-20 h-20 bg-gradient-to-br from-green-400 to-green-600 rounded-lg flex items-center justify-center text-2xl text-white">
                             🏠
                         </div>
-                        <div class="mr-4 flex-1" dir="rtl">
-                            <h4 class="font-bold text-gray-800">شقة للبيع - 3 غرف</h4>
-                            <p class="text-orange-500 font-bold text-lg">850,000 درهم</p>
-                            <p class="text-sm text-gray-500">📍 الرباط • منذ 5 ساعات</p>
+                        <div class="mr-4 flex-1">
+                            <h4 class="font-bold text-gray-800 ad-title">شقة للبيع - 3 غرف</h4>
+                            <p class="text-orange-500 font-bold text-lg ad-price">850,000 درهم</p>
+                            <p class="text-sm text-gray-500 ad-location">📍 الرباط • منذ 5 ساعات</p>
                         </div>
                     </div>
                 </div>
@@ -135,29 +156,140 @@
 
     <!-- Mobile Navigation -->
     <nav class="mobile-nav bg-white border-t border-gray-200 shadow-lg">
-        <div class="flex justify-around py-2 max-w-md mx-auto">
-            <button class="flex flex-col items-center p-3 text-blue-600 bg-blue-50 rounded-lg">
+        <div class="flex justify-around py-2 max-w-md mx-auto" id="mobile-nav">
+            <button class="flex flex-col items-center p-3 text-blue-600 bg-blue-50 rounded-lg nav-item">
                 <span class="text-xl mb-1">🏠</span>
-                <span class="text-xs font-semibold">الرئيسية</span>
+                <span class="text-xs font-semibold nav-text">الرئيسية</span>
             </button>
-            <button class="flex flex-col items-center p-3 text-gray-500 hover:text-blue-600 transition-colors">
+            <button class="flex flex-col items-center p-3 text-gray-500 hover:text-blue-600 transition-colors nav-item">
                 <span class="text-xl mb-1">🔍</span>
-                <span class="text-xs">بحث</span>
+                <span class="text-xs nav-text">بحث</span>
             </button>
-            <button class="flex flex-col items-center p-3 text-gray-500 hover:text-blue-600 transition-colors">
+            <button class="flex flex-col items-center p-3 text-gray-500 hover:text-blue-600 transition-colors nav-item">
                 <span class="text-xl mb-1">➕</span>
-                <span class="text-xs">إضافة</span>
+                <span class="text-xs nav-text">إضافة</span>
             </button>
-            <button class="flex flex-col items-center p-3 text-gray-500 hover:text-blue-600 transition-colors">
+            <button class="flex flex-col items-center p-3 text-gray-500 hover:text-blue-600 transition-colors nav-item">
                 <span class="text-xl mb-1">👤</span>
-                <span class="text-xs">حسابي</span>
+                <span class="text-xs nav-text">حسابي</span>
             </button>
         </div>
     </nav>
 
     <script>
-        // Simple interactivity
+        // Traductions
+        const translations = {
+            ar: {
+                headerSubtitle: "بلادي باي",
+                headerTagline: "السوق المغربي",
+                welcomeTitle: "أهلا بك في بلادي باي",
+                welcomeSubtitle: "السوق الإلكتروني الحديث للمغرب 🇲🇦",
+                searchPlaceholder: "🔍 ماذا تبحث عنه؟",
+                searchButton: "ابحث الآن",
+                categoriesTitle: "الفئات الشائعة",
+                categories: ["سيارات", "عقارات", "إلكترونيات", "أزياء"],
+                categoryCounts: ["1,234 إعلان", "856 إعلان", "2,341 إعلان", "967 إعلان"],
+                recentTitle: "آخر الإعلانات",
+                adTitles: ["تويوتا كورولا 2020", "شقة للبيع - 3 غرف"],
+                adPrices: ["180,000 درهم", "850,000 درهم"],
+                adLocations: ["📍 الدار البيضاء • منذ ساعتين", "📍 الرباط • منذ 5 ساعات"],
+                navTexts: ["الرئيسية", "بحث", "إضافة", "حسابي"],
+                direction: "rtl"
+            },
+            fr: {
+                headerSubtitle: "BladiBay",
+                headerTagline: "Marketplace Maroc",
+                welcomeTitle: "Bienvenue sur BladiBay",
+                welcomeSubtitle: "Le marketplace moderne du Maroc 🇲🇦",
+                searchPlaceholder: "🔍 Que cherchez-vous ?",
+                searchButton: "Rechercher",
+                categoriesTitle: "Catégories populaires",
+                categories: ["Voitures", "Immobilier", "Électronique", "Mode"],
+                categoryCounts: ["1,234 annonces", "856 annonces", "2,341 annonces", "967 annonces"],
+                recentTitle: "Annonces récentes",
+                adTitles: ["Toyota Corolla 2020", "Appartement à vendre - 3 chambres"],
+                adPrices: ["180,000 DH", "850,000 DH"],
+                adLocations: ["📍 Casablanca • il y a 2h", "📍 Rabat • il y a 5h"],
+                navTexts: ["Accueil", "Recherche", "Publier", "Profil"],
+                direction: "ltr"
+            }
+        };
+
+        let currentLang = 'ar';
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'ar' ? 'fr' : 'ar';
+            updateLanguage();
+        }
+
+        function updateLanguage() {
+            const t = translations[currentLang];
+            const htmlRoot = document.getElementById('html-root');
+            const mainContent = document.getElementById('main-content');
+            
+            // Update direction
+            htmlRoot.setAttribute('dir', t.direction);
+            htmlRoot.setAttribute('lang', currentLang === 'ar' ? 'ar' : 'fr');
+            mainContent.className = `max-w-md mx-auto p-4 fade-in ${t.direction}`;
+            
+            // Update texts
+            document.getElementById('header-subtitle').textContent = t.headerSubtitle;
+            document.getElementById('header-tagline').textContent = t.headerTagline;
+            document.getElementById('welcome-title').textContent = t.welcomeTitle;
+            document.getElementById('welcome-subtitle').textContent = t.welcomeSubtitle;
+            document.getElementById('search-input').placeholder = t.searchPlaceholder;
+            document.getElementById('search-button').textContent = t.searchButton;
+            document.getElementById('categories-title').textContent = t.categoriesTitle;
+            document.getElementById('recent-title').textContent = t.recentTitle;
+            document.getElementById('current-lang').textContent = currentLang.toUpperCase();
+            
+            // Update categories
+            const categoryNames = document.querySelectorAll('.category-name');
+                        const categoryCounts = document.querySelectorAll('.category-count');
+            categoryNames.forEach((el, i) => {
+                el.textContent = t.categories[i];
+            });
+            categoryCounts.forEach((el, i) => {
+                el.textContent = t.categoryCounts[i];
+            });
+            
+            // Update ads
+            const adTitles = document.querySelectorAll('.ad-title');
+            const adPrices = document.querySelectorAll('.ad-price');
+            const adLocations = document.querySelectorAll('.ad-location');
+            adTitles.forEach((el, i) => {
+                el.textContent = t.adTitles[i];
+            });
+            adPrices.forEach((el, i) => {
+                el.textContent = t.adPrices[i];
+            });
+            adLocations.forEach((el, i) => {
+                el.textContent = t.adLocations[i];
+            });
+            
+            // Update navigation
+            const navTexts = document.querySelectorAll('.nav-text');
+            navTexts.forEach((el, i) => {
+                el.textContent = t.navTexts[i];
+            });
+            
+            // Update search input direction
+            const searchInput = document.getElementById('search-input');
+            searchInput.style.direction = t.direction;
+            
+            // Save language preference
+            localStorage.setItem('bladibay-lang', currentLang);
+        }
+
+        // Initialize
         document.addEventListener('DOMContentLoaded', function() {
+            // Load saved language
+            const savedLang = localStorage.getItem('bladibay-lang');
+            if (savedLang) {
+                currentLang = savedLang;
+                updateLanguage();
+            }
+            
             // Add click effects to category cards
             const cards = document.querySelectorAll('.category-card');
             cards.forEach(card => {
