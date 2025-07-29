@@ -5,21 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BladiBay ✨ - بلادي باي | Marketplace Premium Maroc</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <meta name="description" content="BladiBay - Le marketplace moderne du Maroc. Achetez et vendez facilement avec l'IA intégrée.">
     <style>
         :root {
-            --primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            --accent: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            --success: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
-            --warning: linear-gradient(135deg, #fce043 0%, #fb7b3c 100%);
-            --glass: rgba(255, 255, 255, 0.25);
-            --glass-border: rgba(255, 255, 255, 0.18);
-            --shadow-soft: 0 8px 32px rgba(31, 38, 135, 0.37);
-            --shadow-hover: 0 15px 35px rgba(31, 38, 135, 0.4);
-            --blur: blur(10px);
+            --primary-gradient: linear-gradient(135deg, #8B5CF6 0%, #A855F7 50%, #C084FC 100%);
+            --purple-bg: linear-gradient(135deg, #7C3AED 0%, #8B5CF6 50%, #A855F7 100%);
+            --glass: rgba(255, 255, 255, 0.15);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --shadow-soft: 0 8px 32px rgba(139, 92, 246, 0.3);
+            --shadow-hover: 0 15px 35px rgba(139, 92, 246, 0.4);
         }
         
         * {
@@ -29,611 +24,487 @@
         }
         
         body { 
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            font-family: 'Inter', sans-serif;
+            background: var(--purple-bg);
             background-attachment: fixed;
             min-height: 100vh;
-            overflow-x: hidden;
+            color: white;
         }
         
-        .main-container {
+        .glass-card {
             background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: var(--blur);
-            min-height: 100vh;
-            position: relative;
-        }
-        
-        .glass-morphism {
-            background: var(--glass);
-            backdrop-filter: var(--blur);
-            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 20px;
             box-shadow: var(--shadow-soft);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.3s ease;
         }
         
-        .glass-morphism:hover {
-            transform: translateY(-8px);
+        .glass-card:hover {
+            transform: translateY(-5px);
             box-shadow: var(--shadow-hover);
-            background: rgba(255, 255, 255, 0.35);
         }
         
         .premium-button {
-            background: var(--primary);
             border: none;
-            border-radius: 50px;
+            border-radius: 12px;
             color: white;
             font-weight: 600;
-            padding: 16px 32px;
-            font-size: 16px;
+            padding: 10px 16px;
+            font-size: 14px;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 8px 30px rgba(102, 126, 234, 0.4);
-            position: relative;
-            overflow: hidden;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
         }
         
-        .premium-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: left 0.5s;
+        .btn-call {
+            background: linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%);
         }
         
-        .premium-button:hover::before {
-            left: 100%;
+        .btn-whatsapp {
+            background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+        }
+        
+        .btn-favorite {
+            background: linear-gradient(135deg, #EF4444 0%, #DC2626 100%);
+        }
+        
+        .btn-favorite.favorited {
+            background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+        }
+        
+        .btn-share {
+            background: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%);
         }
         
         .premium-button:hover {
-            transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 12px 40px rgba(102, 126, 234, 0.6);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
         }
         
-        .premium-button:active {
-            transform: translateY(-1px) scale(0.98);
-        }
-        
-        .floating-logo {
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: var(--blur);
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            border-radius: 20px;
-            padding: 12px;
-            transition: all 0.3s ease;
-        }
-        
-        .floating-logo:hover {
-            transform: rotate(5deg) scale(1.1);
-            background: rgba(255, 255, 255, 0.3);
-        }
-        
-        .category-card-premium {
-            background: var(--glass);
-            backdrop-filter: var(--blur);
-            border: 1px solid var(--glass-border);
-            border-radius: 25px;
-            padding: 30px 20px;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            text-align: center;
-        }
-        
-        .category-card-premium::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: var(--primary);
-            opacity: 0;
-            transition: all 0.4s ease;
-            z-index: -1;
-        }
-        
-        .category-card-premium:hover {
-            transform: translateY(-15px) rotateY(5deg);
-            box-shadow: 0 25px 50px rgba(102, 126, 234, 0.3);
-        }
-        
-        .category-card-premium:hover::before {
-            opacity: 0.9;
-        }
-        
-        .category-card-premium:hover .category-text {
-            color: white;
-            transform: scale(1.1);
-        }
-        
-        .category-text {
-            transition: all 0.3s ease;
-        }
-        
-        .search-premium {
+        .search-container {
             background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: var(--blur);
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            border-radius: 25px;
-            padding: 12px;
-            box-shadow: var(--shadow-soft);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 8px;
+            margin-bottom: 30px;
         }
         
-        .search-input-premium {
+        .search-input {
             background: transparent;
             border: none;
             outline: none;
-            padding: 16px 24px;
+            padding: 16px 20px;
             font-size: 16px;
             width: 100%;
-            border-radius: 20px;
-            font-weight: 500;
-            color: #2d3748;
+            color: #374151;
+            border-radius: 15px;
         }
         
-        .search-input-premium::placeholder {
-            color: rgba(107, 114, 128, 0.7);
-            font-weight: 400;
-        }
-        
-        .ad-card-premium {
-            background: var(--glass);
-            backdrop-filter: var(--blur);
-            border: 1px solid var(--glass-border);
-            border-radius: 25px;
-            padding: 24px;
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .ad-card-premium::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
+        .search-button {
+            background: var(--primary-gradient);
+            border: none;
+            border-radius: 15px;
+            color: white;
+            font-weight: 600;
+            padding: 14px 24px;
             width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.6s;
+            margin-top: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
         
-        .ad-card-premium:hover::before {
-            left: 100%;
+        .category-card {
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            border-radius: 18px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
         
-        .ad-card-premium:hover {
+        .category-card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.2);
-            background: rgba(255, 255, 255, 0.4);
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .ad-card {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .ad-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .price-text {
+            color: #F472B6;
+            font-weight: 800;
+            font-size: 24px;
+            margin: 8px 0;
         }
         
         .premium-badge {
-            background: var(--warning);
+            background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
             color: white;
-            border-radius: 50px;
-            padding: 8px 16px;
+            padding: 4px 12px;
+            border-radius: 20px;
             font-size: 12px;
             font-weight: 700;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s ease;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
         }
         
-        .premium-badge:hover {
-            transform: scale(1.1);
-            box-shadow: 0 8px 20px rgba(252, 224, 67, 0.4);
+        .verified-badge {
+            background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
         }
         
-        .mobile-nav-premium {
+        .ad-meta {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 14px;
+            margin: 12px 0;
+        }
+        
+        .mobile-nav {
             position: fixed;
             bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
             background: var(--glass);
-            backdrop-filter: var(--blur);
+            backdrop-filter: blur(20px);
             border: 1px solid var(--glass-border);
-            border-radius: 30px;
-            padding: 16px 24px;
-            box-shadow: var(--shadow-soft);
+            border-radius: 25px;
+            padding: 12px 20px;
             z-index: 1000;
             width: 90%;
             max-width: 400px;
         }
         
-        .nav-item-premium {
+        .nav-item {
             background: transparent;
             border: none;
-            border-radius: 20px;
-            padding: 12px;
-            transition: all 0.3s ease;
+            color: rgba(255, 255, 255, 0.7);
+            padding: 10px;
+            border-radius: 15px;
             cursor: pointer;
-            position: relative;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
         }
         
-        .nav-item-premium.active {
-            background: var(--primary);
+        .nav-item.active {
+            background: rgba(255, 255, 255, 0.2);
             color: white;
+        }
+        
+        .nav-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+        
+        .lang-toggle {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 8px 12px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .lang-toggle:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        
+        .section-title {
+            color: white;
+            font-size: 20px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .filter-button {
+            background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        .image-container {
+            width: 80px;
+            height: 80px;
+            border-radius: 15px;
+            overflow: hidden;
+            flex-shrink: 0;
+            margin-right: 16px;
+        }
+        
+        .image-container.rtl {
+            margin-left: 16px;
+            margin-right: 0;
+        }
+        
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .image-container:hover img {
             transform: scale(1.1);
         }
         
-        .nav-item-premium:hover:not(.active) {
-            background: rgba(255, 255, 255, 0.3);
-            transform: translateY(-2px);
+        .ad-content {
+            flex: 1;
         }
         
-        .notification-premium {
-            background: var(--glass);
-            backdrop-filter: var(--blur);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            padding: 16px 24px;
-            box-shadow: var(--shadow-soft);
-            animation: slideInRight 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        @keyframes slideInRight {
-            from { 
-                transform: translateX(100%); 
-                opacity: 0; 
-            }
-            to { 
-                transform: translateX(0); 
-                opacity: 1; 
-            }
-        }
-        
-        .fade-in-up {
-            animation: fadeInUp 0.8s ease-out;
-        }
-        
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .gradient-text {
-            background: var(--primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-weight: 800;
-        }
-        
-        .price-gradient {
-            background: var(--secondary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-weight: 800;
-        }
-        
-        .lang-switcher {
-            background: rgba(255, 255, 255, 0.25);
-            backdrop-filter: var(--blur);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 15px;
-            padding: 10px 16px;
+        .ad-title {
             color: white;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .lang-switcher:hover {
-            background: rgba(255, 255, 255, 0.4);
-            transform: scale(1.05);
-        }
-        
-        .floating-chat {
-            position: fixed;
-            bottom: 120px;
-            right: 20px;
-            width: 60px;
-            height: 60px;
-            background: var(--accent);
-            border-radius: 50%;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 8px;
             display: flex;
             align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 24px;
-            cursor: pointer;
-            box-shadow: 0 8px 30px rgba(79, 172, 254, 0.4);
-            animation: float 3s ease-in-out infinite;
-            z-index: 999;
+            gap: 8px;
         }
         
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
+        .ad-description {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 14px;
+            line-height: 1.4;
+            margin-bottom: 16px;
+        }
+        
+        .ad-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
         }
         
         .rtl { direction: rtl; }
         .ltr { direction: ltr; }
         
-        /* Image Effects */
-        .image-premium {
-            border-radius: 20px;
-            overflow: hidden;
-            position: relative;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
         }
         
-        .image-premium img {
-            transition: transform 0.5s ease;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
-        .image-premium:hover img {
-            transform: scale(1.1);
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 16px 20px;
+            color: white;
+            z-index: 9999;
+            animation: slideIn 0.3s ease;
         }
         
-        /* Loading Animation */
-        .loading-dots {
-            display: inline-block;
-            animation: dots 1.5s infinite;
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
         }
         
-        @keyframes dots {
-            0%, 20% { color: rgba(0,0,0,0); text-shadow: .25em 0 0 rgba(0,0,0,0), .5em 0 0 rgba(0,0,0,0); }
-            40% { color: white; text-shadow: .25em 0 0 rgba(0,0,0,0), .5em 0 0 rgba(0,0,0,0); }
-            60% { text-shadow: .25em 0 0 white, .5em 0 0 rgba(0,0,0,0); }
-            80%, 100% { text-shadow: .25em 0 0 white, .5em 0 0 white; }
-        }
-        
-        /* Responsive Design */
         @media (max-width: 768px) {
-            .category-card-premium {
-                padding: 24px 16px;
-            }
-            .ad-card-premium {
-                padding: 20px;
+            .ad-buttons {
+                justify-content: center;
             }
             .premium-button {
-                padding: 14px 28px;
-                font-size: 15px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .floating-logo {
-                padding: 8px;
-            }
-            .search-input-premium {
-                padding: 14px 20px;
-                font-size: 15px;
-            }
-            .mobile-nav-premium {
-                bottom: 10px;
-                width: 95%;
-                padding: 12px 20px;
+                font-size: 12px;
+                padding: 8px 12px;
             }
         }
     </style>
 </head>
-<body>
-    <div class="main-container">
-        
-        <!-- Header Premium Ultra-Moderne -->
-        <header class="relative overflow-hidden">
-            <div class="absolute inset-0 bg-gradient-to-r from-purple-600/20 to-pink-600/20"></div>
-            <div class="relative z-10 p-6">
-                <div class="flex items-center justify-between max-w-md mx-auto">
-                    
-                    <!-- Logo Premium -->
-                    <div class="flex items-center gap-4">
-                        <div class="floating-logo">
-                            <i class="fas fa-gem text-2xl text-white"></i>
-                        </div>
-                        <div>
-                            <h1 class="text-2xl font-bold text-white font-['Playfair_Display']">
-                                BladiBay
-                            </h1>
-                            <p class="text-sm text-white/80" id="header-subtitle">بلادي باي</p>
-                        </div>
-                    </div>
-                    
-                    <!-- Language Switcher Premium -->
-                    <div class="flex items-center gap-3">
-                        <div class="text-right hidden sm:block">
-                            <p class="text-sm text-white/90 font-semibold" id="header-tagline">Premium Marketplace</p>
-                        </div>
-                        <button 
-                            id="lang-toggle" 
-                            class="lang-switcher"
-                            onclick="toggleLanguage()"
-                        >
-                            <i class="fas fa-globe mr-2"></i>
-                            <span id="current-lang" class="font-bold">AR</span>
-                        </button>
-                    </div>
+<body class="pb-28">
+    
+    <!-- Header -->
+    <header class="p-6">
+        <div class="flex items-center justify-between max-w-md mx-auto">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-10">
+                    <i class="fas fa-gem text-white text-lg"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold text-white">BladiBay</h1>
+                    <p class="text-sm text-white/80" id="header-subtitle">بلادي باي</p>
                 </div>
             </div>
-        </header>
-
-        <!-- Main Content -->
-        <main class="max-w-md mx-auto p-6 fade-in-up" id="main-content">
             
-            <!-- Hero Section Premium -->
-            <section class="text-center py-8 mb-8">
-                <h2 class="text-4xl md:text-5xl font-bold gradient-text mb-4 font-['Poppins']" id="welcome-title">
-                    أهلا بك في بلادي باي
-                </h2>
-                <p class="text-lg text-white/90 mb-6 font-medium" id="welcome-subtitle">
-                    السوق الإلكتروني الذكي للمغرب 🇲🇦
-                </p>
-                <div class="flex justify-center items-center gap-2 text-white/70">
-                    <i class="fas fa-users"></i>
-                    <span class="text-sm font-medium">+10,000 مستخدم نشط</span>
-                    <span class="mx-2">•</span>
-                    <i class="fas fa-check-circle text-green-400"></i>
-                    <span class="text-sm font-medium">موثق 100%</span>
-                </div>
-            </section>
-
-            <!-- Search Bar Ultra-Premium -->
-            <section class="mb-10">
-                <div class="search-premium">
-                    <div class="flex items-center gap-3 mb-3">
-                        <i class="fas fa-search text-gray-500 text-lg"></i>
-                        <input 
-                            type="text"
-                            id="search-input"
-                            placeholder="🔍 ابحث عن أي شيء..."
-                            class="search-input-premium flex-1"
-                        />
-                        <i class="fas fa-microphone text-gray-400 cursor-pointer hover:text-blue-500 transition-colors" title="البحث الصوتي"></i>
-                    </div>
-                    <button 
-                        id="search-button" 
-                        class="premium-button w-full"
-                    >
-                        <i class="fas fa-search mr-2"></i>
-                        <span>ابحث الآن</span>
-                        <span class="loading-dots" style="display: none;">...</span>
-                    </button>
-                </div>
-            </section>
-
-            <!-- Categories Premium Grid -->
-            <section class="mb-10">
-                <h3 class="text-2xl font-bold text-white text-center mb-6" id="categories-title">
-                    <i class="fas fa-th-large mr-2"></i>
-                    الفئات الشائعة
-                </h3>
-                <div class="grid grid-cols-2 gap-4 mb-4" id="categories-grid">
-                    
-                    <div class="category-card-premium" data-category="cars">
-                        <div class="category-text">
-                            <i class="fas fa-car text-3xl text-blue-500 mb-3"></i>
-                            <h4 class="font-bold text-gray-800 text-lg category-name">سيارات</h4>
-                            <p class="text-sm text-gray-600 mt-2 category-count">1,234 إعلان</p>
-                            <div class="w-8 h-1 bg-blue-500 mx-auto mt-3 rounded-full"></div>
-                        </div>
-                    </div>
-
-                    <div class="category-card-premium" data-category="realestate">
-                        <div class="category-text">
-                            <i class="fas fa-home text-3xl text-green-500 mb-3"></i>
-                            <h4 class="font-bold text-gray-800 text-lg category-name">عقارات</h4>
-                            <p class="text-sm text-gray-600 mt-2 category-count">856 إعلان</p>
-                            <div class="w-8 h-1 bg-green-500 mx-auto mt-3 rounded-full"></div>
-                        </div>
-                    </div>
-
-                    <div class="category-card-premium" data-category="electronics">
-                        <div class="category-text">
-                            <i class="fas fa-mobile-alt text-3xl text-purple-500 mb-3"></i>
-                            <h4 class="font-bold text-gray-800 text-lg category-name">إلكترونيات</h4>
-                            <p class="text-sm text-gray-600 mt-2 category-count">2,341 إعلان</p>
-                            <div class="w-8 h-1 bg-purple-500 mx-auto mt-3 rounded-full"></div>
-                        </div>
-                    </div>
-
-                    <div class="category-card-premium" data-category="fashion">
-                        <div class="category-text">
-                            <i class="fas fa-tshirt text-3xl text-pink-500 mb-3"></i>
-                            <h4 class="font-bold text-gray-800 text-lg category-name">أزياء</h4>
-                            <p class="text-sm text-gray-600 mt-2 category-count">967 إعلان</p>
-                            <div class="w-8 h-1 bg-pink-500 mx-auto mt-3 rounded-full"></div>
-                        </div>
-                    </div>
-
-                    <div class="category-card-premium" data-category="furniture">
-                        <div class="category-text">
-                            <i class="fas fa-couch text-3xl text-orange-500 mb-3"></i>
-                            <h4 class="font-bold text-gray-800 text-lg category-name">أثاث</h4>
-                            <p class="text-sm text-gray-600 mt-2 category-count">445 إعلان</p>
-                            <div class="w-8 h-1 bg-orange-500 mx-auto mt-3 rounded-full"></div>
-                        </div>
-                    </div>
-
-                    <div class="category-card-premium" data-category="all">
-                        <div class="category-text">
-                            <i class="fas fa-star text-3xl text-yellow-500 mb-3"></i>
-                            <h4 class="font-bold text-gray-800 text-lg category-name">الكل</h4>
-                            <p class="text-sm text-gray-600 mt-2 category-count">5,843 إعلان</p>
-                            <div class="w-8 h-1 bg-yellow-500 mx-auto mt-3 rounded-full"></div>
-                        </div>
-                    </div>
-                    
-                </div>
-            </section>
-
-            <!-- Annonces Section Premium -->
-            <section class="mb-10">
-                <div class="flex items-center justify-between mb-6">
-                    <h3 class="text-2xl font-bold text-white" id="recent-title">
-                        <i class="fas fa-fire mr-2 text-orange-500"></i>
-                        آخر الإعلانات
-                    </h3>
-                    <button class="premium-badge">
-                        <i class="fas fa-filter mr-1"></i>
-                        فلتر
-                    </button>
-                </div>
-                <div class="space-y-6" id="recent-ads">
-                    <!-- Les annonces seront générées dynamiquement -->
-                </div>
-            </section>
-
-        </main>
-
-        <!-- Chat IA Flottant -->
-        <div class="floating-chat" onclick="toggleChat()">
-            <i class="fas fa-robot"></i>
+            <button id="lang-toggle" class="lang-toggle" onclick="toggleLanguage()">
+                <i class="fas fa-globe mr-1"></i>
+                <span id="current-lang">AR</span>
+            </button>
         </div>
+    </header>
 
-        <!-- Navigation Mobile Ultra-Premium -->
-        <nav class="mobile-nav-premium">
-            <div class="flex justify-around items-center" id="mobile-nav">
-                <button class="nav-item-premium active" data-page="home">
-                    <div class="flex flex-col items-center">
-                        <i class="fas fa-home text-lg mb-1"></i>
-                        <span class="text-xs font-semibold nav-text">الرئيسية</span>
-                    </div>
-                </button>
-                <button class="nav-item-premium" data-page="search">
-                    <div class="flex flex-col items-center">
-                        <i class="fas fa-search text-lg mb-1"></i>
-                        <span class="text-xs nav-text">بحث</span>
-                    </div>
-                </button>
-                <button class="nav-item-premium" data-page="add">
-                    <div class="flex flex-col items-center">
-                        <i class="fas fa-plus text-lg mb-1"></i>
-                        <span class="text-xs nav-text">إضافة</span>
-                    </div>
-                </button>
-                <button class="nav-item-premium" data-page="profile">
-                    <div class="flex flex-col items-center">
-                        <i class="fas fa-user text-lg mb-1"></i>
-                        <span class="text-xs nav-text">حسابي</span>
-                    </div>
+    <!-- Main Content -->
+    <main class="max-w-md mx-auto px-6" id="main-content">
+        
+        <!-- Welcome Section -->
+        <section class="text-center mb-8">
+            <h2 class="text-3xl font-bold text-white mb-3" id="welcome-title">
+                أهلا بك في بلادي باي
+            </h2>
+            <p class="text-white/90 text-lg" id="welcome-subtitle">
+                السوق الإلكتروني الحديث للمغرب 🇲🇦
+            </p>
+        </section>
+
+        <!-- Search Bar -->
+        <section class="mb-8">
+            <div class="search-container">
+                <input 
+                    type="text"
+                    id="search-input"
+                    placeholder="🔍 ماذا تبحث عنه؟"
+                    class="search-input"
+                />
+                <button id="search-button" class="search-button">
+                    <i class="fas fa-search mr-2"></i>
+                    <span>ابحث الآن</span>
                 </button>
             </div>
-        </nav>
-    </div>
+        </section>
 
-    <!-- JavaScript Premium Ultra-Avancé -->
+        <!-- Categories -->
+        <section class="mb-8">
+            <h3 class="section-title mb-6" id="categories-title">
+                <i class="fas fa-th-large"></i>
+                الفئات الشائعة
+            </h3>
+            <div class="grid grid-cols-2 gap-4">
+                
+                <div class="category-card" data-category="cars">
+                    <i class="fas fa-car text-3xl text-blue-400 mb-3"></i>
+                    <h4 class="font-bold text-white category-name">سيارات</h4>
+                    <p class="text-sm text-white/70 mt-1 category-count">1,234 إعلان</p>
+                </div>
+
+                <div class="category-card" data-category="realestate">
+                    <i class="fas fa-home text-3xl text-green-400 mb-3"></i>
+                                        <h4 class="font-bold text-white category-name">عقارات</h4>
+                    <p class="text-sm text-white/70 mt-1 category-count">856 إعلان</p>
+                </div>
+
+                <div class="category-card" data-category="electronics">
+                    <i class="fas fa-mobile-alt text-3xl text-purple-400 mb-3"></i>
+                    <h4 class="font-bold text-white category-name">إلكترونيات</h4>
+                    <p class="text-sm text-white/70 mt-1 category-count">2,341 إعلان</p>
+                </div>
+
+                <div class="category-card" data-category="fashion">
+                    <i class="fas fa-tshirt text-3xl text-pink-400 mb-3"></i>
+                    <h4 class="font-bold text-white category-name">أزياء</h4>
+                    <p class="text-sm text-white/70 mt-1 category-count">967 إعلان</p>
+                </div>
+
+                <div class="category-card" data-category="furniture">
+                    <i class="fas fa-couch text-3xl text-orange-400 mb-3"></i>
+                    <h4 class="font-bold text-white category-name">أثاث</h4>
+                    <p class="text-sm text-white/70 mt-1 category-count">445 إعلان</p>
+                </div>
+
+                <div class="category-card" data-category="all">
+                    <i class="fas fa-star text-3xl text-yellow-400 mb-3"></i>
+                    <h4 class="font-bold text-white category-name">الكل</h4>
+                    <p class="text-sm text-white/70 mt-1 category-count">5,843 إعلان</p>
+                </div>
+                
+            </div>
+        </section>
+
+        <!-- Annonces Section -->
+        <section class="mb-8">
+            <div class="section-header">
+                <h3 class="section-title" id="recent-title">
+                    <i class="fas fa-fire text-orange-400"></i>
+                    آخر الإعلانات
+                </h3>
+                <button class="filter-button">
+                    <i class="fas fa-filter mr-1"></i>
+                    <span id="filter-text">فلتر</span>
+                </button>
+            </div>
+            <div id="recent-ads">
+                <!-- Les annonces seront générées dynamiquement -->
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Navigation Mobile -->
+    <nav class="mobile-nav">
+        <div class="flex justify-around items-center">
+            <button class="nav-item active" data-page="home">
+                <i class="fas fa-home text-lg"></i>
+                <span class="text-xs font-medium nav-text">الرئيسية</span>
+            </button>
+            <button class="nav-item" data-page="search">
+                <i class="fas fa-search text-lg"></i>
+                <span class="text-xs font-medium nav-text">بحث</span>
+            </button>
+            <button class="nav-item" data-page="add">
+                <i class="fas fa-plus text-lg"></i>
+                <span class="text-xs font-medium nav-text">إضافة</span>
+            </button>
+            <button class="nav-item" data-page="profile">
+                <i class="fas fa-user text-lg"></i>
+                <span class="text-xs font-medium nav-text">حسابي</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- JavaScript Premium -->
     <script>
-        // =================== DONNÉES PREMIUM AVEC VRAIES IMAGES ===================
+        // =================== DONNÉES AVEC DESIGN EXACT ===================
         const sampleAds = [
             {
                 id: 1,
@@ -646,7 +517,8 @@
                 description: { ar: "سيارة في حالة ممتازة، صيانة دورية، كيلومترات قليلة", fr: "Voiture en excellent état, entretien régulier, faible kilométrage" },
                 featured: true,
                 verified: true,
-                views: 245
+                views: 245,
+                favorited: false
             },
             {
                 id: 2,
@@ -659,7 +531,8 @@
                 description: { ar: "شقة واسعة ومشمسة، إطلالة رائعة على البحر، قريبة من الخدمات", fr: "Appartement spacieux et lumineux, belle vue mer, proche commodités" },
                 featured: false,
                 verified: true,
-                views: 189
+                views: 189,
+                favorited: false
             },
             {
                 id: 3,
@@ -672,7 +545,8 @@
                 description: { ar: "جديد في العلبة، ضمان كامل سنة، جميع الإكسسوارات", fr: "Neuf dans sa boîte, garantie 1 an, tous accessoires" },
                 featured: true,
                 verified: true,
-                views: 567
+                views: 567,
+                favorited: true
             },
             {
                 id: 4,
@@ -685,7 +559,8 @@
                 description: { ar: "فستان أنيق ومميز، مقاس M، استعمال مرة واحدة", fr: "Robe élégante et unique, taille M, portée une seule fois" },
                 featured: false,
                 verified: false,
-                views: 123
+                views: 123,
+                favorited: false
             },
             {
                 id: 5,
@@ -698,7 +573,8 @@
                 description: { ar: "سيارة فاخرة، حالة ممتازة، مالك واحد، تأمين شامل", fr: "Voiture de luxe, état impeccable, un seul propriétaire" },
                 featured: true,
                 verified: true,
-                views: 334
+                views: 334,
+                favorited: false
             },
             {
                 id: 6,
@@ -711,33 +587,8 @@
                 description: { ar: "للألعاب والعمل، مواصفات عالية، كارت جرافيك قوي", fr: "Pour gaming et travail, hautes performances, carte graphique puissante" },
                 featured: false,
                 verified: true,
-                views: 278
-            },
-            {
-                id: 7,
-                title: { ar: "كنبة مودرن 3 مقاعد جلد طبيعي", fr: "Canapé moderne 3 places cuir" },
-                price: 4500,
-                location: { ar: "الدار البيضاء", fr: "Casablanca" },
-                category: "furniture",
-                image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=500&h=400&fit=crop&auto=format",
-                time: { ar: "منذ 4 ساعات", fr: "il y a 4h" },
-                description: { ar: "كنبة جديدة وأنيقة، جلد طبيعي، تصميم عصري", fr: "Canapé neuf et élégant, cuir véritable, design moderne" },
-                featured: false,
-                verified: true,
-                views: 156
-            },
-            {
-                id: 8,
-                title: { ar: "ساعة ذكية أبل الجديدة", fr: "Apple Watch Dernière Génération" },
-                price: 2800,
-                location: { ar: "الرباط", fr: "Rabat" },
-                category: "electronics",
-                image: "https://images.unsplash.com/photo-1434493907317-a46b5bbe7834?w=500&h=400&fit=crop&auto=format",
-                time: { ar: "منذ 8 ساعات", fr: "il y a 8h" },
-                description: { ar: "ساعة ذكية حديثة، مقاومة للماء، بطارية طويلة المدى", fr: "Montre connectée moderne, étanche, longue autonomie" },
-                featured: true,
-                verified: true,
-                views: 445
+                views: 278,
+                favorited: true
             }
         ];
 
@@ -745,16 +596,14 @@
         let filteredAds = [...sampleAds];
         let currentSearchTerm = '';
         let currentLang = 'ar';
-        let isSearching = false;
 
-        // =================== TRADUCTIONS ULTRA-COMPLÈTES ===================
+        // =================== TRADUCTIONS ===================
         const translations = {
             ar: {
                 headerSubtitle: "بلادي باي",
-                headerTagline: "السوق المغربي الذكي",
                 welcomeTitle: "أهلا بك في بلادي باي",
-                welcomeSubtitle: "السوق الإلكتروني الذكي للمغرب 🇲🇦",
-                searchPlaceholder: "🔍 ابحث عن أي شيء...",
+                welcomeSubtitle: "السوق الإلكتروني الحديث للمغرب 🇲🇦",
+                searchPlaceholder: "🔍 ماذا تبحث عنه؟",
                 searchButton: "ابحث الآن",
                 categoriesTitle: "الفئات الشائعة",
                 categories: ["سيارات", "عقارات", "إلكترونيات", "أزياء", "أثاث", "الكل"],
@@ -766,26 +615,22 @@
                 tryOtherKeywords: "جرب البحث بكلمات أخرى",
                 resultsFor: "نتيجة للبحث",
                 call: "اتصل",
-                message: "رسالة",
+                whatsapp: "واتساب",
                 favorite: "مفضلة",
                 share: "مشاركة",
                 featured: "مميز",
                 verified: "موثق",
                 views: "مشاهدة",
+                filterText: "فلتر",
                 addedToFavorites: "تمت الإضافة للمفضلة ✨",
                 removedFromFavorites: "تم الحذف من المفضلة",
-                searching: "البحث",
-                currency: "درهم",
-                activeUsers: "+10,000 مستخدم نشط",
-                verified100: "موثق 100%",
-                filter: "فلتر"
+                currency: "درهم"
             },
             fr: {
                 headerSubtitle: "BladiBay",
-                headerTagline: "Marketplace IA Premium",
                 welcomeTitle: "Bienvenue sur BladiBay",
-                welcomeSubtitle: "Le marketplace intelligent du Maroc 🇲🇦",
-                searchPlaceholder: "🔍 Rechercher n'importe quoi...",
+                welcomeSubtitle: "Le marketplace moderne du Maroc 🇲🇦",
+                searchPlaceholder: "🔍 Rechercher...",
                 searchButton: "Rechercher",
                 categoriesTitle: "Catégories populaires",
                 categories: ["Voitures", "Immobilier", "Électronique", "Mode", "Mobilier", "Tout"],
@@ -797,66 +642,47 @@
                 tryOtherKeywords: "Essayez avec d'autres mots-clés",
                 resultsFor: "résultats pour",
                 call: "Appeler",
-                message: "Message",
+                whatsapp: "WhatsApp",
                 favorite: "Favori",
                 share: "Partager",
                 featured: "Premium",
                 verified: "Vérifié",
                 views: "vues",
+                filterText: "Filtre",
                 addedToFavorites: "Ajouté aux favoris ✨",
                 removedFromFavorites: "Retiré des favoris",
-                searching: "Recherche",
-                currency: "DH",
-                activeUsers: "+10,000 utilisateurs actifs",
-                verified100: "100% Vérifié",
-                filter: "Filtre"
+                currency: "DH"
             }
         };
 
         // =================== FONCTIONS PRINCIPALES ===================
         function performSearch() {
-            if (isSearching) return;
-            
             const searchInput = document.getElementById('search-input');
-            const searchButton = document.getElementById('search-button');
             const searchTerm = searchInput.value.toLowerCase().trim();
-            
             currentSearchTerm = searchTerm;
-            isSearching = true;
             
-            // Animation du bouton
-            searchButton.querySelector('span').style.display = 'none';
-            searchButton.querySelector('.loading-dots').style.display = 'inline-block';
+            if (searchTerm === '') {
+                filteredAds = [...sampleAds];
+            } else {
+                filteredAds = sampleAds.filter(ad => {
+                    const titleAr = ad.title.ar.toLowerCase();
+                    const titleFr = ad.title.fr.toLowerCase();
+                    const locationAr = ad.location.ar.toLowerCase();
+                    const locationFr = ad.location.fr.toLowerCase();
+                    const descAr = ad.description.ar.toLowerCase();
+                    const descFr = ad.description.fr.toLowerCase();
+                    
+                    return titleAr.includes(searchTerm) || 
+                           titleFr.includes(searchTerm) ||
+                           locationAr.includes(searchTerm) ||
+                           locationFr.includes(searchTerm) ||
+                           descAr.includes(searchTerm) ||
+                           descFr.includes(searchTerm) ||
+                           ad.price.toString().includes(searchTerm);
+                });
+            }
             
-            setTimeout(() => {
-                if (searchTerm === '') {
-                    filteredAds = [...sampleAds];
-                } else {
-                    filteredAds = sampleAds.filter(ad => {
-                        const titleAr = ad.title.ar.toLowerCase();
-                        const titleFr = ad.title.fr.toLowerCase();
-                        const locationAr = ad.location.ar.toLowerCase();
-                        const locationFr = ad.location.fr.toLowerCase();
-                        const descAr = ad.description.ar.toLowerCase();
-                        const descFr = ad.description.fr.toLowerCase();
-                        
-                        return titleAr.includes(searchTerm) || 
-                               titleFr.includes(searchTerm) ||
-                               locationAr.includes(searchTerm) ||
-                               locationFr.includes(searchTerm) ||
-                               descAr.includes(searchTerm) ||
-                               descFr.includes(searchTerm) ||
-                               ad.price.toString().includes(searchTerm);
-                    });
-                }
-                
-                displaySearchResults();
-                
-                // Restaurer le bouton
-                searchButton.querySelector('span').style.display = 'inline';
-                searchButton.querySelector('.loading-dots').style.display = 'none';
-                isSearching = false;
-            }, 800);
+            displaySearchResults();
         }
 
         function displaySearchResults() {
@@ -865,18 +691,290 @@
             const t = translations[currentLang];
             
             if (currentSearchTerm === '') {
-                recentTitle.innerHTML = `<i class="fas fa-fire mr-2 text-orange-500"></i>${t.recentTitle}`;
+                recentTitle.innerHTML = `<i class="fas fa-fire text-orange-400"></i>${t.recentTitle}`;
             } else {
                 const resultsCount = filteredAds.length;
-                recentTitle.innerHTML = `<i class="fas fa-search mr-2 text-blue-500"></i>${resultsCount} ${t.resultsFor} "${currentSearchTerm}"`;
+                recentTitle.innerHTML = `<i class="fas fa-search text-blue-400"></i>${resultsCount} ${t.resultsFor} "${currentSearchTerm}"`;
             }
             
             recentAdsContainer.innerHTML = '';
             
             if (filteredAds.length === 0) {
                 recentAdsContainer.innerHTML = `
-                    <div class="glass-morphism p-8 text-center">
-                        <i class="fas fa-search text-6xl text-white/50 mb-4"></i>
+                    <div class="glass-card p-8 text-center">
+                                            <h4 class="font-bold text-white category-name">عقارات</h4>
+                    <p class="text-sm text-white/70 mt-1 category-count">856 إعلان</p>
+                </div>
+
+                <div class="category-card" data-category="electronics">
+                    <i class="fas fa-mobile-alt text-3xl text-purple-400 mb-3"></i>
+                    <h4 class="font-bold text-white category-name">إلكترونيات</h4>
+                    <p class="text-sm text-white/70 mt-1 category-count">2,341 إعلان</p>
+                </div>
+
+                <div class="category-card" data-category="fashion">
+                    <i class="fas fa-tshirt text-3xl text-pink-400 mb-3"></i>
+                    <h4 class="font-bold text-white category-name">أزياء</h4>
+                    <p class="text-sm text-white/70 mt-1 category-count">967 إعلان</p>
+                </div>
+
+                <div class="category-card" data-category="furniture">
+                    <i class="fas fa-couch text-3xl text-orange-400 mb-3"></i>
+                    <h4 class="font-bold text-white category-name">أثاث</h4>
+                    <p class="text-sm text-white/70 mt-1 category-count">445 إعلان</p>
+                </div>
+
+                <div class="category-card" data-category="all">
+                    <i class="fas fa-star text-3xl text-yellow-400 mb-3"></i>
+                    <h4 class="font-bold text-white category-name">الكل</h4>
+                    <p class="text-sm text-white/70 mt-1 category-count">5,843 إعلان</p>
+                </div>
+                
+            </div>
+        </section>
+
+        <!-- Annonces Section -->
+        <section class="mb-8">
+            <div class="section-header">
+                <h3 class="section-title" id="recent-title">
+                    <i class="fas fa-fire text-orange-400"></i>
+                    آخر الإعلانات
+                </h3>
+                <button class="filter-button">
+                    <i class="fas fa-filter mr-1"></i>
+                    <span id="filter-text">فلتر</span>
+                </button>
+            </div>
+            <div id="recent-ads">
+                <!-- Les annonces seront générées dynamiquement -->
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Navigation Mobile -->
+    <nav class="mobile-nav">
+        <div class="flex justify-around items-center">
+            <button class="nav-item active" data-page="home">
+                <i class="fas fa-home text-lg"></i>
+                <span class="text-xs font-medium nav-text">الرئيسية</span>
+            </button>
+            <button class="nav-item" data-page="search">
+                <i class="fas fa-search text-lg"></i>
+                <span class="text-xs font-medium nav-text">بحث</span>
+            </button>
+            <button class="nav-item" data-page="add">
+                <i class="fas fa-plus text-lg"></i>
+                <span class="text-xs font-medium nav-text">إضافة</span>
+            </button>
+            <button class="nav-item" data-page="profile">
+                <i class="fas fa-user text-lg"></i>
+                <span class="text-xs font-medium nav-text">حسابي</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- JavaScript Premium -->
+    <script>
+        // =================== DONNÉES AVEC DESIGN EXACT ===================
+        const sampleAds = [
+            {
+                id: 1,
+                title: { ar: "تويوتا كورولا 2020 فل أوبشن", fr: "Toyota Corolla 2020 Full Option" },
+                price: 180000,
+                location: { ar: "الدار البيضاء", fr: "Casablanca" },
+                category: "cars",
+                image: "https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?w=500&h=400&fit=crop&auto=format",
+                time: { ar: "منذ ساعتين", fr: "il y a 2h" },
+                description: { ar: "سيارة في حالة ممتازة، صيانة دورية، كيلومترات قليلة", fr: "Voiture en excellent état, entretien régulier, faible kilométrage" },
+                featured: true,
+                verified: true,
+                views: 245,
+                favorited: false
+            },
+            {
+                id: 2,
+                title: { ar: "شقة للبيع 3 غرف - إطلالة بحرية", fr: "Appartement 3 chambres - Vue mer" },
+                price: 850000,
+                location: { ar: "الرباط", fr: "Rabat" },
+                category: "realestate",
+                image: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=500&h=400&fit=crop&auto=format",
+                time: { ar: "منذ 5 ساعات", fr: "il y a 5h" },
+                description: { ar: "شقة واسعة ومشمسة، إطلالة رائعة على البحر، قريبة من الخدمات", fr: "Appartement spacieux et lumineux, belle vue mer, proche commodités" },
+                featured: false,
+                verified: true,
+                views: 189,
+                favorited: false
+            },
+            {
+                id: 3,
+                title: { ar: "آيفون 14 برو ماكس جديد", fr: "iPhone 14 Pro Max Neuf" },
+                price: 12000,
+                location: { ar: "فاس", fr: "Fès" },
+                category: "electronics",
+                image: "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=500&h=400&fit=crop&auto=format",
+                time: { ar: "منذ يوم", fr: "il y a 1 jour" },
+                description: { ar: "جديد في العلبة، ضمان كامل سنة، جميع الإكسسوارات", fr: "Neuf dans sa boîte, garantie 1 an, tous accessoires" },
+                featured: true,
+                verified: true,
+                views: 567,
+                favorited: true
+            },
+            {
+                id: 4,
+                title: { ar: "فستان زفاف أبيض راقي", fr: "Robe de mariée blanche élégante" },
+                price: 3500,
+                location: { ar: "مراكش", fr: "Marrakech" },
+                category: "fashion",
+                image: "https://images.unsplash.com/photo-1594736797933-d0501ba2fe65?w=500&h=400&fit=crop&auto=format",
+                time: { ar: "منذ 3 أيام", fr: "il y a 3 jours" },
+                description: { ar: "فستان أنيق ومميز، مقاس M، استعمال مرة واحدة", fr: "Robe élégante et unique, taille M, portée une seule fois" },
+                featured: false,
+                verified: false,
+                views: 123,
+                favorited: false
+            },
+            {
+                id: 5,
+                title: { ar: "مرسيدس بنز E200 موديل 2019", fr: "Mercedes Benz E200 2019" },
+                price: 320000,
+                location: { ar: "الدار البيضاء", fr: "Casablanca" },
+                category: "cars",
+                image: "https://images.unsplash.com/photo-1563720223185-11003d516935?w=500&h=400&fit=crop&auto=format",
+                time: { ar: "منذ 6 ساعات", fr: "il y a 6h" },
+                description: { ar: "سيارة فاخرة، حالة ممتازة، مالك واحد، تأمين شامل", fr: "Voiture de luxe, état impeccable, un seul propriétaire" },
+                featured: true,
+                verified: true,
+                views: 334,
+                favorited: false
+            },
+            {
+                id: 6,
+                title: { ar: "لابتوب ديل XPS للألعاب", fr: "Laptop Dell XPS Gaming" },
+                price: 8500,
+                location: { ar: "أكادير", fr: "Agadir" },
+                category: "electronics",
+                image: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=500&h=400&fit=crop&auto=format",
+                time: { ar: "منذ 12 ساعة", fr: "il y a 12h" },
+                description: { ar: "للألعاب والعمل، مواصفات عالية، كارت جرافيك قوي", fr: "Pour gaming et travail, hautes performances, carte graphique puissante" },
+                featured: false,
+                verified: true,
+                views: 278,
+                favorited: true
+            }
+        ];
+
+        // =================== VARIABLES GLOBALES ===================
+        let filteredAds = [...sampleAds];
+        let currentSearchTerm = '';
+        let currentLang = 'ar';
+
+        // =================== TRADUCTIONS ===================
+        const translations = {
+            ar: {
+                headerSubtitle: "بلادي باي",
+                welcomeTitle: "أهلا بك في بلادي باي",
+                welcomeSubtitle: "السوق الإلكتروني الحديث للمغرب 🇲🇦",
+                searchPlaceholder: "🔍 ماذا تبحث عنه؟",
+                searchButton: "ابحث الآن",
+                categoriesTitle: "الفئات الشائعة",
+                categories: ["سيارات", "عقارات", "إلكترونيات", "أزياء", "أثاث", "الكل"],
+                categoryCounts: ["1,234 إعلان", "856 إعلان", "2,341 إعلان", "967 إعلان", "445 إعلان", "5,843 إعلان"],
+                recentTitle: "آخر الإعلانات",
+                navTexts: ["الرئيسية", "بحث", "إضافة", "حسابي"],
+                direction: "rtl",
+                noResults: "لا توجد نتائج",
+                tryOtherKeywords: "جرب البحث بكلمات أخرى",
+                resultsFor: "نتيجة للبحث",
+                call: "اتصل",
+                whatsapp: "واتساب",
+                favorite: "مفضلة",
+                share: "مشاركة",
+                featured: "مميز",
+                verified: "موثق",
+                views: "مشاهدة",
+                filterText: "فلتر",
+                addedToFavorites: "تمت الإضافة للمفضلة ✨",
+                removedFromFavorites: "تم الحذف من المفضلة",
+                currency: "درهم"
+            },
+            fr: {
+                headerSubtitle: "BladiBay",
+                welcomeTitle: "Bienvenue sur BladiBay",
+                welcomeSubtitle: "Le marketplace moderne du Maroc 🇲🇦",
+                searchPlaceholder: "🔍 Rechercher...",
+                searchButton: "Rechercher",
+                categoriesTitle: "Catégories populaires",
+                categories: ["Voitures", "Immobilier", "Électronique", "Mode", "Mobilier", "Tout"],
+                categoryCounts: ["1,234 annonces", "856 annonces", "2,341 annonces", "967 annonces", "445 annonces", "5,843 annonces"],
+                recentTitle: "Annonces récentes",
+                navTexts: ["Accueil", "Recherche", "Publier", "Profil"],
+                direction: "ltr",
+                noResults: "Aucun résultat",
+                tryOtherKeywords: "Essayez avec d'autres mots-clés",
+                resultsFor: "résultats pour",
+                call: "Appeler",
+                whatsapp: "WhatsApp",
+                favorite: "Favori",
+                share: "Partager",
+                featured: "Premium",
+                verified: "Vérifié",
+                views: "vues",
+                filterText: "Filtre",
+                addedToFavorites: "Ajouté aux favoris ✨",
+                removedFromFavorites: "Retiré des favoris",
+                currency: "DH"
+            }
+        };
+
+        // =================== FONCTIONS PRINCIPALES ===================
+        function performSearch() {
+            const searchInput = document.getElementById('search-input');
+            const searchTerm = searchInput.value.toLowerCase().trim();
+            currentSearchTerm = searchTerm;
+            
+            if (searchTerm === '') {
+                filteredAds = [...sampleAds];
+            } else {
+                filteredAds = sampleAds.filter(ad => {
+                    const titleAr = ad.title.ar.toLowerCase();
+                    const titleFr = ad.title.fr.toLowerCase();
+                    const locationAr = ad.location.ar.toLowerCase();
+                    const locationFr = ad.location.fr.toLowerCase();
+                    const descAr = ad.description.ar.toLowerCase();
+                    const descFr = ad.description.fr.toLowerCase();
+                    
+                    return titleAr.includes(searchTerm) || 
+                           titleFr.includes(searchTerm) ||
+                           locationAr.includes(searchTerm) ||
+                           locationFr.includes(searchTerm) ||
+                           descAr.includes(searchTerm) ||
+                           descFr.includes(searchTerm) ||
+                           ad.price.toString().includes(searchTerm);
+                });
+            }
+            
+            displaySearchResults();
+        }
+
+        function displaySearchResults() {
+            const recentAdsContainer = document.getElementById('recent-ads');
+            const recentTitle = document.getElementById('recent-title');
+            const t = translations[currentLang];
+            
+            if (currentSearchTerm === '') {
+                recentTitle.innerHTML = `<i class="fas fa-fire text-orange-400"></i>${t.recentTitle}`;
+            } else {
+                const resultsCount = filteredAds.length;
+                recentTitle.innerHTML = `<i class="fas fa-search text-blue-400"></i>${resultsCount} ${t.resultsFor} "${currentSearchTerm}"`;
+            }
+            
+            recentAdsContainer.innerHTML = '';
+            
+            if (filteredAds.length === 0) {
+                recentAdsContainer.innerHTML = `
+                    <div class="glass-card p-8 text-center">
+                                               <i class="fas fa-search text-6xl text-white/30 mb-4"></i>
                         <h3 class="text-xl font-bold text-white mb-2">${t.noResults}</h3>
                         <p class="text-white/70">${t.tryOtherKeywords}</p>
                     </div>
@@ -887,7 +985,7 @@
             filteredAds.forEach((ad, index) => {
                 const adElement = createAdElement(ad);
                 adElement.style.animationDelay = `${index * 0.1}s`;
-                adElement.classList.add('fade-in-up');
+                adElement.classList.add('fade-in');
                 recentAdsContainer.appendChild(adElement);
             });
         }
@@ -895,69 +993,75 @@
         function createAdElement(ad) {
             const t = translations[currentLang];
             const adDiv = document.createElement('div');
-            adDiv.className = 'ad-card-premium';
+            adDiv.className = 'ad-card';
             
             const isRTL = currentLang === 'ar';
-            const marginClass = isRTL ? 'mr-4' : 'ml-4';
+            const imageClass = isRTL ? 'image-container rtl' : 'image-container';
             
             const featuredBadge = ad.featured ? 
                 `<span class="premium-badge absolute top-4 ${isRTL ? 'left-4' : 'right-4'}">
-                    <i class="fas fa-star mr-1"></i>${t.featured}
+                    <i class="fas fa-star"></i>${t.featured}
                 </span>` : '';
             
-            const verifiedBadge = ad.verified ? 
-                `<i class="fas fa-check-circle text-green-500 ml-2" title="${t.verified}"></i>` : '';
+            const verifiedIcon = ad.verified ? 
+                `<span class="verified-badge">
+                    <i class="fas fa-check"></i>
+                </span>` : '';
+            
+            const favoriteIcon = ad.favorited ? 'fas fa-heart' : 'far fa-heart';
+            const favoriteClass = ad.favorited ? 'btn-favorite favorited' : 'btn-favorite';
             
             adDiv.innerHTML = `
                 <div class="relative">
                     ${featuredBadge}
                     <div class="flex ${isRTL ? 'flex-row-reverse' : ''}">
-                        <div class="w-28 h-28 flex-shrink-0 image-premium">
+                        <div class="${imageClass}">
                             <img 
                                 src="${ad.image}" 
                                 alt="${ad.title[currentLang]}"
-                                class="w-full h-full object-cover"
                                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
                             />
-                            <div class="w-full h-full bg-gradient-to-br from-blue-400 to-purple-600 rounded-2xl hidden items-center justify-center text-2xl text-white">
+                            <div class="w-full h-full bg-gradient-to-br from-purple-400 to-pink-400 hidden items-center justify-center text-white text-2xl">
                                 <i class="fas fa-image"></i>
                             </div>
                         </div>
-                        <div class="${marginClass} flex-1" ${isRTL ? 'dir="rtl"' : ''}>
-                            <div class="flex items-start justify-between mb-2">
-                                <h4 class="font-bold text-white text-lg leading-tight flex-1">
-                                    ${ad.title[currentLang]}
-                                    ${verifiedBadge}
-                                </h4>
+                        <div class="ad-content" ${isRTL ? 'dir="rtl"' : ''}>
+                            <div class="ad-title">
+                                ${ad.title[currentLang]}
+                                ${verifiedIcon}
                             </div>
-                            <p class="price-gradient font-bold text-2xl mb-2">
+                            <div class="price-text">
                                 ${ad.price.toLocaleString()} ${t.currency}
-                            </p>
-                            <div class="flex items-center text-sm text-white/70 mb-3">
-                                <i class="fas fa-map-marker-alt mr-2"></i>
+                            </div>
+                            <div class="ad-meta">
+                                <i class="fas fa-map-marker-alt"></i>
                                 <span>${ad.location[currentLang]}</span>
-                                <span class="mx-2">•</span>
-                                <i class="fas fa-clock mr-1"></i>
+                                <span>•</span>
+                                <i class="fas fa-clock"></i>
                                 <span>${ad.time[currentLang]}</span>
-                                <span class="mx-2">•</span>
-                                <i class="fas fa-eye mr-1"></i>
+                                <span>•</span>
+                                <i class="fas fa-eye"></i>
                                 <span>${ad.views} ${t.views}</span>
                             </div>
-                            <p class="text-sm text-white/80 mb-4 leading-relaxed">
+                            <div class="ad-description">
                                 ${ad.description[currentLang]}
-                            </p>
-                            <div class="flex ${isRTL ? 'flex-row-reverse' : ''} gap-2 flex-wrap">
-                                <button class="premium-badge bg-gradient-to-r from-blue-500 to-blue-600 text-xs">
-                                    <i class="fas fa-phone mr-1"></i>${t.call}
+                            </div>
+                            <div class="ad-buttons">
+                                <button class="premium-button btn-call">
+                                    <i class="fas fa-phone"></i>
+                                    ${t.call}
                                 </button>
-                                <button class="premium-badge bg-gradient-to-r from-green-500 to-green-600 text-xs">
-                                    <i class="fas fa-comment mr-1"></i>${t.message}
+                                <button class="premium-button btn-whatsapp">
+                                    <i class="fab fa-whatsapp"></i>
+                                    ${t.whatsapp}
                                 </button>
-                                <button class="premium-badge bg-gradient-to-r from-red-500 to-pink-500 text-xs" onclick="toggleFavorite(${ad.id})">
-                                    <i class="fas fa-heart mr-1"></i>${t.favorite}
+                                <button class="premium-button ${favoriteClass}" onclick="toggleFavorite(${ad.id}, this)">
+                                    <i class="${favoriteIcon}"></i>
+                                    ${t.favorite}
                                 </button>
-                                <button class="premium-badge bg-gradient-to-r from-purple-500 to-purple-600 text-xs">
-                                    <i class="fas fa-share mr-1"></i>${t.share}
+                                <button class="premium-button btn-share">
+                                    <i class="fas fa-share-alt"></i>
+                                    ${t.share}
                                 </button>
                             </div>
                         </div>
@@ -983,26 +1087,16 @@
             
             htmlRoot.setAttribute('dir', t.direction);
             htmlRoot.setAttribute('lang', currentLang === 'ar' ? 'ar' : 'fr');
-            mainContent.className = `max-w-md mx-auto p-6 fade-in-up ${t.direction}`;
             
-            // Update header
+            // Update texts
             document.getElementById('header-subtitle').textContent = t.headerSubtitle;
-            document.getElementById('header-tagline').textContent = t.headerTagline;
-            
-            // Update main content
             document.getElementById('welcome-title').textContent = t.welcomeTitle;
             document.getElementById('welcome-subtitle').textContent = t.welcomeSubtitle;
             document.getElementById('search-input').placeholder = t.searchPlaceholder;
             document.getElementById('search-button').querySelector('span').textContent = t.searchButton;
-            document.getElementById('categories-title').innerHTML = `<i class="fas fa-th-large mr-2"></i>${t.categoriesTitle}`;
+            document.getElementById('categories-title').innerHTML = `<i class="fas fa-th-large"></i>${t.categoriesTitle}`;
             document.getElementById('current-lang').textContent = currentLang.toUpperCase();
-            
-            // Update stats
-            const statsElements = document.querySelectorAll('.text-sm.font-medium');
-            if (statsElements.length >= 2) {
-                statsElements[0].textContent = t.activeUsers;
-                statsElements[1].textContent = t.verified100;
-            }
+            document.getElementById('filter-text').textContent = t.filterText;
             
             // Update categories
             const categoryNames = document.querySelectorAll('.category-name');
@@ -1051,39 +1145,49 @@
             
             displaySearchResults();
             document.getElementById('recent-title').scrollIntoView({ 
-                behavior: 'smooth',
-                block: 'start'
+                behavior: 'smooth'
             });
         }
 
-        function toggleFavorite(adId) {
-            const favorites = JSON.parse(localStorage.getItem('bladibay-favorites') || '[]');
-            const index = favorites.indexOf(adId);
-            const t = translations[currentLang];
+        function toggleFavorite(adId, buttonElement) {
+            const ad = sampleAds.find(a => a.id === adId);
+            if (!ad) return;
             
-            if (index === -1) {
-                favorites.push(adId);
+            const t = translations[currentLang];
+            ad.favorited = !ad.favorited;
+            
+            const icon = buttonElement.querySelector('i');
+            if (ad.favorited) {
+                icon.className = 'fas fa-heart';
+                buttonElement.className = 'premium-button btn-favorite favorited';
                 showNotification(t.addedToFavorites, 'success');
             } else {
-                favorites.splice(index, 1);
+                icon.className = 'far fa-heart';
+                buttonElement.className = 'premium-button btn-favorite';
                 showNotification(t.removedFromFavorites, 'info');
             }
             
+            // Save to localStorage
+            const favorites = JSON.parse(localStorage.getItem('bladibay-favorites') || '[]');
+            if (ad.favorited) {
+                if (!favorites.includes(adId)) favorites.push(adId);
+            } else {
+                const index = favorites.indexOf(adId);
+                if (index > -1) favorites.splice(index, 1);
+            }
             localStorage.setItem('bladibay-favorites', JSON.stringify(favorites));
         }
 
         function showNotification(message, type = 'info') {
             const notification = document.createElement('div');
-            const bgColor = type === 'success' ? 'from-green-500 to-green-600' : 
-                           type === 'error' ? 'from-red-500 to-red-600' : 
-                           'from-blue-500 to-blue-600';
+            notification.className = 'notification';
             
-            notification.className = `notification-premium fixed top-6 right-6 z-50 text-white font-semibold shadow-2xl transform translate-x-full transition-all duration-500`;
-            notification.style.background = `linear-gradient(135deg, ${bgColor.includes('green') ? '#10b981, #059669' : bgColor.includes('red') ? '#ef4444, #dc2626' : '#3b82f6, #2563eb'})`;
+            const icon = type === 'success' ? 'check-circle' : 
+                        type === 'error' ? 'exclamation-circle' : 'info-circle';
             
             notification.innerHTML = `
                 <div class="flex items-center gap-3">
-                    <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
+                    <i class="fas fa-${icon}"></i>
                     <span>${message}</span>
                 </div>
             `;
@@ -1091,26 +1195,19 @@
             document.body.appendChild(notification);
             
             setTimeout(() => {
-                notification.style.transform = 'translateX(0)';
-            }, 100);
-            
-            setTimeout(() => {
                 notification.style.transform = 'translateX(100%)';
+                notification.style.opacity = '0';
                 setTimeout(() => {
                     if (document.body.contains(notification)) {
                         document.body.removeChild(notification);
                     }
-                }, 500);
-            }, 3500);
-        }
-
-        function toggleChat() {
-            showNotification(currentLang === 'ar' ? 'مرحباً! كيف يمكنني مساعدتك؟ 🤖' : 'Bonjour! Comment puis-je vous aider? 🤖', 'info');
+                }, 300);
+            }, 3000);
         }
 
         // Navigation mobile
         function switchNavigation(page) {
-            const navItems = document.querySelectorAll('.nav-item-premium');
+            const navItems = document.querySelectorAll('.nav-item');
             navItems.forEach(item => {
                 item.classList.remove('active');
                 if (item.dataset.page === page) {
@@ -1119,7 +1216,7 @@
             });
         }
 
-        // =================== INITIALISATION ULTRA-PREMIUM ===================
+        // =================== INITIALISATION ===================
         document.addEventListener('DOMContentLoaded', function() {
             // Load saved language
             const savedLang = localStorage.getItem('bladibay-lang');
@@ -1128,19 +1225,25 @@
                 updateLanguage();
             }
             
-            // Setup search with debouncing
+            // Load saved favorites
+            const savedFavorites = JSON.parse(localStorage.getItem('bladibay-favorites') || '[]');
+            sampleAds.forEach(ad => {
+                if (savedFavorites.includes(ad.id)) {
+                    ad.favorited = true;
+                }
+            });
+            
+            // Setup search
             const searchInput = document.getElementById('search-input');
             const searchButton = document.getElementById('search-button');
-            let searchTimeout;
             
             if (searchInput && searchButton) {
-                // Recherche en temps réel avec délai
+                let searchTimeout;
                 searchInput.addEventListener('input', function() {
                     clearTimeout(searchTimeout);
                     searchTimeout = setTimeout(performSearch, 300);
                 });
                 
-                // Recherche en appuyant sur Entrée
                 searchInput.addEventListener('keypress', function(e) {
                     if (e.key === 'Enter') {
                         clearTimeout(searchTimeout);
@@ -1148,91 +1251,45 @@
                     }
                 });
                 
-                // Bouton de recherche
                 searchButton.addEventListener('click', performSearch);
             }
             
-            // Setup category cards avec animations
-            const cards = document.querySelectorAll('.category-card-premium');
+            // Setup category cards
+            const cards = document.querySelectorAll('.category-card');
             cards.forEach((card, index) => {
                 card.style.animationDelay = `${index * 0.1}s`;
-                card.classList.add('fade-in-up');
+                card.classList.add('fade-in');
                 
                 card.addEventListener('click', function() {
                     const category = this.getAttribute('data-category');
-                    
-                    // Animation de sélection
-                    cards.forEach(c => c.style.transform = '');
-                    this.style.transform = 'scale(0.95)';
-                    
-                    setTimeout(() => {
-                        this.style.transform = '';
-                        filterByCategory(category);
-                    }, 150);
+                    filterByCategory(category);
                 });
             });
             
             // Setup navigation mobile
-            const navItems = document.querySelectorAll('.nav-item-premium');
+            const navItems = document.querySelectorAll('.nav-item');
             navItems.forEach(item => {
                 item.addEventListener('click', function() {
                     const page = this.dataset.page;
                     switchNavigation(page);
-                    
-                    // Vibration mobile si supportée
-                    if (navigator.vibrate) {
-                        navigator.vibrate(50);
-                    }
                 });
             });
             
-            // Précharger les images
-            sampleAds.forEach(ad => {
-                const img = new Image();
-                img.src = ad.image;
-            });
-            
-            // Load initial ads avec animation
+            // Load initial ads
             displaySearchResults();
             
-            // Animation d'entrée pour le header
-            setTimeout(() => {
-                document.querySelector('header').classList.add('fade-in-up');
-            }, 200);
-            
-            // Messages de bienvenue
+            // Welcome message
             setTimeout(() => {
                 if (!localStorage.getItem('bladibay-welcomed')) {
                     showNotification(
                         currentLang === 'ar' ? 
-                        'مرحباً بك في بلادي باي! ✨ اكتشف آلاف الإعلانات' : 
-                        'Bienvenue sur BladiBay! ✨ Découvrez des milliers d\'annonces',
+                        'مرحباً بك في بلادي باي! 🎉' : 
+                        'Bienvenue sur BladiBay! 🎉',
                         'success'
                     );
                     localStorage.setItem('bladibay-welcomed', 'true');
                 }
             }, 1000);
-        });
-
-        // Gestion des erreurs réseau
-        window.addEventListener('online', function() {
-            showNotification(
-                currentLang === 'ar' ? 'تم الاتصال بالإنترنت ✅' : 'Connexion rétablie ✅',
-                'success'
-            );
-        });
-
-        window.addEventListener('offline', function() {
-            showNotification(
-                currentLang === 'ar' ? 'لا يوجد اتصال بالإنترنت ⚠️' : 'Connexion perdue ⚠️',
-                'error'
-            );
-        });
-
-        // Performance monitoring
-        window.addEventListener('load', function() {
-            const loadTime = performance.now();
-            console.log(`🚀 BladiBay loaded in ${Math.round(loadTime)}ms`);
         });
     </script>
 
