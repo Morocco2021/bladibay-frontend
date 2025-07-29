@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BladiBay - بلادي باي</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+        .mobile-nav { position: fixed; bottom: 0; left: 0; right: 0; z-index: 100; }
+        .category-card { transition: all 0.3s ease; }
+        .category-card:hover { transform: translateY(-2px); }
+    </style>
+</head>
+<body class="bg-gray-50 pb-20">
+    
+    <!-- Header BladiBay -->
+    <header class="bg-blue-600 text-white p-4 shadow-lg">
+        <div class="flex items-center justify-between max-w-md mx-auto">
+            <h1 class="text-2xl font-bold flex items-center">
+                🏛️ BladiBay
+            </h1>
+            <div class="text-right">
+                <p class="text-sm opacity-90">بلادي باي</p>
+                <p class="text-xs opacity-75">السوق المغربي</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <main class="max-w-md mx-auto p-4">
+        
+        <!-- Welcome Message -->
+        <section class="text-center py-6">
+            <h2 class="text-3xl font-bold text-gray-800 mb-2">
+                أهلا بك في بلادي باي
+            </h2>
+            <p class="text-gray-600 mb-6">
+                السوق الإلكتروني الحديث للمغرب 🇲🇦
+            </p>
+        </section>
+
+        <!-- Search Bar -->
+        <section class="mb-8">
+            <div class="bg-white rounded-xl shadow-lg p-4">
+                <div class="relative">
+                    <input 
+                        type="text"
+                        placeholder="🔍 ماذا تبحث عنه؟"
+                        class="w-full p-4 border-2 border-gray-200 rounded-lg text-lg focus:border-blue-500 focus:outline-none"
+                        dir="rtl"
+                    />
+                    <button class="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white p-4 rounded-lg mt-3 font-bold text-lg hover:from-blue-700 hover:to-blue-800 transition-all">
+                        ابحث الآن
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Categories -->
+        <section class="mb-8">
+            <h3 class="text-xl font-bold text-gray-800 mb-4 text-center">الفئات الشائعة</h3>
+            <div class="grid grid-cols-2 gap-4">
+                
+                <div class="category-card bg-white p-6 rounded-xl shadow-lg hover:shadow-xl cursor-pointer">
+                    <div class="text-center">
+                        <div class="text-4xl mb-3">🚗</div>
+                        <h4 class="font-bold text-gray-800">سيارات</h4>
+                        <p class="text-sm text-gray-500 mt-1">1,234 إعلان</p>
+                    </div>
+                </div>
+
+                <div class="category-card bg-white p-6 rounded-xl shadow-lg hover:shadow-xl cursor-pointer">
+                    <div class="text-center">
+                        <div class="text-4xl mb-3">🏠</div>
+                        <h4 class="font-bold text-gray-800">عقارات</h4>
+                        <p class="text-sm text-gray-500 mt-1">856 إعلان</p>
+                    </div>
+                </div>
+
+                <div class="category-card bg-white p-6 rounded-xl shadow-lg hover:shadow-xl cursor-pointer">
+                    <div class="text-center">
+                        <div class="text-4xl mb-3">📱</div>
+                        <h4 class="font-bold text-gray-800">إلكترونيات</h4>
+                        <p class="text-sm text-gray-500 mt-1">2,341 إعلان</p>
+                    </div>
+                </div>
+
+                <div class="category-card bg-white p-6 rounded-xl shadow-lg hover:shadow-xl cursor-pointer">
+                    <div class="text-center">
+                        <div class="text-4xl mb-3">👕</div>
+                        <h4 class="font-bold text-gray-800">أزياء</h4>
+                        <p class="text-sm text-gray-500 mt-1">967 إعلان</p>
+                    </div>
+                </div>
+                
+            </div>
+        </section>
+
+        <!-- Recent Ads Preview -->
+        <section class="mb-8">
+            <h3 class="text-xl font-bold text-gray-800 mb-4 text-center">آخر الإعلانات</h3>
+            <div class="space-y-4">
+                
+                <div class="bg-white rounded-xl shadow-lg p-4 hover:shadow-xl transition-all cursor-pointer">
+                    <div class="flex">
+                        <div class="w-20 h-20 bg-gradient-to-br from-blue-400 to-blue-600 rounded-lg flex items-center justify-center text-2xl text-white">
+                            🚗
+                        </div>
+                        <div class="mr-4 flex-1" dir="rtl">
+                            <h4 class="font-bold text-gray-800">تويوتا كورولا 2020</h4>
+                            <p class="text-orange-500 font-bold text-lg">180,000 درهم</p>
+                            <p class="text-sm text-gray-500">📍 الدار البيضاء • منذ ساعتين</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-lg p-4 hover:shadow-xl transition-all cursor-pointer">
+                    <div class="flex">
+                        <div class="w-20 h-20 bg-gradient-to-br from-green-400 to-green-600 rounded-lg flex items-center justify-center text-2xl text-white">
+                            🏠
+                        </div>
+                        <div class="mr-4 flex-1" dir="rtl">
+                            <h4 class="font-bold text-gray-800">شقة للبيع - 3 غرف</h4>
+                            <p class="text-orange-500 font-bold text-lg">850,000 درهم</p>
+                            <p class="text-sm text-gray-500">📍 الرباط • منذ 5 ساعات</p>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Mobile Navigation -->
+    <nav class="mobile-nav bg-white border-t border-gray-200 shadow-lg">
+        <div class="flex justify-around py-2 max-w-md mx-auto">
+            <button class="flex flex-col items-center p-3 text-blue-600 bg-blue-50 rounded-lg">
+                <span class="text-xl mb-1">🏠</span>
+                <span class="text-xs font-semibold">الرئيسية</span>
+            </button>
+            <button class="flex flex-col items-center p-3 text-gray-500 hover:text-blue-600 transition-colors">
+                <span class="text-xl mb-1">🔍</span>
+                <span class="text-xs">بحث</span>
+            </button>
+            <button class="flex flex-col items-center p-3 text-gray-500 hover:text-blue-600 transition-colors">
+                <span class="text-xl mb-1">➕</span>
+                <span class="text-xs">إضافة</span>
+            </button>
+            <button class="flex flex-col items-center p-3 text-gray-500 hover:text-blue-600 transition-colors">
+                <span class="text-xl mb-1">👤</span>
+                <span class="text-xs">حسابي</span>
+            </button>
+        </div>
+    </nav>
+
+    <script>
+        // Simple interactivity
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add click effects to category cards
+            const cards = document.querySelectorAll('.category-card');
+            cards.forEach(card => {
+                card.addEventListener('click', function() {
+                    this.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 150);
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
