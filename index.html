@@ -25,16 +25,6 @@
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.18);
         }
-                /* Fix pour le texte blanc des villes */
-        #citySelect {
-            color: #374151 !important;
-        }
-        
-        #citySelect option {
-            color: #374151 !important;
-            background-color: white !important;
-        }
-
         
         .hover-scale {
             transition: all 0.3s ease;
@@ -86,13 +76,23 @@
             font-weight: 600;
         }
         
+        /* Fix pour le texte blanc des villes */
+        #citySelect {
+            color: #374151 !important;
+        }
+        
+        #citySelect option {
+            color: #374151 !important;
+            background-color: white !important;
+        }
+        
         @media (max-width: 768px) {
             .hero-title {
                 font-size: 2rem;
                 line-height: 1.2;
             }
         }
-    </>
+    </style>
 </head>
 
 <body class="bg-gray-50">
@@ -165,7 +165,6 @@
                         
                         <select id="citySelect" class="px-4 py-4 rounded-xl border-0 focus:ring-2 focus:ring-blue-500 outline-none min-w-[200px]">
                             <option value="">Toutes les villes</option>
-                            <!-- TOUTES LES VILLES DU MAROC -->
                             <option value="casablanca">🏙️ Casablanca</option>
                             <option value="rabat">🏛️ Rabat</option>
                             <option value="marrakech">🕌 Marrakech</option>
@@ -279,10 +278,10 @@
                         <i class="fas fa-couch text-yellow-600 text-2xl"></i>
                     </div>
                     <h3 class="font-semibold text-gray-800 mb-2">Mobilier</h3>
-                    <p class="text-sm text-gray-500">672 annonces</p>
+                                    <p class="text-sm text-gray-500">672 annonces</p>
                 </div>
                 
-                               <!-- SERVICES -->
+                <!-- SERVICES -->
                 <div class="category-card glassmorphism rounded-2xl p-6 text-center hover-scale cursor-pointer">
                     <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
                         <i class="fas fa-tools text-red-600 text-2xl"></i>
@@ -464,7 +463,7 @@
                     <div class="relative">
                         <img src="https://images.unsplash.com/photo-1606813907291-d86efa9b94db?w=400&h=300&fit=crop" alt="PlayStation 5" class="w-full h-48 object-cover">
                         <button class="absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-md hover:bg-red-50">
-                            <i class="far fa-heart text-gray-606 hover:text-red-500"></i>
+                            <i class="far fa-heart text-gray-600 hover:text-red-500"></i>
                         </button>
                         <span class="absolute top-3 left-3 badge bg-red-500 text-white">🔥 HOT</span>
                     </div>
@@ -495,7 +494,7 @@
                 <div class="product-card bg-white rounded-2xl overflow-hidden card-shadow" data-category="voitures">
                     <div class="relative">
                         <img src="https://images.unsplash.com/photo-1549399161-1c8a8c2d5f12?w=400&h=300&fit=crop" alt="Dacia Logan" class="w-full h-48 object-cover">
-                                                <button class="absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-md hover:bg-red-50">
+                                               <button class="absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-md hover:bg-red-50">
                             <i class="far fa-heart text-gray-600 hover:text-red-500"></i>
                         </button>
                         <span class="absolute top-3 left-3 badge bg-orange-500 text-white">💰 Négociable</span>
@@ -732,7 +731,7 @@
     <!-- CHAT FLOTTANT -->
     <div class="fixed bottom-20 md:bottom-6 right-6 z-40">
         <button id="chatBtn" class="w-14 h-14 gradient-bg rounded-full shadow-lg hover:shadow-xl transition-all transform hover:scale-110 flex items-center justify-center">
-                        <i class="fas fa-comments text-white text-xl"></i>
+                       <i class="fas fa-comments text-white text-xl"></i>
         </button>
     </div>
 
@@ -765,7 +764,6 @@
                 featured: true,
                 description: "90m², 5ème étage, ascenseur, parking, cuisine équipée, proche métro"
             }
-            // ... autres produits
         ];
 
         // GESTION DES FAVORIS
@@ -805,12 +803,10 @@
             
             document.getElementById('notifications').appendChild(notification);
             
-            // Animation d'entrée
             setTimeout(() => {
                 notification.classList.remove('translate-x-full');
             }, 100);
             
-            // Suppression automatique
             setTimeout(() => {
                 notification.classList.add('translate-x-full');
                 setTimeout(() => {
@@ -838,7 +834,6 @@
                 
                 showNotification(`Recherche pour "${query}" ${city ? `à ${city}` : ''}...`, 'info');
                 
-                // Ici vous ajouteriez la logique de recherche réelle
                 setTimeout(() => {
                     showNotification(`${Math.floor(Math.random() * 50) + 10} résultats trouvés !`, 'success');
                 }, 1000);
@@ -857,7 +852,6 @@
             
             filterButtons.forEach(btn => {
                 btn.addEventListener('click', () => {
-                    // Mise à jour des boutons actifs
                     filterButtons.forEach(b => {
                         b.classList.remove('bg-blue-600', 'text-white');
                         b.classList.add('bg-gray-200', 'text-gray-700');
@@ -867,7 +861,6 @@
                     
                     const filter = btn.dataset.filter;
                     
-                    // Filtrage des cartes
                     productCards.forEach(card => {
                         if (filter === 'all' || card.dataset.category === filter) {
                             card.style.display = 'block';
@@ -891,11 +884,9 @@
                     const categoryName = card.querySelector('h3').textContent;
                     showNotification(`Navigation vers ${categoryName}...`, 'info');
                     
-                    // Scroll vers les annonces et filtrer
                     document.getElementById('annonces').scrollIntoView({ behavior: 'smooth' });
                     
                     setTimeout(() => {
-                        // Simuler le filtrage par catégorie
                         const filterBtn = document.querySelector(`[data-filter="${categoryName.toLowerCase()}"]`);
                         if (filterBtn) filterBtn.click();
                     }, 800);
@@ -919,7 +910,6 @@
                         e.target.classList.add('fas', 'text-red-500');
                     }
                     
-                    // Simulation d'ajout/suppression des favoris
                     const productId = Math.floor(Math.random() * 1000);
                     toggleFavorite(productId);
                 }
@@ -928,19 +918,15 @@
 
         // GESTION DU MENU MOBILE
         function setupMobileMenu() {
-            const mobileMenuBtn = document.getElementById('mobileMenu');
             const navItems = document.querySelectorAll('.nav-item');
             
-            // Navigation mobile bottom
             navItems.forEach(item => {
                 item.addEventListener('click', () => {
-                    // Retirer la classe active de tous les éléments
                     navItems.forEach(nav => {
                         nav.classList.remove('text-blue-600');
                         nav.classList.add('text-gray-600');
                     });
                     
-                    // Ajouter la classe active à l'élément cliqué
                     item.classList.remove('text-gray-600');
                     item.classList.add('text-blue-600');
                 });
@@ -963,7 +949,7 @@
             badges.forEach(badge => {
                 badge.addEventListener('click', () => {
                     const searchInput = document.getElementById('searchInput');
-                    searchInput.value = badge.textContent;
+                    searchInput.value = badge.textContent.replace(/[🔥💰⭐✓💎]/g, '').trim();
                     searchInput.focus();
                     showNotification(`Recherche pour "${badge.textContent}" ajoutée`, 'info');
                 });
@@ -1007,7 +993,6 @@
         document.addEventListener('DOMContentLoaded', function() {
             console.log('🚀 BladiBay chargé avec succès !');
             
-            // Initialiser tous les composants
             setupSearch();
             setupFilters();
             setupCategories();
@@ -1018,15 +1003,12 @@
             setupSmoothScrolling();
             setupLazyLoading();
             
-            // Mettre à jour le compteur de favoris
             updateFavoriteCount();
             
-            // Message de bienvenue
             setTimeout(() => {
                 showNotification('Bienvenue sur BladiBay ! 🎉', 'success');
             }, 1000);
             
-            // Animer les éléments au chargement
             document.querySelectorAll('.animate-fade-in').forEach((el, index) => {
                 setTimeout(() => {
                     el.style.opacity = '1';
@@ -1044,7 +1026,6 @@
         // OPTIMISATION PERFORMANCE
         let ticking = false;
         function updateScrollEffects() {
-            // Effets de parallax légers
             const scrolled = window.pageYOffset;
             const parallax = document.querySelector('.gradient-bg');
             if (parallax) {
