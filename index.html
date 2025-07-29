@@ -1,686 +1,1054 @@
 <!DOCTYPE html>
 <html lang="fr" dir="ltr">
 <head>
-    <!-- META TAGS ESSENTIELS -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="BladiBay - Marketplace marocain moderne avec IA. Achetez et vendez facilement au Maroc.">
-    <meta name="keywords" content="marketplace maroc, annonces maroc, vente achat maroc, bladibay">
-    <meta name="author" content="BladiBay Team">
+    <title>BladiBay - Marketplace du Maroc 🇲🇦</title>
     
-    <!-- OPEN GRAPH (Partage réseaux sociaux) -->
-    <meta property="og:title" content="BladiBay - Marketplace du Maroc">
-    <meta property="og:description" content="La plateforme moderne pour acheter et vendre au Maroc">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://bladibay.netlify.app">
+    <!-- FONTS -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- FAVICON -->
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    
-    <!-- TITRE DE LA PAGE -->
-    <title>BladiBay - Marketplace Intelligent du Maroc 🇲🇦</title>
-    
-    <!-- FONTS GOOGLE -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- TAILWIND CSS CDN -->
+    <!-- TAILWIND CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- FONT AWESOME ICONS -->
+    <!-- ICONS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- NOTRE CSS PERSONNALISÉ -->
-    <link rel="stylesheet" href="styles.css">
-    
-    <!-- CONFIGURATION TAILWIND -->
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        'inter': ['Inter', 'sans-serif'],
-                        'poppins': ['Poppins', 'sans-serif'],
-                    },
-                    colors: {
-                        'brand': {
-                            50: '#f0f9ff',
-                            100: '#e0f2fe',
-                            500: '#0ea5e9',
-                            600: '#0284c7',
-                            700: '#0369a1',
-                        }
-                    }
-                }
+    <style>
+        * {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+        
+        .glassmorphism {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+        
+        .hover-scale {
+            transition: all 0.3s ease;
+        }
+        
+        .hover-scale:hover {
+            transform: scale(1.05);
+        }
+        
+        .animate-fade-in {
+            animation: fadeIn 0.6s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .card-shadow {
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .product-card {
+            transition: all 0.3s ease;
+            border: 1px solid #e5e7eb;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .badge {
+            font-size: 0.75rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 9999px;
+            font-weight: 500;
+        }
+        
+        .price-tag {
+            background: linear-gradient(45deg, #10b981, #059669);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2rem;
+                line-height: 1.2;
             }
         }
-    </script>
+    </style>
 </head>
 
-<body class="font-inter bg-gradient-to-br from-purple-50 via-blue-50 to-pink-50 min-h-screen">
-    
-    <!-- 🔵 HEADER NAVIGATION -->
-    <header class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-white/20 shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
-                
+<body class="bg-gray-50">
+    <!-- HEADER -->
+    <header class="glassmorphism fixed top-0 left-0 right-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-3">
+            <div class="flex items-center justify-between">
                 <!-- LOGO -->
                 <div class="flex items-center space-x-3">
-                    <div class="w-10 h-10 bg-gradient-to-r from-purple-600 to-blue-600 rounded-xl flex items-center justify-center">
-                        <i class="fas fa-gem text-white text-lg"></i>
+                    <div class="w-10 h-10 gradient-bg rounded-xl flex items-center justify-center">
+                        <i class="fas fa-shopping-bag text-white text-lg"></i>
                     </div>
-                    <h1 class="text-xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
-                        BladiBay
-                    </h1>
+                    <h1 class="text-xl font-bold text-gray-800">BladiBay</h1>
                 </div>
                 
                 <!-- NAVIGATION DESKTOP -->
-                <nav class="hidden md:flex items-center space-x-8">
-                    <a href="#home" class="text-gray-700 hover:text-purple-600 font-medium transition-colors">
-                        <span class="fr">Accueil</span>
-                        <span class="ar hidden">الرئيسية</span>
-                    </a>
-                    <a href="#categories" class="text-gray-700 hover:text-purple-600 font-medium transition-colors">
-                        <span class="fr">Catégories</span>
-                        <span class="ar hidden">الفئات</span>
-                    </a>
-                    <a href="#featured" class="text-gray-700 hover:text-purple-600 font-medium transition-colors">
-                        <span class="fr">À la une</span>
-                        <span class="ar hidden">مميزة</span>
-                    </a>
+                <nav class="hidden md:flex items-center space-x-6">
+                    <a href="#accueil" class="text-gray-700 hover:text-blue-600 font-medium">Accueil</a>
+                    <a href="#categories" class="text-gray-700 hover:text-blue-600 font-medium">Catégories</a>
+                    <a href="#annonces" class="text-gray-700 hover:text-blue-600 font-medium">Annonces</a>
                 </nav>
                 
-                <!-- ACTIONS HEADER -->
-                <div class="flex items-center space-x-4">
-                    <!-- Sélecteur de langue -->
-                    <button id="languageToggle" class="flex items-center space-x-2 px-3 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors">
-                        <i class="fas fa-globe text-gray-600"></i>
-                        <span class="hidden sm:inline text-sm font-medium text-gray-700" id="currentLang">FR</span>
+                <!-- ACTIONS -->
+                <div class="flex items-center space-x-3">
+                    <button class="hidden md:flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+                        <i class="fas fa-plus"></i>
+                        <span>Publier</span>
                     </button>
                     
-                    <!-- Favoris -->
-                    <button class="relative p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors">
+                    <!-- FAVORIS -->
+                    <button class="relative p-2 rounded-lg hover:bg-gray-100">
                         <i class="fas fa-heart text-gray-600"></i>
-                        <span id="favoritesCount" class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span>
+                        <span id="favCount" class="absolute -top-1 -right-1 bg-red-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">0</span>
                     </button>
                     
-                    <!-- Publier une annonce -->
-                    <button class="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-4 py-2 rounded-lg font-medium hover:shadow-lg transition-all transform hover:scale-105">
-                        <i class="fas fa-plus mr-2"></i>
-                        <span class="fr">Publier</span>
-                        <span class="ar hidden">نشر إعلان</span>
-                    </button>
-                    
-                    <!-- Menu mobile -->
-                    <button id="mobileMenuToggle" class="md:hidden p-2 rounded-lg bg-gray-100">
+                    <!-- MENU MOBILE -->
+                    <button id="mobileMenu" class="md:hidden p-2 rounded-lg hover:bg-gray-100">
                         <i class="fas fa-bars text-gray-600"></i>
                     </button>
                 </div>
             </div>
         </div>
-        
-        <!-- MENU MOBILE -->
-        <div id="mobileMenu" class="md:hidden hidden bg-white/95 backdrop-blur-md border-t border-gray-200">
-            <div class="px-4 py-4 space-y-3">
-                <a href="#home" class="block py-2 text-gray-700 hover:text-purple-600">
-                    <span class="fr">Accueil</span>
-                    <span class="ar hidden">الرئيسية</span>
-                </a>
-                <a href="#categories" class="block py-2 text-gray-700 hover:text-purple-600">
-                    <span class="fr">Catégories</span>
-                    <span class="ar hidden">الفئات</span>
-                </a>
-                <a href="#featured" class="block py-2 text-gray-700 hover:text-purple-600">
-                    <span class="fr">À la une</span>
-                    <span class="ar hidden">مميزة</span>
-                </a>
-            </div>
-        </div>
     </header>
 
-    <!-- 🎯 HERO SECTION -->
-    <section id="home" class="pt-24 pb-12 px-4">
-        <div class="max-w-7xl mx-auto text-center">
-            <!-- Titre principal -->
-            <h1 class="text-4xl md:text-6xl font-bold mb-6">
-                <span class="fr bg-gradient-to-r from-purple-600 via-blue-600 to-pink-600 bg-clip-text text-transparent">
-                    Achetez, Vendez,<br>Échangez au Maroc
-                </span>
-                <span class="ar hidden bg-gradient-to-r from-purple-600 via-blue-600 to-pink-600 bg-clip-text text-transparent">
-                    اشتري، بيع،<br>تبادل في المغرب
-                </span>
+    <!-- HERO SECTION -->
+    <section id="accueil" class="pt-20 pb-16 px-4 gradient-bg text-white">
+        <div class="max-w-6xl mx-auto text-center">
+            <h1 class="hero-title text-5xl md:text-6xl font-bold mb-6 animate-fade-in">
+                Achetez & Vendez<br>
+                <span class="text-yellow-300">Facilement</span> au Maroc
             </h1>
             
-            <!-- Sous-titre -->
-            <p class="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-                <span class="fr">La marketplace intelligente qui connecte tous les Marocains. Trouvez tout ce que vous cherchez près de chez vous.</span>
-                <span class="ar hidden">السوق الذكي الذي يربط جميع المغاربة. اعثر على كل ما تبحث عنه بالقرب منك.</span>
+            <p class="text-xl mb-8 text-blue-100 max-w-2xl mx-auto">
+                Des milliers d'annonces vérifiées. Trouvez tout ce que vous cherchez près de chez vous.
             </p>
             
-            <!-- Barre de recherche principale -->
+            <!-- BARRE DE RECHERCHE -->
             <div class="max-w-4xl mx-auto mb-12">
-                <div class="relative bg-white/80 backdrop-blur-md rounded-2xl p-6 shadow-xl border border-white/20">
+                <div class="glassmorphism rounded-2xl p-6">
                     <div class="flex flex-col md:flex-row gap-4">
-                        <!-- Input recherche -->
                         <div class="flex-1 relative">
-                            <i class="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                            <i class="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
                             <input 
                                 type="text" 
-                                id="mainSearchInput"
-                                placeholder="Que recherchez-vous ? (ex: iPhone 13, Appartement Casablanca...)"
-                                class="w-full pl-12 pr-4 py-4 rounded-xl border border-gray-200 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 outline-none transition-all bg-white/50"
+                                id="searchInput"
+                                placeholder="Que recherchez-vous ? (iPhone, Voiture, Appartement...)"
+                                class="w-full pl-12 pr-4 py-4 rounded-xl border-0 focus:ring-2 focus:ring-blue-500 outline-none"
                             >
                         </div>
                         
-                        <!-- Sélecteur de ville -->
-                        <div class="relative">
-                            <i class="fas fa-map-marker-alt absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
-                            <select id="citySelector" class="pl-12 pr-8 py-4 rounded-xl border border-gray-200 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 outline-none bg-white/50 min-w-[200px]">
-                                <option value="">Toutes les villes</option>
-                                <option value="casablanca">Casablanca</option>
-                                <option value="rabat">Rabat</option>
-                                <option value="marrakech">Marrakech</option>
-                                <option value="fes">Fès</option>
-                                <option value="tangier">Tanger</option>
-                                <option value="agadir">Agadir</option>
-                                <option value="meknes">Meknès</option>
-                            </select>
-                        </div>
+                        <select id="citySelect" class="px-4 py-4 rounded-xl border-0 focus:ring-2 focus:ring-blue-500 outline-none min-w-[200px]">
+                            <option value="">Toutes les villes</option>
+                            <!-- TOUTES LES VILLES DU MAROC -->
+                            <option value="casablanca">🏙️ Casablanca</option>
+                            <option value="rabat">🏛️ Rabat</option>
+                            <option value="marrakech">🕌 Marrakech</option>
+                            <option value="fes">🎭 Fès</option>
+                            <option value="tangier">⛵ Tanger</option>
+                            <option value="agadir">🏖️ Agadir</option>
+                            <option value="meknes">🌿 Meknès</option>
+                            <option value="oujda">🌵 Oujda</option>
+                            <option value="kenitra">🌊 Kénitra</option>
+                            <option value="tetouan">⛰️ Tétouan</option>
+                            <option value="safi">🐟 Safi</option>
+                            <option value="mohammedia">🏭 Mohammedia</option>
+                            <option value="khouribga">⚡ Khouribga</option>
+                            <option value="beni-mellal">🍇 Béni Mellal</option>
+                            <option value="el-jadida">🏰 El Jadida</option>
+                            <option value="nador">🚢 Nador</option>
+                            <option value="taza">🏔️ Taza</option>
+                            <option value="settat">🌾 Settat</option>
+                            <option value="berrechid">🚂 Berrechid</option>
+                            <option value="khemisset">🌳 Khémisset</option>
+                            <option value="inezgane">🏘️ Inezgane</option>
+                            <option value="ksar-el-kebir">🕌 Ksar El Kébir</option>
+                            <option value="larache">🏖️ Larache</option>
+                            <option value="guelmim">🐪 Guelmim</option>
+                            <option value="ouarzazate">🎬 Ouarzazate</option>
+                            <option value="tiznit">🏺 Tiznit</option>
+                            <option value="al-hoceima">🏝️ Al Hoceima</option>
+                            <option value="taourirt">🌄 Taourirt</option>
+                            <option value="taroudant">🌴 Taroudant</option>
+                            <option value="essaouira">🎨 Essaouira</option>
+                        </select>
                         
-                        <!-- Bouton recherche -->
-                        <button id="mainSearchBtn" class="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-8 py-4 rounded-xl font-semibold hover:shadow-lg transition-all transform hover:scale-105 flex items-center justify-center space-x-2">
+                        <button id="searchBtn" class="bg-blue-600 text-white px-8 py-4 rounded-xl font-semibold hover:bg-blue-700 flex items-center justify-center space-x-2">
                             <i class="fas fa-search"></i>
-                            <span class="fr">Rechercher</span>
-                            <span class="ar hidden">بحث</span>
+                            <span>Rechercher</span>
                         </button>
                     </div>
                 </div>
             </div>
             
-            <!-- Statistiques -->
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
+            <!-- STATISTIQUES -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
                 <div class="text-center">
-                    <div class="text-3xl font-bold text-purple-600">10K+</div>
-                    <div class="text-gray-600 text-sm">
-                        <span class="fr">Annonces actives</span>
-                        <span class="ar hidden">إعلانات نشطة</span>
-                    </div>
+                    <div class="text-3xl font-bold text-yellow-300">50K+</div>
+                    <div class="text-blue-100">Annonces</div>
                 </div>
                 <div class="text-center">
-                    <div class="text-3xl font-bold text-blue-600">5K+</div>
-                    <div class="text-gray-600 text-sm">
-                        <span class="fr">Utilisateurs</span>
-                        <span class="ar hidden">مستخدمين</span>
-                    </div>
+                    <div class="text-3xl font-bold text-yellow-300">25K+</div>
+                    <div class="text-blue-100">Utilisateurs</div>
                 </div>
                 <div class="text-center">
-                    <div class="text-3xl font-bold text-pink-600">20+</div>
-                    <div class="text-gray-600 text-sm">
-                        <span class="fr">Villes</span>
-                        <span class="ar hidden">مدن</span>
-                    </div>
+                    <div class="text-3xl font-bold text-yellow-300">30+</div>
+                    <div class="text-blue-100">Villes</div>
                 </div>
                 <div class="text-center">
-                    <div class="text-3xl font-bold text-green-600">24/7</div>
-                    <div class="text-gray-600 text-sm">
-                        <span class="fr">Support IA</span>
-                        <span class="ar hidden">دعم ذكي</span>
-                    </div>
+                    <div class="text-3xl font-bold text-yellow-300">24/7</div>
+                    <div class="text-blue-100">Support</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 🏷️ CATÉGORIES POPULAIRES -->
-    <section id="categories" class="py-16 px-4 bg-white/30 backdrop-blur-sm">
+    <!-- CATÉGORIES POPULAIRES -->
+    <section id="categories" class="py-16 px-4">
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-gray-800 mb-4">
-                    <span class="fr">Catégories Populaires</span>
-                    <span class="ar hidden">الفئات الشائعة</span>
-                </h2>
-                <p class="text-gray-600">
-                    <span class="fr">Explorez nos catégories les plus demandées</span>
-                    <span class="ar hidden">استكشف فئاتنا الأكثر طلباً</span>
-                </p>
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Catégories Populaires</h2>
+                <p class="text-gray-600">Trouvez facilement ce que vous cherchez</p>
             </div>
             
-            <div id="categoriesGrid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-                <!-- Les catégories seront générées par JavaScript -->
-                  </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
+                <!-- VOITURES -->
+                <div class="category-card glassmorphism rounded-2xl p-6 text-center hover-scale cursor-pointer">
+                    <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-car text-blue-600 text-2xl"></i>
+                    </div>
+                    <h3 class="font-semibold text-gray-800 mb-2">Voitures</h3>
+                    <p class="text-sm text-gray-500">2,341 annonces</p>
+                </div>
+                
+                <!-- IMMOBILIER -->
+                <div class="category-card glassmorphism rounded-2xl p-6 text-center hover-scale cursor-pointer">
+                    <div class="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-home text-green-600 text-2xl"></i>
+                    </div>
+                    <h3 class="font-semibold text-gray-800 mb-2">Immobilier</h3>
+                    <p class="text-sm text-gray-500">1,829 annonces</p>
+                </div>
+                
+                <!-- ÉLECTRONIQUE -->
+                <div class="category-card glassmorphism rounded-2xl p-6 text-center hover-scale cursor-pointer">
+                    <div class="w-16 h-16 bg-purple-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-laptop text-purple-600 text-2xl"></i>
+                    </div>
+                    <h3 class="font-semibold text-gray-800 mb-2">Électronique</h3>
+                    <p class="text-sm text-gray-500">3,156 annonces</p>
+                </div>
+                
+                <!-- MODE -->
+                <div class="category-card glassmorphism rounded-2xl p-6 text-center hover-scale cursor-pointer">
+                    <div class="w-16 h-16 bg-pink-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-tshirt text-pink-600 text-2xl"></i>
+                    </div>
+                    <h3 class="font-semibold text-gray-800 mb-2">Mode</h3>
+                    <p class="text-sm text-gray-500">945 annonces</p>
+                </div>
+                
+                <!-- MOBILIER -->
+                <div class="category-card glassmorphism rounded-2xl p-6 text-center hover-scale cursor-pointer">
+                    <div class="w-16 h-16 bg-yellow-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-couch text-yellow-600 text-2xl"></i>
+                    </div>
+                    <h3 class="font-semibold text-gray-800 mb-2">Mobilier</h3>
+                    <p class="text-sm text-gray-500">672 annonces</p>
+                </div>
+                
+                               <!-- SERVICES -->
+                <div class="category-card glassmorphism rounded-2xl p-6 text-center hover-scale cursor-pointer">
+                    <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-tools text-red-600 text-2xl"></i>
+                    </div>
+                    <h3 class="font-semibold text-gray-800 mb-2">Services</h3>
+                    <p class="text-sm text-gray-500">1,234 annonces</p>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <!-- 🔥 ANNONCES À LA UNE -->
-    <section id="featured" class="py-16 px-4">
+    <!-- RECHERCHES POPULAIRES -->
+    <section class="py-8 px-4 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <h3 class="text-lg font-semibold text-gray-800 mb-4">🔥 Recherches populaires :</h3>
+            <div class="flex flex-wrap gap-3">
+                <span class="badge bg-blue-100 text-blue-800 cursor-pointer hover:bg-blue-200">iPhone 13</span>
+                <span class="badge bg-green-100 text-green-800 cursor-pointer hover:bg-green-200">Appartement Casablanca</span>
+                <span class="badge bg-purple-100 text-purple-800 cursor-pointer hover:bg-purple-200">MacBook Pro</span>
+                <span class="badge bg-yellow-100 text-yellow-800 cursor-pointer hover:bg-yellow-200">Dacia Logan</span>
+                <span class="badge bg-pink-100 text-pink-800 cursor-pointer hover:bg-pink-200">PlayStation 5</span>
+                <span class="badge bg-indigo-100 text-indigo-800 cursor-pointer hover:bg-indigo-200">Villa Marrakech</span>
+                <span class="badge bg-gray-100 text-gray-800 cursor-pointer hover:bg-gray-200">Samsung Galaxy</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ANNONCES À LA UNE -->
+    <section id="annonces" class="py-16 px-4 bg-gray-50">
         <div class="max-w-7xl mx-auto">
             <div class="flex flex-col md:flex-row justify-between items-center mb-12">
                 <div>
-                    <h2 class="text-3xl font-bold text-gray-800 mb-4">
-                        <span class="fr">Annonces à la Une</span>
-                        <span class="ar hidden">الإعلانات المميزة</span>
-                    </h2>
-                    <p class="text-gray-600">
-                        <span class="fr">Découvrez les meilleures offres du moment</span>
-                        <span class="ar hidden">اكتشف أفضل العروض الحالية</span>
-                    </p>
+                    <h2 class="text-3xl font-bold text-gray-800 mb-4">Annonces à la Une</h2>
+                    <p class="text-gray-600">Les meilleures offres du moment</p>
                 </div>
                 
-                <!-- Filtres rapides -->
+                <!-- FILTRES RAPIDES -->
                 <div class="flex flex-wrap gap-3 mt-4 md:mt-0">
-                    <button class="filter-btn active" data-filter="all">
-                        <span class="fr">Tout</span>
-                        <span class="ar hidden">الكل</span>
-                    </button>
-                    <button class="filter-btn" data-filter="voitures">
-                        <span class="fr">Voitures</span>
-                        <span class="ar hidden">سيارات</span>
-                    </button>
-                    <button class="filter-btn" data-filter="immobilier">
-                        <span class="fr">Immobilier</span>
-                        <span class="ar hidden">عقارات</span>
-                    </button>
-                    <button class="filter-btn" data-filter="electronique">
-                        <span class="fr">Électronique</span>
-                        <span class="ar hidden">إلكترونيات</span>
-                    </button>
+                    <button class="filter-btn bg-blue-600 text-white px-4 py-2 rounded-lg" data-filter="all">Tout</button>
+                    <button class="filter-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-300" data-filter="voitures">Voitures</button>
+                    <button class="filter-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-300" data-filter="immobilier">Immobilier</button>
+                    <button class="filter-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-300" data-filter="electronique">Électronique</button>
                 </div>
             </div>
             
-            <!-- Grille des annonces -->
+            <!-- GRILLE DES ANNONCES -->
             <div id="productsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                <!-- Les annonces seront générées par JavaScript -->
+                
+                <!-- ANNONCE 1 - iPhone 14 Pro -->
+                <div class="product-card bg-white rounded-2xl overflow-hidden card-shadow" data-category="electronique">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=400&h=300&fit=crop" alt="iPhone 14 Pro" class="w-full h-48 object-cover">
+                        <button class="absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-md hover:bg-red-50">
+                            <i class="far fa-heart text-gray-600 hover:text-red-500"></i>
+                        </button>
+                        <span class="absolute top-3 left-3 badge bg-green-500 text-white">✓ Vérifié</span>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-gray-800 mb-2">iPhone 14 Pro 128GB</h3>
+                        <p class="text-sm text-gray-600 mb-3">État neuf, sous garantie Apple, boîte complète avec tous les accessoires</p>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="price-tag">12 500 DH</span>
+                            <div class="flex items-center text-sm text-gray-500">
+                                <i class="fas fa-map-marker-alt mr-1"></i>
+                                Casablanca
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center text-sm text-gray-500">
+                                <i class="fas fa-clock mr-1"></i>
+                                Il y a 2h
+                            </div>
+                            <button class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-700">
+                                <i class="fas fa-eye mr-1"></i>
+                                Voir
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ANNONCE 2 - Appartement -->
+                <div class="product-card bg-white rounded-2xl overflow-hidden card-shadow" data-category="immobilier">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=400&h=300&fit=crop" alt="Appartement" class="w-full h-48 object-cover">
+                        <button class="absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-md hover:bg-red-50">
+                            <i class="far fa-heart text-gray-600 hover:text-red-500"></i>
+                        </button>
+                        <span class="absolute top-3 left-3 badge bg-yellow-500 text-white">🔥 TOP</span>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-gray-800 mb-2">Appartement 3 chambres</h3>
+                        <p class="text-sm text-gray-600 mb-3">90m², 5ème étage, ascenseur, parking, cuisine équipée, proche métro</p>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="price-tag">850 000 DH</span>
+                            <div class="flex items-center text-sm text-gray-500">
+                                <i class="fas fa-map-marker-alt mr-1"></i>
+                                Rabat
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center text-sm text-gray-500">
+                                <i class="fas fa-clock mr-1"></i>
+                                Il y a 1 jour
+                            </div>
+                            <button class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-700">
+                                <i class="fas fa-eye mr-1"></i>
+                                Voir
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ANNONCE 3 - Voiture -->
+                <div class="product-card bg-white rounded-2xl overflow-hidden card-shadow" data-category="voitures">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=400&h=300&fit=crop" alt="BMW X3" class="w-full h-48 object-cover">
+                        <button class="absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-md hover:bg-red-50">
+                            <i class="far fa-heart text-gray-600 hover:text-red-500"></i>
+                        </button>
+                        <span class="absolute top-3 left-3 badge bg-blue-500 text-white">💎 Premium</span>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-gray-800 mb-2">BMW X3 2019</h3>
+                        <p class="text-sm text-gray-600 mb-3">45 000 km, automatique, GPS, cuir, climatisation, état impeccable</p>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="price-tag">285 000 DH</span>
+                            <div class="flex items-center text-sm text-gray-500">
+                                <i class="fas fa-map-marker-alt mr-1"></i>
+                                Marrakech
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center text-sm text-gray-500">
+                                <i class="fas fa-clock mr-1"></i>
+                                Il y a 3h
+                            </div>
+                            <button class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-700">
+                                <i class="fas fa-eye mr-1"></i>
+                                Voir
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ANNONCE 4 - MacBook -->
+                <div class="product-card bg-white rounded-2xl overflow-hidden card-shadow" data-category="electronique">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=400&h=300&fit=crop" alt="MacBook Pro" class="w-full h-48 object-cover">
+                        <button class="absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-md hover:bg-red-50">
+                            <i class="far fa-heart text-gray-600 hover:text-red-500"></i>
+                        </button>
+                        <span class="absolute top-3 left-3 badge bg-green-500 text-white">✓ Vérifié</span>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-gray-800 mb-2">MacBook Pro M2 2022</h3>
+                        <p class="text-sm text-gray-600 mb-3">13 pouces, 16GB RAM, 512GB SSD, comme neuf, facture incluse</p>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="price-tag">18 900 DH</span>
+                            <div class="flex items-center text-sm text-gray-500">
+                                <i class="fas fa-map-marker-alt mr-1"></i>
+                                Fès
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center text-sm text-gray-500">
+                                <i class="fas fa-clock mr-1"></i>
+                                Il y a 5h
+                            </div>
+                            <button class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-700">
+                                <i class="fas fa-eye mr-1"></i>
+                                Voir
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ANNONCE 5 - PlayStation 5 -->
+                <div class="product-card bg-white rounded-2xl overflow-hidden card-shadow" data-category="electronique">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1606813907291-d86efa9b94db?w=400&h=300&fit=crop" alt="PlayStation 5" class="w-full h-48 object-cover">
+                        <button class="absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-md hover:bg-red-50">
+                            <i class="far fa-heart text-gray-606 hover:text-red-500"></i>
+                        </button>
+                        <span class="absolute top-3 left-3 badge bg-red-500 text-white">🔥 HOT</span>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-gray-800 mb-2">PlayStation 5 + 2 Manettes</h3>
+                        <p class="text-sm text-gray-600 mb-3">État neuf, garantie 1 an, avec 3 jeux inclus, emballage d'origine</p>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="price-tag">4 800 DH</span>
+                            <div class="flex items-center text-sm text-gray-500">
+                                <i class="fas fa-map-marker-alt mr-1"></i>
+                                Tanger
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center text-sm text-gray-500">
+                                <i class="fas fa-clock mr-1"></i>
+                                Il y a 1h
+                            </div>
+                            <button class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-700">
+                                <i class="fas fa-eye mr-1"></i>
+                                Voir
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ANNONCE 6 - Dacia Logan -->
+                <div class="product-card bg-white rounded-2xl overflow-hidden card-shadow" data-category="voitures">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1549399161-1c8a8c2d5f12?w=400&h=300&fit=crop" alt="Dacia Logan" class="w-full h-48 object-cover">
+                                                <button class="absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-md hover:bg-red-50">
+                            <i class="far fa-heart text-gray-600 hover:text-red-500"></i>
+                        </button>
+                        <span class="absolute top-3 left-3 badge bg-orange-500 text-white">💰 Négociable</span>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-gray-800 mb-2">Dacia Logan 2018</h3>
+                        <p class="text-sm text-gray-600 mb-3">85 000 km, essence, climatisation, bon état général, première main</p>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="price-tag">95 000 DH</span>
+                            <div class="flex items-center text-sm text-gray-500">
+                                <i class="fas fa-map-marker-alt mr-1"></i>
+                                Agadir
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center text-sm text-gray-500">
+                                <i class="fas fa-clock mr-1"></i>
+                                Il y a 6h
+                            </div>
+                            <button class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-700">
+                                <i class="fas fa-eye mr-1"></i>
+                                Voir
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ANNONCE 7 - Villa -->
+                <div class="product-card bg-white rounded-2xl overflow-hidden card-shadow" data-category="immobilier">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=400&h=300&fit=crop" alt="Villa" class="w-full h-48 object-cover">
+                        <button class="absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-md hover:bg-red-50">
+                            <i class="far fa-heart text-gray-600 hover:text-red-500"></i>
+                        </button>
+                        <span class="absolute top-3 left-3 badge bg-purple-500 text-white">⭐ Luxe</span>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-gray-800 mb-2">Villa 5 chambres avec piscine</h3>
+                        <p class="text-sm text-gray-600 mb-3">250m², jardin, garage 2 voitures, quartier résidentiel calme</p>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="price-tag">1 450 000 DH</span>
+                            <div class="flex items-center text-sm text-gray-500">
+                                <i class="fas fa-map-marker-alt mr-1"></i>
+                                Marrakech
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center text-sm text-gray-500">
+                                <i class="fas fa-clock mr-1"></i>
+                                Il y a 2 jours
+                            </div>
+                            <button class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-700">
+                                <i class="fas fa-eye mr-1"></i>
+                                Voir
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ANNONCE 8 - Samsung Galaxy -->
+                <div class="product-card bg-white rounded-2xl overflow-hidden card-shadow" data-category="electronique">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=400&h=300&fit=crop" alt="Samsung Galaxy" class="w-full h-48 object-cover">
+                        <button class="absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-md hover:bg-red-50">
+                            <i class="far fa-heart text-gray-600 hover:text-red-500"></i>
+                        </button>
+                        <span class="absolute top-3 left-3 badge bg-green-500 text-white">✓ Vérifié</span>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-gray-800 mb-2">Samsung Galaxy S23 Ultra</h3>
+                        <p class="text-sm text-gray-600 mb-3">256GB, couleur noir, état excellent, protection écran, étui inclus</p>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="price-tag">9 500 DH</span>
+                            <div class="flex items-center text-sm text-gray-500">
+                                <i class="fas fa-map-marker-alt mr-1"></i>
+                                Meknès
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center text-sm text-gray-500">
+                                <i class="fas fa-clock mr-1"></i>
+                                Il y a 4h
+                            </div>
+                            <button class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-700">
+                                <i class="fas fa-eye mr-1"></i>
+                                Voir
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
             
-            <!-- Bouton voir plus -->
+            <!-- BOUTON VOIR PLUS -->
             <div class="text-center mt-12">
-                <button id="loadMoreBtn" class="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-8 py-3 rounded-xl font-semibold hover:shadow-lg transition-all transform hover:scale-105">
+                <button class="bg-blue-600 text-white px-8 py-3 rounded-xl font-semibold hover:bg-blue-700 transform hover:scale-105 transition-all">
                     <i class="fas fa-plus mr-2"></i>
-                    <span class="fr">Voir plus d'annonces</span>
-                    <span class="ar hidden">عرض المزيد من الإعلانات</span>
+                    Voir plus d'annonces
                 </button>
             </div>
         </div>
     </section>
 
-    <!-- 🤖 SECTION IA ASSISTANT -->
-    <section class="py-16 px-4 bg-gradient-to-r from-purple-600/10 to-blue-600/10">
-        <div class="max-w-4xl mx-auto text-center">
-            <div class="bg-white/80 backdrop-blur-md rounded-3xl p-8 shadow-xl border border-white/20">
-                <div class="w-16 h-16 bg-gradient-to-r from-purple-600 to-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                    <i class="fas fa-robot text-white text-2xl"></i>
+    <!-- SECTION AVANTAGES -->
+    <section class="py-16 px-4 bg-white">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Pourquoi choisir BladiBay ?</h2>
+                <p class="text-gray-600">La plateforme de confiance pour tous vos achats et ventes</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="text-center">
+                    <div class="w-20 h-20 bg-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-shield-alt text-blue-600 text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Sécurisé</h3>
+                    <p class="text-gray-600">Toutes les annonces sont vérifiées. Achetez et vendez en toute sécurité.</p>
                 </div>
                 
-                <h2 class="text-3xl font-bold text-gray-800 mb-4">
-                    <span class="fr">Assistant IA BladiBay</span>
-                    <span class="ar hidden">مساعد بلادي باي الذكي</span>
-                </h2>
-                
-                <p class="text-gray-600 mb-8">
-                    <span class="fr">Notre intelligence artificielle vous aide à trouver exactement ce que vous cherchez et optimise vos annonces automatiquement.</span>
-                    <span class="ar hidden">يساعدك ذكاؤنا الاصطناعي في العثور على ما تبحث عنه بالضبط ويحسن إعلاناتك تلقائياً.</span>
-                </p>
-                
-                <div class="grid md:grid-cols-3 gap-6 mb-8">
-                    <div class="text-center">
-                        <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mx-auto mb-3">
-                            <i class="fas fa-search text-purple-600"></i>
-                        </div>
-                        <h3 class="font-semibold mb-2">
-                            <span class="fr">Recherche Intelligente</span>
-                            <span class="ar hidden">بحث ذكي</span>
-                        </h3>
-                        <p class="text-sm text-gray-600">
-                            <span class="fr">Comprenez vos besoins même avec des descriptions floues</span>
-                            <span class="ar hidden">يفهم احتياجاتك حتى مع الأوصاف الغامضة</span>
-                        </p>
+                <div class="text-center">
+                    <div class="w-20 h-20 bg-green-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-bolt text-green-600 text-3xl"></i>
                     </div>
-                    
-                    <div class="text-center">
-                        <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mx-auto mb-3">
-                            <i class="fas fa-magic text-blue-600"></i>
-                        </div>
-                        <h3 class="font-semibold mb-2">
-                            <span class="fr">Amélioration Auto</span>
-                            <span class="ar hidden">تحسين تلقائي</span>
-                        </h3>
-                        <p class="text-sm text-gray-600">
-                            <span class="fr">Optimise vos titres et descriptions pour plus de visibilité</span>
-                            <span class="ar hidden">يحسن عناوينك ووصفك لمزيد من الرؤية</span>
-                        </p>
-                    </div>
-                    
-                    <div class="text-center">
-                        <div class="w-12 h-12 bg-pink-100 rounded-xl flex items-center justify-center mx-auto mb-3">
-                            <i class="fas fa-chart-line text-pink-600"></i>
-                        </div>
-                        <h3 class="font-semibold mb-2">
-                            <span class="fr">Prix Intelligent</span>
-                            <span class="ar hidden">سعر ذكي</span>
-                        </h3>
-                        <p class="text-sm text-gray-600">
-                            <span class="fr">Suggère le prix optimal basé sur le marché</span>
-                            <span class="ar hidden">يقترح السعر الأمثل بناءً على السوق</span>
-                        </p>
-                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Rapide</h3>
+                    <p class="text-gray-600">Publiez votre annonce en 2 minutes. Trouvez ce que vous cherchez instantanément.</p>
                 </div>
                 
-                <button class="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-8 py-3 rounded-xl font-semibold hover:shadow-lg transition-all transform hover:scale-105">
-                    <i class="fas fa-comments mr-2"></i>
-                    <span class="fr">Parler avec l'IA</span>
-                    <span class="ar hidden">تحدث مع الذكاء الاصطناعي</span>
-                </button>
+                <div class="text-center">
+                    <div class="w-20 h-20 bg-purple-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-heart text-purple-600 text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Gratuit</h3>
+                    <p class="text-gray-600">Inscription gratuite, publication gratuite. Pas de frais cachés.</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- 📱 NAVIGATION MOBILE BOTTOM -->
-    <nav class="fixed bottom-0 left-0 right-0 bg-white/90 backdrop-blur-md border-t border-gray-200 md:hidden z-40">
-        <div class="flex items-center justify-around py-3">
-            <a href="#home" class="nav-item active flex flex-col items-center space-y-1 px-4 py-2">
-                <i class="fas fa-home text-lg"></i>
-                <span class="text-xs font-medium">
-                    <span class="fr">Accueil</span>
-                    <span class="ar hidden">الرئيسية</span>
-                </span>
+    <!-- NAVIGATION MOBILE BOTTOM -->
+    <nav class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 md:hidden z-50">
+        <div class="flex items-center justify-around py-2">
+            <a href="#accueil" class="nav-item flex flex-col items-center py-2 px-3 text-blue-600">
+                <i class="fas fa-home text-xl mb-1"></i>
+                <span class="text-xs font-medium">Accueil</span>
             </a>
-            
-            <a href="#categories" class="nav-item flex flex-col items-center space-y-1 px-4 py-2">
-                <i class="fas fa-th-large text-lg"></i>
-                <span class="text-xs font-medium">
-                    <span class="fr">Catégories</span>
-                    <span class="ar hidden">الفئات</span>
-                </span>
+            <a href="#categories" class="nav-item flex flex-col items-center py-2 px-3 text-gray-600">
+                <i class="fas fa-th-large text-xl mb-1"></i>
+                <span class="text-xs font-medium">Catégories</span>
             </a>
-            
-            <button id="mobileSearchBtn" class="nav-item flex flex-col items-center space-y-1 px-4 py-2">
-                <i class="fas fa-search text-lg"></i>
-                <span class="text-xs font-medium">
-                    <span class="fr">Recherche</span>
-                    <span class="ar hidden">بحث</span>
-                </span>
+            <button class="nav-item flex flex-col items-center py-2 px-3 text-gray-600">
+                <div class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center -mt-2 mb-1">
+                    <i class="fas fa-plus text-white text-lg"></i>
+                </div>
+                <span class="text-xs font-medium">Publier</span>
             </button>
-            
-            <a href="#favorites" class="nav-item flex flex-col items-center space-y-1 px-4 py-2 relative">
-                <i class="fas fa-heart text-lg"></i>
-                <span class="text-xs font-medium">
-                    <span class="fr">Favoris</span>
-                    <span class="ar hidden">المفضلة</span>
-                </span>
-                <span id="mobileFavCount" class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center hidden">0</span>
+            <a href="#favoris" class="nav-item flex flex-col items-center py-2 px-3 text-gray-600 relative">
+                <i class="fas fa-heart text-xl mb-1"></i>
+                <span class="text-xs font-medium">Favoris</span>
+                <span class="absolute -top-1 right-2 w-5 h-5 bg-red-500 text-white text-xs rounded-full flex items-center justify-center">0</span>
             </a>
-            
-            <a href="#profile" class="nav-item flex flex-col items-center space-y-1 px-4 py-2">
-                <i class="fas fa-user text-lg"></i>
-                <span class="text-xs font-medium">
-                    <span class="fr">Profil</span>
-                    <span class="ar hidden">الملف</span>
-                </span>
+            <a href="#profil" class="nav-item flex flex-col items-center py-2 px-3 text-gray-600">
+                <i class="fas fa-user text-xl mb-1"></i>
+                <span class="text-xs font-medium">Profil</span>
             </a>
         </div>
     </nav>
 
-    <!-- 🔔 NOTIFICATIONS TOAST -->
-    <div id="toastContainer" class="fixed top-20 right-4 z-50 space-y-3">
-        <!-- Les notifications apparaîtront ici -->
-    </div>
-
-    <!-- 🏠 FOOTER -->
-    <footer class="bg-gray-900 text-white py-16 px-4 mb-20 md:mb-0">
-        <div class="max-w-7xl mx-auto">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                <!-- Logo et description -->
-                <div class="col-span-1 md:col-span-2">
+    <!-- FOOTER -->
+    <footer class="bg-gray-900 text-white py-12 px-4 mb-16 md:mb-0">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- LOGO & DESCRIPTION -->
+                <div>
                     <div class="flex items-center space-x-3 mb-6">
-                        <div class="w-12 h-12 bg-gradient-to-r from-purple-600 to-blue-600 rounded-xl flex items-center justify-center">
-                            <i class="fas fa-gem text-white text-xl"></i>
+                        <div class="w-12 h-12 gradient-bg rounded-xl flex items-center justify-center">
+                            <i class="fas fa-shopping-bag text-white text-xl"></i>
                         </div>
                         <h3 class="text-2xl font-bold">BladiBay</h3>
                     </div>
-                    
-                    <p class="text-gray-400 mb-6 max-w-md">
-                        <span class="fr">La marketplace intelligente qui révolutionne le commerce au Maroc. Avec l'IA, trouvez et vendez plus facilement que jamais.</span>
-                        <span class="ar hidden">السوق الذكي الذي يثور التجارة في المغرب. مع الذكاء الاصطناعي، اعثر وبيع بسهولة أكثر من أي وقت مضى.</span>
+                    <p class="text-gray-400 mb-6">
+                        La marketplace moderne du Maroc. Achetez, vendez et échangez facilement près de chez vous.
                     </p>
-                    
-                    <!-- Réseaux sociaux -->
                     <div class="flex space-x-4">
-                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-purple-600 transition-colors">
-                            <i class="fab fa-facebook text-lg"></i>
+                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-blue-600 transition-colors">
+                            <i class="fab fa-facebook"></i>
                         </a>
-                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-blue-500 transition-colors">
-                            <i class="fab fa-twitter text-lg"></i>
+                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-blue-400 transition-colors">
+                            <i class="fab fa-twitter"></i>
                         </a>
                         <a href="#" class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-pink-600 transition-colors">
-                            <i class="fab fa-instagram text-lg"></i>
-                        </a>
-                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-green-600 transition-colors">
-                            <i class="fab fa-whatsapp text-lg"></i>
+                            <i class="fab fa-instagram"></i>
                         </a>
                     </div>
                 </div>
                 
-                <!-- Liens rapides -->
+                <!-- LIENS RAPIDES -->
                 <div>
-                    <h4 class="font-semibold mb-4">
-                        <span class="fr">Liens Rapides</span>
-                        <span class="ar hidden">روابط سريعة</span>
-                    </h4>
+                    <h4 class="font-semibold mb-6">Liens Rapides</h4>
                     <ul class="space-y-3 text-gray-400">
-                                                <li class="flex items-center space-x-2 space-x-reverse">
-                            <i class="fas fa-phone w-4"></i>
+                        <li><a href="#" class="hover:text-white transition-colors">Comment ça marche</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Aide & Support</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Sécurité</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Conditions d'utilisation</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Politique de confidentialité</a></li>
+                    </ul>
+                </div>
+                
+                <!-- CONTACT -->
+                <div>
+                    <h4 class="font-semibold mb-6">Contact</h4>
+                    <ul class="space-y-3 text-gray-400">
+                        <li class="flex items-center space-x-3">
+                            <i class="fas fa-envelope w-5"></i>
+                            <span>contact@bladibay.ma</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <i class="fas fa-phone w-5"></i>
                             <span>+212 5XX-XXXXXX</span>
                         </li>
-                        <li class="flex items-center space-x-2 space-x-reverse">
-                            <i class="fas fa-map-marker-alt w-4"></i>
+                        <li class="flex items-center space-x-3">
+                            <i class="fas fa-map-marker-alt w-5"></i>
                             <span>Casablanca, Maroc</span>
-                        </li>
-                        <li class="flex items-center space-x-2 space-x-reverse">
-                            <i class="fas fa-clock w-4"></i>
-                            <span>24/7 Support IA</span>
                         </li>
                     </ul>
                 </div>
             </div>
             
-            <!-- Ligne de séparation -->
-            <div class="border-t border-gray-800 mt-12 pt-8">
-                <div class="flex flex-col md:flex-row justify-between items-center">
-                    <p class="text-gray-400 text-sm">
-                        <span class="fr">© 2024 BladiBay. Tous droits réservés. Fait avec ❤️ au Maroc</span>
-                        <span class="ar hidden">© 2024 بلادي باي. جميع الحقوق محفوظة. صنع بـ ❤️ في المغرب</span>
-                    </p>
-                    
-                    <div class="flex space-x-6 mt-4 md:mt-0 text-sm">
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
-                            <span class="fr">Conditions d'utilisation</span>
-                            <span class="ar hidden">شروط الاستخدام</span>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
-                            <span class="fr">Politique de confidentialité</span>
-                            <span class="ar hidden">سياسة الخصوصية</span>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
-                            <span class="fr">Cookies</span>
-                            <span class="ar hidden">ملفات تعريف الارتباط</span>
-                        </a>
-                    </div>
-                </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 BladiBay. Tous droits réservés. Fait avec ❤️ au Maroc 🇲🇦</p>
             </div>
         </div>
     </footer>
 
-    <!-- 💬 CHAT IA FLOTTANT -->
-    <div id="aiChatWidget" class="fixed bottom-24 md:bottom-6 right-6 z-50">
-        <!-- Bouton d'ouverture du chat -->
-        <button id="aiChatToggle" class="w-14 h-14 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full shadow-lg hover:shadow-xl transition-all transform hover:scale-110 flex items-center justify-center">
-            <i class="fas fa-robot text-white text-xl"></i>
+    <!-- CHAT FLOTTANT -->
+    <div class="fixed bottom-20 md:bottom-6 right-6 z-40">
+        <button id="chatBtn" class="w-14 h-14 gradient-bg rounded-full shadow-lg hover:shadow-xl transition-all transform hover:scale-110 flex items-center justify-center">
+                        <i class="fas fa-comments text-white text-xl"></i>
         </button>
-        
-        <!-- Fenêtre de chat (cachée par défaut) -->
-        <div id="aiChatWindow" class="absolute bottom-16 right-0 w-80 h-96 bg-white/95 backdrop-blur-md rounded-2xl shadow-2xl border border-white/20 transform scale-0 origin-bottom-right transition-transform duration-300">
-            <!-- Header du chat -->
-            <div class="bg-gradient-to-r from-purple-600 to-blue-600 text-white p-4 rounded-t-2xl">
-                <div class="flex items-center justify-between">
-                    <div class="flex items-center space-x-3">
-                        <div class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
-                            <i class="fas fa-robot"></i>
-                        </div>
-                        <div>
-                            <h4 class="font-semibold">Assistant BladiBay</h4>
-                            <p class="text-xs opacity-90">
-                                <span class="fr">En ligne maintenant</span>
-                                <span class="ar hidden">متصل الآن</span>
-                            </p>
-                        </div>
-                    </div>
-                    <button id="aiChatClose" class="w-8 h-8 rounded-full bg-white/20 hover:bg-white/30 transition-colors flex items-center justify-center">
-                        <i class="fas fa-times text-sm"></i>
-                    </button>
-                </div>
-            </div>
-            
-            <!-- Messages du chat -->
-            <div id="aiChatMessages" class="flex-1 p-4 h-64 overflow-y-auto space-y-3">
-                <div class="flex items-start space-x-3">
-                    <div class="w-8 h-8 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full flex items-center justify-center flex-shrink-0">
-                        <i class="fas fa-robot text-white text-xs"></i>
-                    </div>
-                    <div class="bg-gray-100 rounded-2xl rounded-tl-none p-3 max-w-xs">
-                        <p class="text-sm">
-                            <span class="fr">Salut ! 👋 Je suis votre assistant IA. Comment puis-je vous aider aujourd'hui ?</span>
-                            <span class="ar hidden">مرحبا ! 👋 أنا مساعدك الذكي. كيف يمكنني مساعدتك اليوم؟</span>
-                        </p>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Input du chat -->
-            <div class="p-4 border-t border-gray-200">
-                <div class="flex space-x-2">
-                    <input 
-                        type="text" 
-                        id="aiChatInput" 
-                        placeholder="Tapez votre message..."
-                        class="flex-1 px-3 py-2 border border-gray-200 rounded-xl focus:border-purple-500 focus:ring-1 focus:ring-purple-200 outline-none text-sm"
-                    >
-                    <button id="aiChatSend" class="w-10 h-10 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-xl hover:shadow-lg transition-all transform hover:scale-105">
-                        <i class="fas fa-paper-plane text-sm"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
     </div>
 
-    <!-- 🎉 MODAL DE DÉTAIL PRODUIT -->
-    <div id="productModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
-        <div class="bg-white rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
-            <!-- Contenu du modal sera généré par JavaScript -->
-        </div>
-    </div>
+    <!-- NOTIFICATIONS TOAST -->
+    <div id="notifications" class="fixed top-20 right-4 z-50 space-y-3"></div>
 
-    <!-- ⚡ SCRIPTS JAVASCRIPT -->
-    
-    <!-- Données des produits -->
-    <script src="data/products.js"></script>
-    
-    <!-- Script principal -->
-    <script src="script.js"></script>
-    
-    <!-- Script d'initialisation -->
+    <!-- SCRIPTS JAVASCRIPT -->
     <script>
-        // Initialisation de l'application au chargement de la page
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('🚀 BladiBay initialized successfully!');
+        // DONNÉES DES PRODUITS (Simulation)
+        const products = [
+            {
+                id: 1,
+                title: "iPhone 14 Pro 128GB",
+                price: "12 500 DH",
+                location: "Casablanca",
+                time: "Il y a 2h",
+                image: "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=400&h=300&fit=crop",
+                category: "electronique",
+                verified: true,
+                description: "État neuf, sous garantie Apple, boîte complète avec tous les accessoires"
+            },
+            {
+                id: 2,
+                title: "Appartement 3 chambres",
+                price: "850 000 DH",
+                location: "Rabat",
+                time: "Il y a 1 jour",
+                image: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=400&h=300&fit=crop",
+                category: "immobilier",
+                featured: true,
+                description: "90m², 5ème étage, ascenseur, parking, cuisine équipée, proche métro"
+            }
+            // ... autres produits
+        ];
+
+        // GESTION DES FAVORIS
+        let favorites = JSON.parse(localStorage.getItem('bladibay_favorites') || '[]');
+
+        function toggleFavorite(productId) {
+            const index = favorites.indexOf(productId);
+            if (index > -1) {
+                favorites.splice(index, 1);
+                showNotification('Retiré des favoris', 'info');
+            } else {
+                favorites.push(productId);
+                showNotification('Ajouté aux favoris ❤️', 'success');
+            }
             
-            // Charger les préférences utilisateur
-            loadUserPreferences();
-            
-            // Initialiser les composants
-            initializeApp();
-            
-            // Charger les données
-            loadInitialData();
-            
-            // Configurer les event listeners
-            setupEventListeners();
-            
-            // Animation d'entrée
-            animatePageLoad();
-        });
-        
-        // Fonctions d'initialisation
-        function loadUserPreferences() {
-            // Charger la langue préférée
-            const savedLanguage = localStorage.getItem('bladibay_language') || 'fr';
-            setLanguage(savedLanguage);
-            
-            // Charger les favoris
-            const savedFavorites = JSON.parse(localStorage.getItem('bladibay_favorites') || '[]');
-            updateFavoritesCount(savedFavorites.length);
+            localStorage.setItem('bladibay_favorites', JSON.stringify(favorites));
+            updateFavoriteCount();
         }
-        
-        function initializeApp() {
-            // Initialiser les composants UI
-            console.log('Initializing UI components...');
-        }
-        
-        function loadInitialData() {
-            // Charger les catégories et produits
-            console.log('Loading initial data...');
-        }
-        
-        function setupEventListeners() {
-            // Configurer tous les event listeners
-            console.log('Setting up event listeners...');
-        }
-        
-        function animatePageLoad() {
-            // Animations d'entrée de page
-            console.log('Animating page load...');
-        }
-        
-        // Fonction utilitaire pour les notifications
-        function showNotification(message, type = 'success') {
-            const toast = document.createElement('div');
-            toast.className = `notification-toast ${type}`;
-            toast.textContent = message;
-            
-            const container = document.getElementById('toastContainer');
-            container.appendChild(toast);
-            
-            // Animation d'entrée
-            setTimeout(() => toast.classList.add('show'), 100);
-            
-            // Suppression automatique après 3 secondes
-            setTimeout(() => {
-                toast.classList.remove('show');
-                setTimeout(() => container.removeChild(toast), 300);
-            }, 3000);
-        }
-        
-        // Service Worker pour PWA (Progressive Web App)
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', function() {
-                navigator.serviceWorker.register('/sw.js')
-                    .then(function(registration) {
-                        console.log('ServiceWorker registration successful');
-                    })
-                    .catch(function(err) {
-                        console.log('ServiceWorker registration failed');
-                    });
+
+        function updateFavoriteCount() {
+            const countElements = document.querySelectorAll('#favCount, [id*="favCount"]');
+            countElements.forEach(el => {
+                el.textContent = favorites.length;
+                el.style.display = favorites.length > 0 ? 'flex' : 'none';
             });
         }
+
+        // SYSTÈME DE NOTIFICATIONS
+        function showNotification(message, type = 'success') {
+            const notification = document.createElement('div');
+            notification.className = `p-4 rounded-lg shadow-lg transform transition-all duration-300 translate-x-full ${
+                type === 'success' ? 'bg-green-500 text-white' : 
+                type === 'error' ? 'bg-red-500 text-white' : 
+                'bg-blue-500 text-white'
+            }`;
+            notification.textContent = message;
+            
+            document.getElementById('notifications').appendChild(notification);
+            
+            // Animation d'entrée
+            setTimeout(() => {
+                notification.classList.remove('translate-x-full');
+            }, 100);
+            
+            // Suppression automatique
+            setTimeout(() => {
+                notification.classList.add('translate-x-full');
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, 300);
+            }, 3000);
+        }
+
+        // RECHERCHE INTELLIGENTE
+        function setupSearch() {
+            const searchInput = document.getElementById('searchInput');
+            const searchBtn = document.getElementById('searchBtn');
+            const citySelect = document.getElementById('citySelect');
+
+            function performSearch() {
+                const query = searchInput.value.trim();
+                const city = citySelect.value;
+                
+                if (!query) {
+                    showNotification('Veuillez saisir un terme de recherche', 'error');
+                    return;
+                }
+                
+                showNotification(`Recherche pour "${query}" ${city ? `à ${city}` : ''}...`, 'info');
+                
+                // Ici vous ajouteriez la logique de recherche réelle
+                setTimeout(() => {
+                    showNotification(`${Math.floor(Math.random() * 50) + 10} résultats trouvés !`, 'success');
+                }, 1000);
+            }
+
+            searchBtn.addEventListener('click', performSearch);
+            searchInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') performSearch();
+            });
+        }
+
+        // FILTRAGE DES ANNONCES
+        function setupFilters() {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const productCards = document.querySelectorAll('.product-card');
+            
+            filterButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Mise à jour des boutons actifs
+                    filterButtons.forEach(b => {
+                        b.classList.remove('bg-blue-600', 'text-white');
+                        b.classList.add('bg-gray-200', 'text-gray-700');
+                    });
+                    btn.classList.remove('bg-gray-200', 'text-gray-700');
+                    btn.classList.add('bg-blue-600', 'text-white');
+                    
+                    const filter = btn.dataset.filter;
+                    
+                    // Filtrage des cartes
+                    productCards.forEach(card => {
+                        if (filter === 'all' || card.dataset.category === filter) {
+                            card.style.display = 'block';
+                            card.classList.add('animate-fade-in');
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                    
+                    showNotification(`Filtre "${btn.textContent}" appliqué`, 'info');
+                });
+            });
+        }
+
+        // GESTION DES CATÉGORIES
+        function setupCategories() {
+            const categoryCards = document.querySelectorAll('.category-card');
+            
+            categoryCards.forEach(card => {
+                card.addEventListener('click', () => {
+                    const categoryName = card.querySelector('h3').textContent;
+                    showNotification(`Navigation vers ${categoryName}...`, 'info');
+                    
+                    // Scroll vers les annonces et filtrer
+                    document.getElementById('annonces').scrollIntoView({ behavior: 'smooth' });
+                    
+                    setTimeout(() => {
+                        // Simuler le filtrage par catégorie
+                        const filterBtn = document.querySelector(`[data-filter="${categoryName.toLowerCase()}"]`);
+                        if (filterBtn) filterBtn.click();
+                    }, 800);
+                });
+            });
+        }
+
+        // GESTION DES COEURS DE FAVORIS
+        function setupFavoriteButtons() {
+            document.addEventListener('click', (e) => {
+                if (e.target.classList.contains('fa-heart')) {
+                    e.preventDefault();
+                    
+                    const isLiked = e.target.classList.contains('fas');
+                    
+                    if (isLiked) {
+                        e.target.classList.remove('fas', 'text-red-500');
+                        e.target.classList.add('far', 'text-gray-600');
+                    } else {
+                        e.target.classList.remove('far', 'text-gray-600');
+                        e.target.classList.add('fas', 'text-red-500');
+                    }
+                    
+                    // Simulation d'ajout/suppression des favoris
+                    const productId = Math.floor(Math.random() * 1000);
+                    toggleFavorite(productId);
+                }
+            });
+        }
+
+        // GESTION DU MENU MOBILE
+        function setupMobileMenu() {
+            const mobileMenuBtn = document.getElementById('mobileMenu');
+            const navItems = document.querySelectorAll('.nav-item');
+            
+            // Navigation mobile bottom
+            navItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    // Retirer la classe active de tous les éléments
+                    navItems.forEach(nav => {
+                        nav.classList.remove('text-blue-600');
+                        nav.classList.add('text-gray-600');
+                    });
+                    
+                    // Ajouter la classe active à l'élément cliqué
+                    item.classList.remove('text-gray-600');
+                    item.classList.add('text-blue-600');
+                });
+            });
+        }
+
+        // CHAT FLOTTANT
+        function setupChat() {
+            const chatBtn = document.getElementById('chatBtn');
+            
+            chatBtn.addEventListener('click', () => {
+                showNotification('Chat en ligne bientôt disponible ! 💬', 'info');
+            });
+        }
+
+        // RECHERCHES POPULAIRES
+        function setupPopularSearches() {
+            const badges = document.querySelectorAll('.badge');
+            
+            badges.forEach(badge => {
+                badge.addEventListener('click', () => {
+                    const searchInput = document.getElementById('searchInput');
+                    searchInput.value = badge.textContent;
+                    searchInput.focus();
+                    showNotification(`Recherche pour "${badge.textContent}" ajoutée`, 'info');
+                });
+            });
+        }
+
+        // SMOOTH SCROLLING POUR LES LIENS
+        function setupSmoothScrolling() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        }
+
+        // LAZY LOADING DES IMAGES
+        function setupLazyLoading() {
+            const images = document.querySelectorAll('img');
+            
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.classList.add('animate-fade-in');
+                        observer.unobserve(img);
+                    }
+                });
+            });
+            
+            images.forEach(img => imageObserver.observe(img));
+        }
+
+        // INITIALISATION AU CHARGEMENT DE LA PAGE
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🚀 BladiBay chargé avec succès !');
+            
+            // Initialiser tous les composants
+            setupSearch();
+            setupFilters();
+            setupCategories();
+            setupFavoriteButtons();
+            setupMobileMenu();
+            setupChat();
+            setupPopularSearches();
+            setupSmoothScrolling();
+            setupLazyLoading();
+            
+            // Mettre à jour le compteur de favoris
+            updateFavoriteCount();
+            
+            // Message de bienvenue
+            setTimeout(() => {
+                showNotification('Bienvenue sur BladiBay ! 🎉', 'success');
+            }, 1000);
+            
+            // Animer les éléments au chargement
+            document.querySelectorAll('.animate-fade-in').forEach((el, index) => {
+                setTimeout(() => {
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        });
+
+        // GESTION DES ERREURS GLOBALES
+        window.addEventListener('error', function(e) {
+            console.error('Erreur détectée:', e.error);
+            showNotification('Une erreur est survenue. Veuillez actualiser la page.', 'error');
+        });
+
+        // OPTIMISATION PERFORMANCE
+        let ticking = false;
+        function updateScrollEffects() {
+            // Effets de parallax légers
+            const scrolled = window.pageYOffset;
+            const parallax = document.querySelector('.gradient-bg');
+            if (parallax) {
+                parallax.style.transform = `translateY(${scrolled * 0.2}px)`;
+            }
+            ticking = false;
+        }
+
+        window.addEventListener('scroll', function() {
+            if (!ticking) {
+                requestAnimationFrame(updateScrollEffects);
+                ticking = true;
+            }
+        });
     </script>
-    
-    <!-- Google Analytics (à remplacer par votre ID) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'GA_MEASUREMENT_ID');
-    </script>
-    
 </body>
 </html>
