@@ -6,21 +6,69 @@
     <title>BladiBay - بلادي باي</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
-        .mobile-nav { position: fixed; bottom: 0; left: 0; right: 0; z-index: 100; }
-        .category-card { transition: all 0.3s ease; }
-        .category-card:hover { transform: translateY(-2px); }
-        .lang-switch { transition: all 0.3s ease; }
-        .rtl { direction: rtl; }
-        .ltr { direction: ltr; }
-        .fade-in { animation: fadeIn 0.3s ease-in; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .mobile-nav { 
+            position: fixed; 
+            bottom: 0; 
+            left: 0; 
+            right: 0; 
+            z-index: 100; 
+        }
+        .category-card { 
+            transition: all 0.3s ease; 
+            cursor: pointer;
+        }
+        .category-card:hover { 
+            transform: translateY(-2px); 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        .lang-switch { 
+            transition: all 0.3s ease; 
+        }
+        .rtl { 
+            direction: rtl; 
+        }
+        .ltr { 
+            direction: ltr; 
+        }
+        .fade-in { 
+            animation: fadeIn 0.3s ease-in; 
+        }
+        @keyframes fadeIn { 
+            from { opacity: 0; transform: translateY(10px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
+        .search-loading {
+            animation: pulse 1s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        .notification {
+            animation: slideIn 0.3s ease-out;
+        }
+        @keyframes slideIn {
+            from { transform: translateX(100%); }
+            to { transform: translateX(0); }
+        }
+        .ad-card {
+            transition: all 0.3s ease;
+        }
+        .ad-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
     </style>
 </head>
 <body class="bg-gray-50 pb-20">
     
     <!-- Header BladiBay avec sélecteur de langue -->
-    <header class="bg-blue-600 text-white p-4 shadow-lg">
+    <header class="bg-gradient-to-r from-blue-600 to-blue-700 text-white p-4 shadow-lg">
         <div class="flex items-center justify-between max-w-md mx-auto">
             <h1 class="text-2xl font-bold flex items-center">
                 🏛️ BladiBay
@@ -37,11 +85,11 @@
                 <div class="lang-switch bg-white bg-opacity-20 rounded-lg p-2">
                     <button 
                         id="lang-toggle" 
-                        class="flex items-center space-x-1 text-white hover:bg-white hover:bg-opacity-20 rounded px-2 py-1 transition-all"
+                        class="flex items-center space-x-1 text-white hover:bg-white hover:bg-opacity-20 rounded px-3 py-2 transition-all font-semibold"
                         onclick="toggleLanguage()"
                     >
-                        <span id="current-lang" class="font-semibold">AR</span>
-                        <span class="text-xs">🌐</span>
+                        <span id="current-lang" class="font-bold">AR</span>
+                        <span class="text-sm">🌐</span>
                     </button>
                 </div>
             </div>
@@ -69,9 +117,12 @@
                         type="text"
                         id="search-input"
                         placeholder="🔍 ماذا تبحث عنه؟"
-                        class="w-full p-4 border-2 border-gray-200 rounded-lg text-lg focus:border-blue-500 focus:outline-none"
+                        class="w-full p-4 border-2 border-gray-200 rounded-lg text-lg focus:border-blue-500 focus:outline-none transition-all"
                     />
-                    <button id="search-button" class="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white p-4 rounded-lg mt-3 font-bold text-lg hover:from-blue-700 hover:to-blue-800 transition-all">
+                    <button 
+                        id="search-button" 
+                        class="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white p-4 rounded-lg mt-3 font-bold text-lg hover:from-blue-700 hover:to-blue-800 transition-all transform hover:scale-105 active:scale-95"
+                    >
                         ابحث الآن
                     </button>
                 </div>
@@ -83,7 +134,7 @@
             <h3 class="text-xl font-bold text-gray-800 mb-4 text-center" id="categories-title">الفئات الشائعة</h3>
             <div class="grid grid-cols-2 gap-4" id="categories-grid">
                 
-                <div class="category-card bg-white p-6 rounded-xl shadow-lg hover:shadow-xl cursor-pointer">
+                <div class="category-card bg-white p-6 rounded-xl shadow-lg hover:shadow-xl" data-category="cars">
                     <div class="text-center">
                         <div class="text-4xl mb-3">🚗</div>
                         <h4 class="font-bold text-gray-800 category-name">سيارات</h4>
@@ -91,7 +142,7 @@
                     </div>
                 </div>
 
-                <div class="category-card bg-white p-6 rounded-xl shadow-lg hover:shadow-xl cursor-pointer">
+                <div class="category-card bg-white p-6 rounded-xl shadow-lg hover:shadow-xl" data-category="realestate">
                     <div class="text-center">
                         <div class="text-4xl mb-3">🏠</div>
                         <h4 class="font-bold text-gray-800 category-name">عقارات</h4>
@@ -99,7 +150,7 @@
                     </div>
                 </div>
 
-                <div class="category-card bg-white p-6 rounded-xl shadow-lg hover:shadow-xl cursor-pointer">
+                <div class="category-card bg-white p-6 rounded-xl shadow-lg hover:shadow-xl" data-category="electronics">
                     <div class="text-center">
                         <div class="text-4xl mb-3">📱</div>
                         <h4 class="font-bold text-gray-800 category-name">إلكترونيات</h4>
@@ -107,7 +158,7 @@
                     </div>
                 </div>
 
-                <div class="category-card bg-white p-6 rounded-xl shadow-lg hover:shadow-xl cursor-pointer">
+                <div class="category-card bg-white p-6 rounded-xl shadow-lg hover:shadow-xl" data-category="fashion">
                     <div class="text-center">
                         <div class="text-4xl mb-3">👕</div>
                         <h4 class="font-bold text-gray-800 category-name">أزياء</h4>
@@ -118,37 +169,11 @@
             </div>
         </section>
 
-        <!-- Recent Ads Preview -->
+        <!-- Recent Ads / Search Results -->
         <section class="mb-8">
             <h3 class="text-xl font-bold text-gray-800 mb-4 text-center" id="recent-title">آخر الإعلانات</h3>
             <div class="space-y-4" id="recent-ads">
-                
-                <div class="bg-white rounded-xl shadow-lg p-4 hover:shadow-xl transition-all cursor-pointer">
-                    <div class="flex">
-                        <div class="w-20 h-20 bg-gradient-to-br from-blue-400 to-blue-600 rounded-lg flex items-center justify-center text-2xl text-white">
-                            🚗
-                        </div>
-                        <div class="mr-4 flex-1">
-                            <h4 class="font-bold text-gray-800 ad-title">تويوتا كورولا 2020</h4>
-                            <p class="text-orange-500 font-bold text-lg ad-price">180,000 درهم</p>
-                            <p class="text-sm text-gray-500 ad-location">📍 الدار البيضاء • منذ ساعتين</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-xl shadow-lg p-4 hover:shadow-xl transition-all cursor-pointer">
-                    <div class="flex">
-                        <div class="w-20 h-20 bg-gradient-to-br from-green-400 to-green-600 rounded-lg flex items-center justify-center text-2xl text-white">
-                            🏠
-                        </div>
-                        <div class="mr-4 flex-1">
-                            <h4 class="font-bold text-gray-800 ad-title">شقة للبيع - 3 غرف</h4>
-                            <p class="text-orange-500 font-bold text-lg ad-price">850,000 درهم</p>
-                            <p class="text-sm text-gray-500 ad-location">📍 الرباط • منذ 5 ساعات</p>
-                        </div>
-                    </div>
-                </div>
-                
+                <!-- Les annonces seront générées dynamiquement par JavaScript -->
             </div>
         </section>
 
@@ -176,8 +201,78 @@
         </div>
     </nav>
 
+    <!-- JavaScript intégré complet -->
     <script>
-        // Traductions
+        // =================== DONNÉES D'EXEMPLE ===================
+        const sampleAds = [
+            {
+                id: 1,
+                title: { ar: "تويوتا كورولا 2020", fr: "Toyota Corolla 2020" },
+                price: 180000,
+                location: { ar: "الدار البيضاء", fr: "Casablanca" },
+                category: "cars",
+                image: "🚗",
+                time: { ar: "منذ ساعتين", fr: "il y a 2h" },
+                description: { ar: "سيارة في حالة ممتازة", fr: "Voiture en excellent état" }
+            },
+            {
+                id: 2,
+                title: { ar: "شقة للبيع - 3 غرف", fr: "Appartement à vendre - 3 chambres" },
+                price: 850000,
+                location: { ar: "الرباط", fr: "Rabat" },
+                category: "realestate",
+                image: "🏠",
+                time: { ar: "منذ 5 ساعات", fr: "il y a 5h" },
+                description: { ar: "شقة واسعة ومشمسة", fr: "Appartement spacieux et lumineux" }
+            },
+            {
+                id: 3,
+                title: { ar: "آيفون 14 برو", fr: "iPhone 14 Pro" },
+                price: 12000,
+                location: { ar: "فاس", fr: "Fès" },
+                category: "electronics",
+                image: "📱",
+                time: { ar: "منذ يوم", fr: "il y a 1 jour" },
+                description: { ar: "جديد في العلبة", fr: "Neuf dans sa boîte" }
+            },
+            {
+                id: 4,
+                title: { ar: "فستان زفاف أبيض", fr: "Robe de mariée blanche" },
+                price: 3500,
+                location: { ar: "مراكش", fr: "Marrakech" },
+                category: "fashion",
+                image: "👕",
+                time: { ar: "منذ 3 أيام", fr: "il y a 3 jours" },
+                description: { ar: "فستان أنيق ومميز", fr: "Robe élégante et unique" }
+            },
+            {
+                id: 5,
+                title: { ar: "مرسيدس بنز E200", fr: "Mercedes Benz E200" },
+                price: 320000,
+                location: { ar: "الدار البيضاء", fr: "Casablanca" },
+                category: "cars",
+                image: "🚗",
+                time: { ar: "منذ 6 ساعات", fr: "il y a 6h" },
+                description: { ar: "سيارة فاخرة", fr: "Voiture de luxe" }
+            },
+            {
+                id: 6,
+                title: { ar: "لابتوب ديل XPS", fr: "Laptop Dell XPS" },
+                price: 8500,
+                location: { ar: "أكادير", fr: "Agadir" },
+                category: "electronics",
+                image: "💻",
+                time: { ar: "منذ 12 ساعة", fr: "il y a 12h" },
+                description: { ar: "للألعاب والعمل", fr: "Pour gaming et travail" }
+            }
+        ];
+
+        // =================== VARIABLES GLOBALES ===================
+        let filteredAds = [...sampleAds];
+        let currentSearchTerm = '';
+        let currentLang = 'ar';
+
+        // =================== TRADUCTIONS ===================
         const translations = {
             ar: {
                 headerSubtitle: "بلادي باي",
@@ -190,14 +285,310 @@
                 categories: ["سيارات", "عقارات", "إلكترونيات", "أزياء"],
                 categoryCounts: ["1,234 إعلان", "856 إعلان", "2,341 إعلان", "967 إعلان"],
                 recentTitle: "آخر الإعلانات",
-                adTitles: ["تويوتا كورولا 2020", "شقة للبيع - 3 غرف"],
-                adPrices: ["180,000 درهم", "850,000 درهم"],
-                adLocations: ["📍 الدار البيضاء • منذ ساعتين", "📍 الرباط • منذ 5 ساعات"],
                 navTexts: ["الرئيسية", "بحث", "إضافة", "حسابي"],
-                direction: "rtl"
+                direction: "rtl",
+               <!DOCTYPE html>
+<html lang="fr" dir="ltr" id="html-root">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BladiBay - بلادي باي</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .mobile-nav { 
+            position: fixed; 
+            bottom: 0; 
+            left: 0; 
+            right: 0; 
+            z-index: 100; 
+        }
+        .category-card { 
+            transition: all 0.3s ease; 
+            cursor: pointer;
+        }
+        .category-card:hover { 
+            transform: translateY(-2px); 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        .lang-switch { 
+            transition: all 0.3s ease; 
+        }
+        .rtl { 
+            direction: rtl; 
+        }
+        .ltr { 
+            direction: ltr; 
+        }
+        .fade-in { 
+            animation: fadeIn 0.3s ease-in; 
+        }
+        @keyframes fadeIn { 
+            from { opacity: 0; transform: translateY(10px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
+        .search-loading {
+            animation: pulse 1s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        .notification {
+            animation: slideIn 0.3s ease-out;
+        }
+        @keyframes slideIn {
+            from { transform: translateX(100%); }
+            to { transform: translateX(0); }
+        }
+        .ad-card {
+            transition: all 0.3s ease;
+        }
+        .ad-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 pb-20">
+    
+    <!-- Header BladiBay avec sélecteur de langue -->
+    <header class="bg-gradient-to-r from-blue-600 to-blue-700 text-white p-4 shadow-lg">
+        <div class="flex items-center justify-between max-w-md mx-auto">
+            <h1 class="text-2xl font-bold flex items-center">
+                🏛️ BladiBay
+            </h1>
+            
+            <!-- Sélecteur de langue -->
+            <div class="flex items-center space-x-2">
+                <div class="text-right mr-4">
+                    <p class="text-sm opacity-90" id="header-subtitle">بلادي باي</p>
+                    <p class="text-xs opacity-75" id="header-tagline">السوق المغربي</p>
+                </div>
+                
+                <!-- Bouton langue -->
+                <div class="lang-switch bg-white bg-opacity-20 rounded-lg p-2">
+                    <button 
+                        id="lang-toggle" 
+                        class="flex items-center space-x-1 text-white hover:bg-white hover:bg-opacity-20 rounded px-3 py-2 transition-all font-semibold"
+                        onclick="toggleLanguage()"
+                    >
+                        <span id="current-lang" class="font-bold">AR</span>
+                        <span class="text-sm">🌐</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <main class="max-w-md mx-auto p-4 fade-in" id="main-content">
+        
+        <!-- Welcome Message -->
+        <section class="text-center py-6">
+            <h2 class="text-3xl font-bold text-gray-800 mb-2" id="welcome-title">
+                أهلا بك في بلادي باي
+            </h2>
+            <p class="text-gray-600 mb-6" id="welcome-subtitle">
+                السوق الإلكتروني الحديث للمغرب 🇲🇦
+            </p>
+        </section>
+
+        <!-- Search Bar -->
+        <section class="mb-8">
+            <div class="bg-white rounded-xl shadow-lg p-4">
+                <div class="relative">
+                    <input 
+                        type="text"
+                        id="search-input"
+                        placeholder="🔍 ماذا تبحث عنه؟"
+                        class="w-full p-4 border-2 border-gray-200 rounded-lg text-lg focus:border-blue-500 focus:outline-none transition-all"
+                    />
+                    <button 
+                        id="search-button" 
+                        class="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white p-4 rounded-lg mt-3 font-bold text-lg hover:from-blue-700 hover:to-blue-800 transition-all transform hover:scale-105 active:scale-95"
+                    >
+                        ابحث الآن
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Categories -->
+        <section class="mb-8">
+            <h3 class="text-xl font-bold text-gray-800 mb-4 text-center" id="categories-title">الفئات الشائعة</h3>
+            <div class="grid grid-cols-2 gap-4" id="categories-grid">
+                
+                <div class="category-card bg-white p-6 rounded-xl shadow-lg hover:shadow-xl" data-category="cars">
+                    <div class="text-center">
+                        <div class="text-4xl mb-3">🚗</div>
+                        <h4 class="font-bold text-gray-800 category-name">سيارات</h4>
+                        <p class="text-sm text-gray-500 mt-1 category-count">1,234 إعلان</p>
+                    </div>
+                </div>
+
+                <div class="category-card bg-white p-6 rounded-xl shadow-lg hover:shadow-xl" data-category="realestate">
+                    <div class="text-center">
+                        <div class="text-4xl mb-3">🏠</div>
+                        <h4 class="font-bold text-gray-800 category-name">عقارات</h4>
+                        <p class="text-sm text-gray-500 mt-1 category-count">856 إعلان</p>
+                    </div>
+                </div>
+
+                <div class="category-card bg-white p-6 rounded-xl shadow-lg hover:shadow-xl" data-category="electronics">
+                    <div class="text-center">
+                        <div class="text-4xl mb-3">📱</div>
+                        <h4 class="font-bold text-gray-800 category-name">إلكترونيات</h4>
+                        <p class="text-sm text-gray-500 mt-1 category-count">2,341 إعلان</p>
+                    </div>
+                </div>
+
+                <div class="category-card bg-white p-6 rounded-xl shadow-lg hover:shadow-xl" data-category="fashion">
+                    <div class="text-center">
+                        <div class="text-4xl mb-3">👕</div>
+                        <h4 class="font-bold text-gray-800 category-name">أزياء</h4>
+                        <p class="text-sm text-gray-500 mt-1 category-count">967 إعلان</p>
+                    </div>
+                </div>
+                
+            </div>
+        </section>
+
+        <!-- Recent Ads / Search Results -->
+        <section class="mb-8">
+            <h3 class="text-xl font-bold text-gray-800 mb-4 text-center" id="recent-title">آخر الإعلانات</h3>
+            <div class="space-y-4" id="recent-ads">
+                <!-- Les annonces seront générées dynamiquement par JavaScript -->
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Mobile Navigation -->
+    <nav class="mobile-nav bg-white border-t border-gray-200 shadow-lg">
+        <div class="flex justify-around py-2 max-w-md mx-auto" id="mobile-nav">
+            <button class="flex flex-col items-center p-3 text-blue-600 bg-blue-50 rounded-lg nav-item">
+                <span class="text-xl mb-1">🏠</span>
+                <span class="text-xs font-semibold nav-text">الرئيسية</span>
+            </button>
+            <button class="flex flex-col items-center p-3 text-gray-500 hover:text-blue-600 transition-colors nav-item">
+                <span class="text-xl mb-1">🔍</span>
+                <span class="text-xs nav-text">بحث</span>
+            </button>
+            <button class="flex flex-col items-center p-3 text-gray-500 hover:text-blue-600 transition-colors nav-item">
+                <span class="text-xl mb-1">➕</span>
+                <span class="text-xs nav-text">إضافة</span>
+            </button>
+            <button class="flex flex-col items-center p-3 text-gray-500 hover:text-blue-600 transition-colors nav-item">
+                <span class="text-xl mb-1">👤</span>
+                <span class="text-xs nav-text">حسابي</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- JavaScript intégré complet -->
+    <script>
+        // =================== DONNÉES D'EXEMPLE ===================
+        const sampleAds = [
+            {
+                id: 1,
+                title: { ar: "تويوتا كورولا 2020", fr: "Toyota Corolla 2020" },
+                price: 180000,
+                location: { ar: "الدار البيضاء", fr: "Casablanca" },
+                category: "cars",
+                image: "🚗",
+                time: { ar: "منذ ساعتين", fr: "il y a 2h" },
+                description: { ar: "سيارة في حالة ممتازة", fr: "Voiture en excellent état" }
+            },
+            {
+                id: 2,
+                title: { ar: "شقة للبيع - 3 غرف", fr: "Appartement à vendre - 3 chambres" },
+                price: 850000,
+                location: { ar: "الرباط", fr: "Rabat" },
+                category: "realestate",
+                image: "🏠",
+                time: { ar: "منذ 5 ساعات", fr: "il y a 5h" },
+                description: { ar: "شقة واسعة ومشمسة", fr: "Appartement spacieux et lumineux" }
+            },
+            {
+                id: 3,
+                title: { ar: "آيفون 14 برو", fr: "iPhone 14 Pro" },
+                price: 12000,
+                location: { ar: "فاس", fr: "Fès" },
+                category: "electronics",
+                image: "📱",
+                time: { ar: "منذ يوم", fr: "il y a 1 jour" },
+                description: { ar: "جديد في العلبة", fr: "Neuf dans sa boîte" }
+            },
+            {
+                id: 4,
+                title: { ar: "فستان زفاف أبيض", fr: "Robe de mariée blanche" },
+                price: 3500,
+                location: { ar: "مراكش", fr: "Marrakech" },
+                category: "fashion",
+                image: "👕",
+                time: { ar: "منذ 3 أيام", fr: "il y a 3 jours" },
+                description: { ar: "فستان أنيق ومميز", fr: "Robe élégante et unique" }
+            },
+            {
+                id: 5,
+                title: { ar: "مرسيدس بنز E200", fr: "Mercedes Benz E200" },
+                price: 320000,
+                location: { ar: "الدار البيضاء", fr: "Casablanca" },
+                category: "cars",
+                image: "🚗",
+                time: { ar: "منذ 6 ساعات", fr: "il y a 6h" },
+                description: { ar: "سيارة فاخرة", fr: "Voiture de luxe" }
+            },
+            {
+                id: 6,
+                title: { ar: "لابتوب ديل XPS", fr: "Laptop Dell XPS" },
+                price: 8500,
+                location: { ar: "أكادير", fr: "Agadir" },
+                category: "electronics",
+                image: "💻",
+                time: { ar: "منذ 12 ساعة", fr: "il y a 12h" },
+                description: { ar: "للألعاب والعمل", fr: "Pour gaming et travail" }
+            }
+        ];
+
+        // =================== VARIABLES GLOBALES ===================
+        let filteredAds = [...sampleAds];
+        let currentSearchTerm = '';
+        let currentLang = 'ar';
+
+        // =================== TRADUCTIONS ===================
+        const translations = {
+            ar: {
+                headerSubtitle: "بلادي باي",
+                headerTagline: "السوق المغربي",
+                welcomeTitle: "أهلا بك في بلادي باي",
+                welcomeSubtitle: "السوق الإلكتروني الحديث للمغرب 🇲🇦",
+                searchPlaceholder: "🔍 ماذا تبحث عنه؟",
+                searchButton: "ابحث الآن",
+                categoriesTitle: "الفئات الشائعة",
+                categories: ["سيارات", "عقارات", "إلكترونيات", "أزياء"],
+                categoryCounts: ["1,234 إعلان", "856 إعلان", "2,341 إعلان", "967 إعلان"],
+                recentTitle: "آخر الإعلانات",
+                navTexts: ["الرئيسية", "بحث", "إضافة", "حسابي"],
+                direction: "rtl",
+                noResults: "لا توجد نتائج",
+                tryOtherKeywords: "جرب البحث بكلمات أخرى",
+                resultsFor: "نتيجة للبحث",
+                call: "📞 اتصل",
+                message: "💬 رسالة",
+                favorite: "❤️",
+                addedToFavorites: "تمت الإضافة للمفضلة",
+                removedFromFavorites: "تم الحذف من المفضلة",
+                searching: "⏳ البحث...",
+                currency: "درهم"
             },
             fr: {
-                headerSubtitle: "BladiBay",
+                headerSubtitle: "BladiBay", 
                 headerTagline: "Marketplace Maroc",
                 welcomeTitle: "Bienvenue sur BladiBay",
                 welcomeSubtitle: "Le marketplace moderne du Maroc 🇲🇦",
@@ -207,19 +598,120 @@
                 categories: ["Voitures", "Immobilier", "Électronique", "Mode"],
                 categoryCounts: ["1,234 annonces", "856 annonces", "2,341 annonces", "967 annonces"],
                 recentTitle: "Annonces récentes",
-                adTitles: ["Toyota Corolla 2020", "Appartement à vendre - 3 chambres"],
-                adPrices: ["180,000 DH", "850,000 DH"],
-                adLocations: ["📍 Casablanca • il y a 2h", "📍 Rabat • il y a 5h"],
                 navTexts: ["Accueil", "Recherche", "Publier", "Profil"],
-                direction: "ltr"
+                direction: "ltr",
+                noResults: "Aucun résultat",
+                tryOtherKeywords: "Essayez avec d'autres mots-clés",
+                resultsFor: "résultats pour",
+                call: "📞 Appeler",
+                message: "💬 Message",
+                favorite: "❤️",
+                addedToFavorites: "Ajouté aux favoris",
+                removedFromFavorites: "Retiré des favoris",
+                searching: "⏳ Recherche...",
+                currency: "DH"
             }
         };
 
-        let currentLang = 'ar';
+        // =================== FONCTIONS DE RECHERCHE ===================
+        function performSearch() {
+            const searchInput = document.getElementById('search-input');
+            const searchTerm = searchInput.value.toLowerCase().trim();
+            currentSearchTerm = searchTerm;
+            
+            if (searchTerm === '') {
+                filteredAds = [...sampleAds];
+            } else {
+                filteredAds = sampleAds.filter(ad => {
+                    const title = ad.title[currentLang].toLowerCase();
+                    const location = ad.location[currentLang].toLowerCase();
+                    const description = ad.description[currentLang].toLowerCase();
+                    
+                    return title.includes(searchTerm) || 
+                           location.includes(searchTerm) ||
+                           description.includes(searchTerm) ||
+                           ad.price.toString().includes(searchTerm);
+                });
+            }
+            
+            displaySearchResults();
+        }
 
+        function displaySearchResults() {
+            const recentAdsContainer = document.getElementById('recent-ads');
+            const recentTitle = document.getElementById('recent-title');
+            const t = translations[currentLang];
+            
+            // Mettre à jour le titre
+            if (currentSearchTerm === '') {
+                recentTitle.textContent = t.recentTitle;
+            } else {
+                const resultsCount = filteredAds.length;
+                recentTitle.textContent = `${resultsCount} ${t.resultsFor} "${currentSearchTerm}"`;
+            }
+            
+            // Vider le conteneur
+            recentAdsContainer.innerHTML = '';
+            
+            if (filteredAds.length === 0) {
+                recentAdsContainer.innerHTML = `
+                    <div class="text-center py-8">
+                        <div class="text-6xl mb-4">🔍</div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">${t.noResults}</h3>
+                        <p class="text-gray-500">${t.tryOtherKeywords}</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            // Afficher les annonces filtrées
+            filteredAds.forEach(ad => {
+                const adElement = createAdElement(ad);
+                recentAdsContainer.appendChild(adElement);
+            });
+        }
+
+        function createAdElement(ad) {
+            const t = translations[currentLang];
+            const adDiv = document.createElement('div');
+            adDiv.className = 'ad-card bg-white rounded-xl shadow-lg p-4 hover:shadow-xl transition-all cursor-pointer mb-4';
+            
+            const isRTL = currentLang === 'ar';
+            const marginClass = isRTL ? 'mr-4' : 'ml-4';
+            
+            adDiv.innerHTML = `
+                <div class="flex ${isRTL ? 'flex-row-reverse' : ''}">
+                    <div class="w-20 h-20 bg-gradient-to-br from-blue-400 to-blue-600 rounded-lg flex items-center justify-center text-2xl text-white">
+                        ${ad.image}
+                    </div>
+                    <div class="${marginClass} flex-1" ${isRTL ? 'dir="rtl"' : ''}>
+                        <h4 class="font-bold text-gray-800">${ad.title[currentLang]}</h4>
+                        <p class="text-orange-500 font-bold text-lg">${ad.price.toLocaleString()} ${t.currency}</p>
+                        <p class="text-sm text-gray-500 mb-2">📍 ${ad.location[currentLang]} • ${ad.time[currentLang]}</p>
+                        <p class="text-sm text-gray-600 mb-3">${ad.description[currentLang]}</p>
+                        <div class="flex ${isRTL ? 'flex-row-reverse' : ''} gap-2">
+                            <button class="text-xs bg-blue-100 text-blue-600 px-3 py-1 rounded-full hover:bg-blue-200 transition-colors">
+                                ${t.call}
+                            </button>
+                            <button class="text-xs bg-green-100 text-green-600 px-3 py-1 rounded-full hover:bg-green-200 transition-colors">
+                                ${t.message}
+                            </button>
+                            <button class="text-xs bg-red-100 text-red-600 px-3 py-1 rounded-full hover:bg-red-200 transition-colors" onclick="toggleFavorite(${ad.id})">
+                                ${t.favorite}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            return adDiv;
+        }
+
+        // =================== FONCTIONS DE LANGUE ===================
         function toggleLanguage() {
             currentLang = currentLang === 'ar' ? 'fr' : 'ar';
             updateLanguage();
+            setTimeout(performSearch, 100);
         }
 
         function updateLanguage() {
@@ -232,7 +724,7 @@
             htmlRoot.setAttribute('lang', currentLang === 'ar' ? 'ar' : 'fr');
             mainContent.className = `max-w-md mx-auto p-4 fade-in ${t.direction}`;
             
-            // Update texts
+            // Update all texts
             document.getElementById('header-subtitle').textContent = t.headerSubtitle;
             document.getElementById('header-tagline').textContent = t.headerTagline;
             document.getElementById('welcome-title').textContent = t.welcomeTitle;
@@ -240,37 +732,22 @@
             document.getElementById('search-input').placeholder = t.searchPlaceholder;
             document.getElementById('search-button').textContent = t.searchButton;
             document.getElementById('categories-title').textContent = t.categoriesTitle;
-            document.getElementById('recent-title').textContent = t.recentTitle;
             document.getElementById('current-lang').textContent = currentLang.toUpperCase();
             
             // Update categories
             const categoryNames = document.querySelectorAll('.category-name');
-                        const categoryCounts = document.querySelectorAll('.category-count');
+            const categoryCounts = document.querySelectorAll('.category-count');
             categoryNames.forEach((el, i) => {
-                el.textContent = t.categories[i];
+                if (t.categories[i]) el.textContent = t.categories[i];
             });
             categoryCounts.forEach((el, i) => {
-                el.textContent = t.categoryCounts[i];
-            });
-            
-            // Update ads
-            const adTitles = document.querySelectorAll('.ad-title');
-            const adPrices = document.querySelectorAll('.ad-price');
-            const adLocations = document.querySelectorAll('.ad-location');
-            adTitles.forEach((el, i) => {
-                el.textContent = t.adTitles[i];
-            });
-            adPrices.forEach((el, i) => {
-                el.textContent = t.adPrices[i];
-            });
-            adLocations.forEach((el, i) => {
-                el.textContent = t.adLocations[i];
+                if (t.categoryCounts[i]) el.textContent = t.categoryCounts[i];
             });
             
             // Update navigation
             const navTexts = document.querySelectorAll('.nav-text');
             navTexts.forEach((el, i) => {
-                el.textContent = t.navTexts[i];
+                if (t.navTexts[i]) el.textContent = t.navTexts[i];
             });
             
             // Update search input direction
@@ -281,7 +758,66 @@
             localStorage.setItem('bladibay-lang', currentLang);
         }
 
-        // Initialize
+        // =================== AUTRES FONCTIONS ===================
+        function filterByCategory(category) {
+            const searchInput = document.getElementById('search-input');
+            const categoryNames = {
+                cars: { ar: 'سيارات', fr: 'voitures' },
+                realestate: { ar: 'عقارات', fr: 'immobilier' },
+                electronics: { ar: 'إلكترونيات', fr: 'électronique' },
+                fashion: { ar: 'أزياء', fr: 'mode' }
+            };
+            
+            const searchTerm = categoryNames[category][currentLang];
+            searchInput.value = searchTerm;
+            performSearch();
+            
+            document.getElementById('recent-title').scrollIntoView({ 
+                behavior: 'smooth' 
+            });
+        }
+
+        function toggleFavorite(adId) {
+            const favorites = JSON.parse(localStorage.getItem('bladibay-favorites') || '[]');
+            const index = favorites.indexOf(adId);
+            const t = translations[currentLang];
+            
+            if (index === -1) {
+                favorites.push(adId);
+                showNotification(t.addedToFavorites, 'success');
+            } else {
+                favorites.splice(index, 1);
+                showNotification(t.removedFromFavorites, 'info');
+            }
+            
+            localStorage.setItem('bladibay-favorites', JSON.stringify(favorites));
+        }
+
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `notification fixed top-4 right-4 z-50 px-4 py-2 rounded-lg text-white font-semibold shadow-lg transform translate-x-full transition-transform duration-300 ${
+                type === 'success' ? 'bg-green-500' : 
+                type === 'error' ? 'bg-red-500' : 'bg-blue-500'
+            }`;
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.transform = 'translateX(0)';
+            }, 100);
+            
+            setTimeout(() => {
+                notification.style.transform = 'translateX(100%)';
+                setTimeout(() => {
+                    if (document.body.contains(notification)) {
+                        document.body.removeChild(notification);
+                    }
+                }, 300);
+            }, 3000);
+        }
+
+        // =================== INITIALISATION ===================
         document.addEventListener('DOMContentLoaded', function() {
             // Load saved language
             const savedLang = localStorage.getItem('bladibay-lang');
@@ -290,16 +826,47 @@
                 updateLanguage();
             }
             
-            // Add click effects to category cards
+            // Setup search
+            const searchInput = document.getElementById('search-input');
+            const searchButton = document.getElementById('search-button');
+            
+            if (searchInput && searchButton) {
+                searchInput.addEventListener('input', performSearch);
+                searchInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        performSearch();
+                    }
+                });
+                
+                searchButton.addEventListener('click', function() {
+                    const t = translations[currentLang];
+                    this.style.transform = 'scale(0.95)';
+                    this.textContent = t.searching;
+                    
+                    setTimeout(() => {
+                        this.style.transform = '';
+                        this.textContent = t.searchButton;
+                        performSearch();
+                    }, 500);
+                });
+            }
+            
+            // Setup category cards
             const cards = document.querySelectorAll('.category-card');
-            cards.forEach(card => {
+            cards.forEach((card) => {
                 card.addEventListener('click', function() {
                     this.style.transform = 'scale(0.95)';
                     setTimeout(() => {
                         this.style.transform = '';
                     }, 150);
+                    
+                    const category = this.getAttribute('data-category');
+                    filterByCategory(category);
                 });
             });
+            
+            // Load initial ads
+            displaySearchResults();
         });
     </script>
 
