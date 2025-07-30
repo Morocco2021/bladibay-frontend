@@ -14,6 +14,13 @@
     <!-- ICONS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
+    <!-- FICHIERS LOCAUX -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- PWA MANIFEST -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#3B82F6">
+    
     <style>
         * {
             font-family: 'Inter', sans-serif;
@@ -76,16 +83,6 @@
             font-weight: 600;
         }
         
-        /* Fix pour le texte blanc des villes */
-        #citySelect {
-            color: #374151 !important;
-        }
-        
-        #citySelect option {
-            color: #374151 !important;
-            background-color: white !important;
-        }
-        
         @media (max-width: 768px) {
             .hero-title {
                 font-size: 2rem;
@@ -125,7 +122,7 @@
                     <!-- FAVORIS -->
                     <button class="relative p-2 rounded-lg hover:bg-gray-100">
                         <i class="fas fa-heart text-gray-600"></i>
-                        <span id="favCount" class="absolute -top-1 -right-1 bg-red-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">0</span>
+                        <span id="favCount" class="absolute -top-1 -right-1 bg-red-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center" style="display: none;">0</span>
                     </button>
                     
                     <!-- MENU MOBILE -->
@@ -278,7 +275,7 @@
                         <i class="fas fa-couch text-yellow-600 text-2xl"></i>
                     </div>
                     <h3 class="font-semibold text-gray-800 mb-2">Mobilier</h3>
-                                    <p class="text-sm text-gray-500">672 annonces</p>
+                    <p class="text-sm text-gray-500">672 annonces</p>
                 </div>
                 
                 <!-- SERVICES -->
@@ -331,7 +328,7 @@
             <div id="productsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 
                 <!-- ANNONCE 1 - iPhone 14 Pro -->
-                <div class="product-card bg-white rounded-2xl overflow-hidden card-shadow" data-category="electronique">
+                <div class="product-card bg-white rounded-2xl overflow-hidden card-shadow" data-category="electronique" data-product-id="1">
                     <div class="relative">
                         <img src="https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=400&h=300&fit=crop" alt="iPhone 14 Pro" class="w-full h-48 object-cover">
                         <button class="absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-md hover:bg-red-50">
@@ -363,7 +360,7 @@
                 </div>
 
                 <!-- ANNONCE 2 - Appartement -->
-                <div class="product-card bg-white rounded-2xl overflow-hidden card-shadow" data-category="immobilier">
+                <div class="product-card bg-white rounded-2xl overflow-hidden card-shadow" data-category="immobilier" data-product-id="2">
                     <div class="relative">
                         <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=400&h=300&fit=crop" alt="Appartement" class="w-full h-48 object-cover">
                         <button class="absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-md hover:bg-red-50">
@@ -395,7 +392,7 @@
                 </div>
 
                 <!-- ANNONCE 3 - Voiture -->
-                <div class="product-card bg-white rounded-2xl overflow-hidden card-shadow" data-category="voitures">
+                <div class="product-card bg-white rounded-2xl overflow-hidden card-shadow" data-category="voitures" data-product-id="3">
                     <div class="relative">
                         <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=400&h=300&fit=crop" alt="BMW X3" class="w-full h-48 object-cover">
                         <button class="absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-md hover:bg-red-50">
@@ -427,7 +424,7 @@
                 </div>
 
                 <!-- ANNONCE 4 - MacBook -->
-                <div class="product-card bg-white rounded-2xl overflow-hidden card-shadow" data-category="electronique">
+                <div class="product-card bg-white rounded-2xl overflow-hidden card-shadow" data-category="electronique" data-product-id="4">
                     <div class="relative">
                         <img src="https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=400&h=300&fit=crop" alt="MacBook Pro" class="w-full h-48 object-cover">
                         <button class="absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-md hover:bg-red-50">
@@ -449,134 +446,6 @@
                             <div class="flex items-center text-sm text-gray-500">
                                 <i class="fas fa-clock mr-1"></i>
                                 Il y a 5h
-                            </div>
-                            <button class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-700">
-                                <i class="fas fa-eye mr-1"></i>
-                                Voir
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ANNONCE 5 - PlayStation 5 -->
-                <div class="product-card bg-white rounded-2xl overflow-hidden card-shadow" data-category="electronique">
-                    <div class="relative">
-                        <img src="https://images.unsplash.com/photo-1606813907291-d86efa9b94db?w=400&h=300&fit=crop" alt="PlayStation 5" class="w-full h-48 object-cover">
-                        <button class="absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-md hover:bg-red-50">
-                            <i class="far fa-heart text-gray-600 hover:text-red-500"></i>
-                        </button>
-                        <span class="absolute top-3 left-3 badge bg-red-500 text-white">🔥 HOT</span>
-                    </div>
-                    <div class="p-4">
-                        <h3 class="font-semibold text-gray-800 mb-2">PlayStation 5 + 2 Manettes</h3>
-                        <p class="text-sm text-gray-600 mb-3">État neuf, garantie 1 an, avec 3 jeux inclus, emballage d'origine</p>
-                        <div class="flex items-center justify-between mb-3">
-                            <span class="price-tag">4 800 DH</span>
-                            <div class="flex items-center text-sm text-gray-500">
-                                <i class="fas fa-map-marker-alt mr-1"></i>
-                                Tanger
-                            </div>
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center text-sm text-gray-500">
-                                <i class="fas fa-clock mr-1"></i>
-                                Il y a 1h
-                            </div>
-                            <button class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-700">
-                                <i class="fas fa-eye mr-1"></i>
-                                Voir
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ANNONCE 6 - Dacia Logan -->
-                <div class="product-card bg-white rounded-2xl overflow-hidden card-shadow" data-category="voitures">
-                    <div class="relative">
-                        <img src="https://images.unsplash.com/photo-1549399161-1c8a8c2d5f12?w=400&h=300&fit=crop" alt="Dacia Logan" class="w-full h-48 object-cover">
-                                               <button class="absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-md hover:bg-red-50">
-                            <i class="far fa-heart text-gray-600 hover:text-red-500"></i>
-                        </button>
-                        <span class="absolute top-3 left-3 badge bg-orange-500 text-white">💰 Négociable</span>
-                    </div>
-                    <div class="p-4">
-                        <h3 class="font-semibold text-gray-800 mb-2">Dacia Logan 2018</h3>
-                        <p class="text-sm text-gray-600 mb-3">85 000 km, essence, climatisation, bon état général, première main</p>
-                        <div class="flex items-center justify-between mb-3">
-                            <span class="price-tag">95 000 DH</span>
-                            <div class="flex items-center text-sm text-gray-500">
-                                <i class="fas fa-map-marker-alt mr-1"></i>
-                                Agadir
-                            </div>
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center text-sm text-gray-500">
-                                <i class="fas fa-clock mr-1"></i>
-                                Il y a 6h
-                            </div>
-                            <button class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-700">
-                                <i class="fas fa-eye mr-1"></i>
-                                Voir
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ANNONCE 7 - Villa -->
-                <div class="product-card bg-white rounded-2xl overflow-hidden card-shadow" data-category="immobilier">
-                    <div class="relative">
-                        <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=400&h=300&fit=crop" alt="Villa" class="w-full h-48 object-cover">
-                        <button class="absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-md hover:bg-red-50">
-                            <i class="far fa-heart text-gray-600 hover:text-red-500"></i>
-                        </button>
-                        <span class="absolute top-3 left-3 badge bg-purple-500 text-white">⭐ Luxe</span>
-                    </div>
-                    <div class="p-4">
-                        <h3 class="font-semibold text-gray-800 mb-2">Villa 5 chambres avec piscine</h3>
-                        <p class="text-sm text-gray-600 mb-3">250m², jardin, garage 2 voitures, quartier résidentiel calme</p>
-                        <div class="flex items-center justify-between mb-3">
-                            <span class="price-tag">1 450 000 DH</span>
-                            <div class="flex items-center text-sm text-gray-500">
-                                <i class="fas fa-map-marker-alt mr-1"></i>
-                                Marrakech
-                            </div>
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center text-sm text-gray-500">
-                                <i class="fas fa-clock mr-1"></i>
-                                Il y a 2 jours
-                            </div>
-                            <button class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-700">
-                                <i class="fas fa-eye mr-1"></i>
-                                Voir
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ANNONCE 8 - Samsung Galaxy -->
-                <div class="product-card bg-white rounded-2xl overflow-hidden card-shadow" data-category="electronique">
-                    <div class="relative">
-                        <img src="https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=400&h=300&fit=crop" alt="Samsung Galaxy" class="w-full h-48 object-cover">
-                        <button class="absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-md hover:bg-red-50">
-                            <i class="far fa-heart text-gray-600 hover:text-red-500"></i>
-                        </button>
-                        <span class="absolute top-3 left-3 badge bg-green-500 text-white">✓ Vérifié</span>
-                    </div>
-                    <div class="p-4">
-                        <h3 class="font-semibold text-gray-800 mb-2">Samsung Galaxy S23 Ultra</h3>
-                        <p class="text-sm text-gray-600 mb-3">256GB, couleur noir, état excellent, protection écran, étui inclus</p>
-                        <div class="flex items-center justify-between mb-3">
-                            <span class="price-tag">9 500 DH</span>
-                            <div class="flex items-center text-sm text-gray-500">
-                                <i class="fas fa-map-marker-alt mr-1"></i>
-                                Meknès
-                            </div>
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center text-sm text-gray-500">
-                                <i class="fas fa-clock mr-1"></i>
-                                Il y a 4h
                             </div>
                             <button class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-700">
                                 <i class="fas fa-eye mr-1"></i>
@@ -623,7 +492,7 @@
                 </div>
                 
                 <div class="text-center">
-                    <div class="w-20 h-20 bg-purple-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                                       <div class="w-20 h-20 bg-purple-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
                         <i class="fas fa-heart text-purple-600 text-3xl"></i>
                     </div>
                     <h3 class="text-xl font-semibold text-gray-800 mb-4">Gratuit</h3>
@@ -731,315 +600,14 @@
     <!-- CHAT FLOTTANT -->
     <div class="fixed bottom-20 md:bottom-6 right-6 z-40">
         <button id="chatBtn" class="w-14 h-14 gradient-bg rounded-full shadow-lg hover:shadow-xl transition-all transform hover:scale-110 flex items-center justify-center">
-                       <i class="fas fa-comments text-white text-xl"></i>
+            <i class="fas fa-comments text-white text-xl"></i>
         </button>
     </div>
 
-    <!-- NOTIFICATIONS TOAST -->
+    <!-- NOTIFICATIONS CONTAINER -->
     <div id="notifications" class="fixed top-20 right-4 z-50 space-y-3"></div>
 
-    <!-- SCRIPTS JAVASCRIPT -->
-    <script>
-        // DONNÉES DES PRODUITS (Simulation)
-        const products = [
-            {
-                id: 1,
-                title: "iPhone 14 Pro 128GB",
-                price: "12 500 DH",
-                location: "Casablanca",
-                time: "Il y a 2h",
-                image: "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=400&h=300&fit=crop",
-                category: "electronique",
-                verified: true,
-                description: "État neuf, sous garantie Apple, boîte complète avec tous les accessoires"
-            },
-            {
-                id: 2,
-                title: "Appartement 3 chambres",
-                price: "850 000 DH",
-                location: "Rabat",
-                time: "Il y a 1 jour",
-                image: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=400&h=300&fit=crop",
-                category: "immobilier",
-                featured: true,
-                description: "90m², 5ème étage, ascenseur, parking, cuisine équipée, proche métro"
-            }
-        ];
-
-        // GESTION DES FAVORIS
-        let favorites = JSON.parse(localStorage.getItem('bladibay_favorites') || '[]');
-
-        function toggleFavorite(productId) {
-            const index = favorites.indexOf(productId);
-            if (index > -1) {
-                favorites.splice(index, 1);
-                showNotification('Retiré des favoris', 'info');
-            } else {
-                favorites.push(productId);
-                showNotification('Ajouté aux favoris ❤️', 'success');
-            }
-            
-            localStorage.setItem('bladibay_favorites', JSON.stringify(favorites));
-            updateFavoriteCount();
-        }
-
-        function updateFavoriteCount() {
-            const countElements = document.querySelectorAll('#favCount, [id*="favCount"]');
-            countElements.forEach(el => {
-                el.textContent = favorites.length;
-                el.style.display = favorites.length > 0 ? 'flex' : 'none';
-            });
-        }
-
-        // SYSTÈME DE NOTIFICATIONS
-        function showNotification(message, type = 'success') {
-            const notification = document.createElement('div');
-            notification.className = `p-4 rounded-lg shadow-lg transform transition-all duration-300 translate-x-full ${
-                type === 'success' ? 'bg-green-500 text-white' : 
-                type === 'error' ? 'bg-red-500 text-white' : 
-                'bg-blue-500 text-white'
-            }`;
-            notification.textContent = message;
-            
-            document.getElementById('notifications').appendChild(notification);
-            
-            setTimeout(() => {
-                notification.classList.remove('translate-x-full');
-            }, 100);
-            
-            setTimeout(() => {
-                notification.classList.add('translate-x-full');
-                setTimeout(() => {
-                    if (notification.parentNode) {
-                        notification.parentNode.removeChild(notification);
-                    }
-                }, 300);
-            }, 3000);
-        }
-
-        // RECHERCHE INTELLIGENTE
-        function setupSearch() {
-            const searchInput = document.getElementById('searchInput');
-            const searchBtn = document.getElementById('searchBtn');
-            const citySelect = document.getElementById('citySelect');
-
-            function performSearch() {
-                const query = searchInput.value.trim();
-                const city = citySelect.value;
-                
-                if (!query) {
-                    showNotification('Veuillez saisir un terme de recherche', 'error');
-                    return;
-                }
-                
-                showNotification(`Recherche pour "${query}" ${city ? `à ${city}` : ''}...`, 'info');
-                
-                setTimeout(() => {
-                    showNotification(`${Math.floor(Math.random() * 50) + 10} résultats trouvés !`, 'success');
-                }, 1000);
-            }
-
-            searchBtn.addEventListener('click', performSearch);
-            searchInput.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') performSearch();
-            });
-        }
-
-        // FILTRAGE DES ANNONCES
-        function setupFilters() {
-            const filterButtons = document.querySelectorAll('.filter-btn');
-            const productCards = document.querySelectorAll('.product-card');
-            
-            filterButtons.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    filterButtons.forEach(b => {
-                        b.classList.remove('bg-blue-600', 'text-white');
-                        b.classList.add('bg-gray-200', 'text-gray-700');
-                    });
-                    btn.classList.remove('bg-gray-200', 'text-gray-700');
-                    btn.classList.add('bg-blue-600', 'text-white');
-                    
-                    const filter = btn.dataset.filter;
-                    
-                    productCards.forEach(card => {
-                        if (filter === 'all' || card.dataset.category === filter) {
-                            card.style.display = 'block';
-                            card.classList.add('animate-fade-in');
-                        } else {
-                            card.style.display = 'none';
-                        }
-                    });
-                    
-                    showNotification(`Filtre "${btn.textContent}" appliqué`, 'info');
-                });
-            });
-        }
-
-        // GESTION DES CATÉGORIES
-        function setupCategories() {
-            const categoryCards = document.querySelectorAll('.category-card');
-            
-            categoryCards.forEach(card => {
-                card.addEventListener('click', () => {
-                    const categoryName = card.querySelector('h3').textContent;
-                    showNotification(`Navigation vers ${categoryName}...`, 'info');
-                    
-                    document.getElementById('annonces').scrollIntoView({ behavior: 'smooth' });
-                    
-                    setTimeout(() => {
-                        const filterBtn = document.querySelector(`[data-filter="${categoryName.toLowerCase()}"]`);
-                        if (filterBtn) filterBtn.click();
-                    }, 800);
-                });
-            });
-        }
-
-        // GESTION DES COEURS DE FAVORIS
-        function setupFavoriteButtons() {
-            document.addEventListener('click', (e) => {
-                if (e.target.classList.contains('fa-heart')) {
-                    e.preventDefault();
-                    
-                    const isLiked = e.target.classList.contains('fas');
-                    
-                    if (isLiked) {
-                        e.target.classList.remove('fas', 'text-red-500');
-                        e.target.classList.add('far', 'text-gray-600');
-                    } else {
-                        e.target.classList.remove('far', 'text-gray-600');
-                        e.target.classList.add('fas', 'text-red-500');
-                    }
-                    
-                    const productId = Math.floor(Math.random() * 1000);
-                    toggleFavorite(productId);
-                }
-            });
-        }
-
-        // GESTION DU MENU MOBILE
-        function setupMobileMenu() {
-            const navItems = document.querySelectorAll('.nav-item');
-            
-            navItems.forEach(item => {
-                item.addEventListener('click', () => {
-                    navItems.forEach(nav => {
-                        nav.classList.remove('text-blue-600');
-                        nav.classList.add('text-gray-600');
-                    });
-                    
-                    item.classList.remove('text-gray-600');
-                    item.classList.add('text-blue-600');
-                });
-            });
-        }
-
-        // CHAT FLOTTANT
-        function setupChat() {
-            const chatBtn = document.getElementById('chatBtn');
-            
-            chatBtn.addEventListener('click', () => {
-                showNotification('Chat en ligne bientôt disponible ! 💬', 'info');
-            });
-        }
-
-        // RECHERCHES POPULAIRES
-        function setupPopularSearches() {
-            const badges = document.querySelectorAll('.badge');
-            
-            badges.forEach(badge => {
-                badge.addEventListener('click', () => {
-                    const searchInput = document.getElementById('searchInput');
-                    searchInput.value = badge.textContent.replace(/[🔥💰⭐✓💎]/g, '').trim();
-                    searchInput.focus();
-                    showNotification(`Recherche pour "${badge.textContent}" ajoutée`, 'info');
-                });
-            });
-        }
-
-        // SMOOTH SCROLLING POUR LES LIENS
-        function setupSmoothScrolling() {
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        target.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }
-                });
-            });
-        }
-
-        // LAZY LOADING DES IMAGES
-        function setupLazyLoading() {
-            const images = document.querySelectorAll('img');
-            
-            const imageObserver = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const img = entry.target;
-                        img.classList.add('animate-fade-in');
-                        observer.unobserve(img);
-                    }
-                });
-            });
-            
-            images.forEach(img => imageObserver.observe(img));
-        }
-
-        // INITIALISATION AU CHARGEMENT DE LA PAGE
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('🚀 BladiBay chargé avec succès !');
-            
-            setupSearch();
-            setupFilters();
-            setupCategories();
-            setupFavoriteButtons();
-            setupMobileMenu();
-            setupChat();
-            setupPopularSearches();
-            setupSmoothScrolling();
-            setupLazyLoading();
-            
-            updateFavoriteCount();
-            
-            setTimeout(() => {
-                showNotification('Bienvenue sur BladiBay ! 🎉', 'success');
-            }, 1000);
-            
-            document.querySelectorAll('.animate-fade-in').forEach((el, index) => {
-                setTimeout(() => {
-                    el.style.opacity = '1';
-                    el.style.transform = 'translateY(0)';
-                }, index * 100);
-            });
-        });
-
-        // GESTION DES ERREURS GLOBALES
-        window.addEventListener('error', function(e) {
-            console.error('Erreur détectée:', e.error);
-            showNotification('Une erreur est survenue. Veuillez actualiser la page.', 'error');
-        });
-
-        // OPTIMISATION PERFORMANCE
-        let ticking = false;
-        function updateScrollEffects() {
-            const scrolled = window.pageYOffset;
-            const parallax = document.querySelector('.gradient-bg');
-            if (parallax) {
-                parallax.style.transform = `translateY(${scrolled * 0.2}px)`;
-            }
-            ticking = false;
-        }
-
-        window.addEventListener('scroll', function() {
-            if (!ticking) {
-                requestAnimationFrame(updateScrollEffects);
-                ticking = true;
-            }
-        });
-    </script>
+    <!-- SCRIPT LOCAL -->
+    <script src="script.js"></script>
 </body>
 </html>
