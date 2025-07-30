@@ -1,7 +1,11 @@
 # bladibay-frontend
-# 🛍️ BladiBay - Marketplace du Maroc
+# 🛍️ BladiBay.com - Marketplace du Maroc
 
-> **La marketplace moderne du Maroc** 🇲🇦  
+**🌐 Site officiel : [bladibay.com](https://bladibay.com)**
+
+> La marketplace moderne du Maroc 🇲🇦  
+> Achetez, vendez et échangez facilement près de chez vous.
+ 
 > Achetez, vendez et échangez facilement près de chez vous.
 
 ## ✨ Fonctionnalités
