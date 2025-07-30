@@ -99,3 +99,22 @@ body {
     line-height: 1.2;
   }
 }
+
+/* FIX TEXTE BLANC BARRE DE RECHERCHE */
+#searchInput {
+    color: #374151 !important;
+    background-color: white !important;
+}
+
+#searchInput::placeholder {
+    color: #9CA3AF !important;
+}
+
+/* FIX POUR TOUS LES INPUTS */
+input[type="text"] {
+    color: #374151 !important;
+}
+
+input[type="text"]:focus {
+    color: #374151 !important;
+}
