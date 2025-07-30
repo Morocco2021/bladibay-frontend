@@ -1,0 +1,89 @@
+{
+    "name": "BladiBay - Marketplace du Maroc",
+    "short_name": "BladiBay",
+    "description": "La marketplace moderne du Maroc. Achetez, vendez et échangez facilement près de chez vous.",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#F9FAFB",
+    "theme_color": "#3B82F6",
+    "orientation": "portrait-primary",
+    "scope": "/",
+    "lang": "fr",
+    "categories": ["shopping", "business", "lifestyle"],
+    "icons": [
+        {
+            "src": "https://via.placeholder.com/72x72/3B82F6/FFFFFF?text=BB",
+            "sizes": "72x72",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "https://via.placeholder.com/96x96/3B82F6/FFFFFF?text=BB",
+            "sizes": "96x96",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "https://via.placeholder.com/128x128/3B82F6/FFFFFF?text=BB",
+            "sizes": "128x128",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "https://via.placeholder.com/144x144/3B82F6/FFFFFF?text=BB",
+            "sizes": "144x144",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "https://via.placeholder.com/152x152/3B82F6/FFFFFF?text=BB",
+            "sizes": "152x152",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "https://via.placeholder.com/192x192/3B82F6/FFFFFF?text=BB",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "https://via.placeholder.com/384x384/3B82F6/FFFFFF?text=BB",
+            "sizes": "384x384",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "https://via.placeholder.com/512x512/3B82F6/FFFFFF?text=BB",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "Publier une annonce",
+            "short_name": "Publier",
+            "description": "Publier rapidement une nouvelle annonce",
+            "url": "/",
+            "icons": [
+                {
+                    "src": "https://via.placeholder.com/192x192/10B981/FFFFFF?text=+",
+                    "sizes": "192x192"
+                }
+            ]
+        },
+        {
+            "name": "Mes favoris",
+            "short_name": "Favoris",
+            "description": "Voir mes annonces favorites",
+            "url": "/",
+            "icons": [
+                {
+                    "src": "https://via.placeholder.com/192x192/EF4444/FFFFFF?text=♥",
+                    "sizes": "192x192"
+                }
+            ]
+        }
+    ]
+}
