@@ -1,13 +1,13 @@
 {
-    "name": "BladiBay - Marketplace du Maroc",
-    "short_name": "BladiBay",
-    "description": "La marketplace moderne du Maroc. Achetez, vendez et échangez facilement près de chez vous.",
-    "start_url": "/",
+    "name": "BladiBay.com - Marketplace du Maroc",
+    "short_name": "BladiBay.com",
+    "description": "Visitez bladibay.com - La marketplace moderne du Maroc. Achetez, vendez et échangez facilement.",
+    "start_url": "https://bladibay.com/",
     "display": "standalone",
     "background_color": "#F9FAFB",
     "theme_color": "#3B82F6",
     "orientation": "portrait-primary",
-    "scope": "/",
+    "scope": "https://bladibay.com/",
     "lang": "fr",
     "categories": ["shopping", "business", "lifestyle"],
     "icons": [
